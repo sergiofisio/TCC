@@ -1,0 +1,5 @@
+main {
+  background-color: white;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}

@@ -1,0 +1,26 @@
+footer {
+  height: 40px;
+  justify-content: space-between;
+}
+
+footer div {
+  height: 30px;
+  align-self: flex-end;
+}
+
+footer .title,
+.copy {
+  font-size: 0.7rem;
+}
+
+footer .title {
+  text-shadow: 0 3px 2px rgba(0, 0, 0, 0.5);
+}
+
+footer p {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  color: white;
+}

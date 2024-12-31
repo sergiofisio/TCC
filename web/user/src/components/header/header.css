@@ -1,0 +1,15 @@
+header {
+  height: 160px;
+  justify-content: center;
+}
+
+header div {
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+}
+
+header .title {
+  font-size: 2rem;
+  text-shadow: 0 6px 5px rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,11 @@
+.app,
+.divOs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.app {
+  flex-direction: column;
+}
