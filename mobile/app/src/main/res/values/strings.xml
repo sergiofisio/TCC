@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Emotion</string>
+    <string name="logo">logo</string>
+    <string name="txtCarregamento">Carregando ...</string>
+    <string name="email_label">Email</string>
+    <string name="senha_label">Senha</string>
+</resources>
