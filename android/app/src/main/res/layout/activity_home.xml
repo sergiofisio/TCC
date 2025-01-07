@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="130dp"
-        android:layout_height="120dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginTop="30dp"
         android:contentDescription="@string/logo"
         app:layout_constraintEnd_toEndOf="parent"
