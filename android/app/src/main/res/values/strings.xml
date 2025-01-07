@@ -4,4 +4,17 @@
     <string name="txtCarregamento">Carregando ...</string>
     <string name="email_label">Email</string>
     <string name="senha_label">Senha</string>
+    <string name="cadastro">Não tem cadastro?\nCLIQUE AQUI</string>
+    <string name="Nome">Nome Completo</string>
+    <string name="CPF">CPF</string>
+    <string name="Phone">Celular</string>
+    <string name="cep">CEP</string>
+    <string name="rua">Rua</string>
+    <string name="numero">Número</string>
+    <string name="comp">Complemento</string>
+    <string name="bairro">Bairro</string>
+    <string name="cidade">Cidade</string>
+    <string name="estado">Estado</string>
+    <string name="login">login</string>
+    <string name="cadastrar">cadastrar-se</string>
 </resources>
