@@ -1,6 +1,48 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "description": "servidor para aplicação emotion harmony",
+  "keywords": [
+    "emotion",
+    "harmony",
+    "server"
+  ],
+  "homepage": "https://github.com/sergiofisio/TCC#readme",
+  "bugs": {
+    "url": "https://github.com/sergiofisio/TCC/issues"
+  },
+  "repository": "git+https://github.com/sergiofisio/TCC.git",
+  "license": "MIT",
+  "author": "",
+  "type": "commonjs",
   "main": "index.js",
-  "license": "MIT"
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "begin": "yarn && npm run generate",
+    "start": "node src/index.js",
+    "prisma": "npm run migrate && npm run generate",
+    "prisma:dev": "prisma migrate dev && yarn generate && yarn push && yarn seed",
+    "migrate": "npx prisma migrate deploy",
+    "generate": "npx prisma generate",
+    "pull": "npx prisma db pull",
+    "push": "npx prisma db push"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2",
+    "node-schedule": "^2.1.1",
+    "nodemon": "^3.1.9",
+    "serve-favicon": "^2.5.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "prisma": "^6.2.1"
+  }
 }

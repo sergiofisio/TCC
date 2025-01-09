@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Type_user {
+  user
+  therapist
+}
+
+enum Type_contacts {
+  home
+  work
+  mobile
+  office
+  clinic
+  emergency
+}
+
+model tb_users{
+  id_user Int @id @default(autoincrement())
+  name_user      String   @db.VarChar(100)
+  email_user     String   @db.VarChar(50) @unique
+  cpf_user       String   @db.VarChar(11) @unique
+  password_user  String   @db.VarChar(255)
+  lost_password_user Boolean @default(false)
+  lost_pasword_token_user String? @db.VarChar(255)
+  active_user Boolean @default(true)
+  type_user Type_user @default(user)
+  phones_user tb_phones[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model tb_phones{
+  id_phone Int @id @default(autoincrement())
+  type_phone Type_contacts @default(mobile)
+  country_code_phone Int @default(55)
+  area_code_phone Int
+  phone_number Int
+  users_id Int
+  users tb_users @relation(fields: [users_id], references: [id_user])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
