@@ -13,6 +13,15 @@
         android:theme="@style/Theme.EmotionHarmony"
         tools:targetApi="31">
         <activity
+            android:name=".pages.After_Login_Page5"
+            android:exported="false" />
+        <activity
+            android:name=".pages.After_Login_Page_Emotions"
+            android:exported="false" />
+        <activity
+            android:name=".pages.After_Login_Page3"
+            android:exported="false" />
+        <activity
             android:name=".pages.After_Login_Page2"
             android:exported="false" />
         <activity

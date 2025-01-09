@@ -6,34 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".pages.After_Login_Page2">
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="355dp"
-        android:layout_height="185dp"
-        android:layout_marginTop="116dp"
-        android:text="Descreva uma situação recente, de preferencia no últimos 6 meses que você acredita que te afetou positiva ou negativamente de alguma forma. O que aconteceu, quando foi, o que você escutou, o que você viu, etc. dê a maior quantidade de detalhes que você conseguir. Não se preocupe, não há resposta errada para esta pergunta"
-        android:textAlignment="center"
-        android:textAppearance="@style/CustomInput"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".pages.After_Login_Page5">
 
     <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="20dp"
-        android:contentDescription="@string/logo"
+        android:id="@+id/btnBack3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="80dp"
+        android:contentDescription="back"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icone_principal" />
+        app:srcCompat="@drawable/back" />
 
     <ImageView
-        android:id="@+id/btnNext2"
+        android:id="@+id/btnNext4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -44,7 +31,7 @@
         app:srcCompat="@drawable/next" />
 
     <EditText
-        android:id="@+id/txtDescription"
+        android:id="@+id/txtDescEmocao"
         android:layout_width="350dp"
         android:layout_height="230dp"
         android:layout_marginTop="320dp"
@@ -60,14 +47,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/btnBack1"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="80dp"
-        android:contentDescription="back"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="116dp"
+        android:text="Feche os olhos e sinta no seu corpo onde a emoção esta presente. De algumas características, se possível, como cor, temperatura, tamanho, etc. Não se preocupe se não conseguir dar as características, no começo temos dificuldade, com o treino fica mais fácil. "
+        android:textAlignment="center"
+        android:textAppearance="@style/CustomInput"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/back" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextSizeCheck" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icone_principal"
+        tools:ignore="ImageContrastCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

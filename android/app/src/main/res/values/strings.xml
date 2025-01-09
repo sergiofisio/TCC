@@ -20,5 +20,5 @@
     <string name="Emergency">Telefone Emergência</string>
     <string name="textEmergency">Porque pedimos isso? Temos uma preocupação com a saúde mental dos nossos usuario e este contato de emergência é uma forma de caso você esteja passando por alguma dificuldade o nosso sistema fara a ligação para este contato para te ajudar nesta situação.</string>
     <string name="message">Vamos fazer um pequeno questionário para saber em que situação você se encontra no momento.</string>
-    <string name="situacao">Descreva a situação</string>
+    <string name="situacao">Escreva aqui.</string>
 </resources>
