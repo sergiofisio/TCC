@@ -1,7 +1,10 @@
 package com.example.emotionharmony;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,10 +27,31 @@ public class Register extends AppCompatActivity {
             return insets;
         });
 
-        EditText cpf = findViewById(R.id.txtCPF), telefone = findViewById(R.id.txtPhone);
+        TextView txtLogin=findViewById(R.id.txtLogin), msgEmergency=findViewById(R.id.txtMsgEmergency);
+
+        EditText mome=findViewById(R.id.txtName), email=findViewById(R.id.txtEmail), cpf = findViewById(R.id.txtCPF), telefone = findViewById(R.id.txtPhone), emergencia=findViewById(R.id.txtEmergency);
 
         cpf.addTextChangedListener(MaskUtil.applyMask(cpf, "###.###.###-##"));
         telefone.addTextChangedListener(MaskUtil.applyMask(telefone, "(##)#####-####"));
+        emergencia.addTextChangedListener(MaskUtil.applyMask(emergencia, "(##)#####-####"));
 
+        emergencia.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+               msgEmergency.setVisibility(hasFocus?View.VISIBLE:View.GONE);
+            }
+        });
+
+        txtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Register.this, Home.class);
+                startActivity(intent);
+
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+                finish();
+            }
+        });
     }
 }

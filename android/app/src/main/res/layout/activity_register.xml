@@ -8,6 +8,91 @@
     android:background="@drawable/gradient_background"
     tools:context=".Register">
 
+    <TextView
+        android:id="@+id/lblPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/Phone"
+        android:textAppearance="@style/CustomInput"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCPF"
+        tools:ignore="TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/lblEmergency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/Emergency"
+        android:textAppearance="@style/CustomInput"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPhone"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/txtPhone"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="@string/Phone"
+        android:inputType="phone"
+        android:textAppearance="@style/CustomInput"
+        android:textColorHint="#78909C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblPhone"
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck" />
+
+    <EditText
+        android:id="@+id/txtEmergency"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="@string/Emergency"
+        android:inputType="phone"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEmergency"
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="360dp"
+        android:layout_height="60dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:focusable="auto"
+        android:focusableInTouchMode="true"
+        android:hint="@string/email_label"
+        android:inputType="text|textEmailAddress"
+        android:textAppearance="@style/CustomInput"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEmail"
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/lblEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/email_label"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="70dp"
@@ -18,13 +103,13 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icone_principal" />
+        app:srcCompat="@drawable/icone_principal"
+        tools:ignore="ImageContrastCheck" />
 
     <EditText
         android:id="@+id/txtName"
         android:layout_width="360dp"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:focusable="auto"
@@ -35,71 +120,93 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblNome"
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/lblNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/Nome"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
-    <EditText
-        android:id="@+id/txtEmail"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
+    <TextView
+        android:id="@+id/lblCpf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:hint="@string/email_label"
-        android:inputType="text|textEmailAddress"
-        android:singleLine="true"
-        android:textAllCaps="false"
+        android:text="@string/CPF"
         android:textAppearance="@style/CustomInput"
-        android:textColor="#000000"
-        android:textIsSelectable="true"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtName" />
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
     <EditText
         android:id="@+id/txtCPF"
         android:layout_width="360dp"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
+        android:autofillHints=""
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="@string/CPF"
         android:inputType="number"
         android:textAppearance="@style/CustomInput"
-        android:textColor="#000000"
+        android:textColorHint="#78909C"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/lblCpf"
+        tools:ignore="DuplicateSpeakableTextCheck" />
 
-    <EditText
-        android:id="@+id/txtPhone"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:hint="@string/Phone"
-        android:inputType="number"
-        android:textAppearance="@style/CustomInput"
-        android:textColor="#000000"
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="290dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/cadastrar"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCPF" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/txtPhone2"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
+    <TextView
+        android:id="@+id/txtMsgEmergency"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="292dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:hint="@string/Phone"
-        android:inputType="number"
-        android:textAppearance="@style/CustomInput"
-        android:textColor="#000000"
+        android:fontFamily="@font/montserrat_bold"
+        android:padding="20dp"
+        android:text="@string/textEmergency"
+        android:textAlignment="center"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPhone" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtLogin"
+        android:layout_width="270dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Ja tenho Cadastro"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
