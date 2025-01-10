@@ -163,7 +163,7 @@
         tools:ignore="DuplicateSpeakableTextCheck" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnRegister"
         android:layout_width="290dp"
         android:layout_height="70dp"
         android:layout_marginBottom="52dp"
