@@ -1,15 +1,16 @@
 package com.example.emotionharmony.classes;
 
-public class FiirstQuestions {
-    private static FiirstQuestions instance;
+public class FirstQuestions {
+
+    private static FirstQuestions instance;
 
     private String question1, question2, emotion, description;
 
-    private FiirstQuestions() {}
+    private FirstQuestions() {}
 
-    public static FiirstQuestions getInstance() {
+    public static FirstQuestions getInstance() {
         if (instance == null) {
-            instance = new FiirstQuestions();
+            instance = new FirstQuestions();
         }
         return instance;
     }

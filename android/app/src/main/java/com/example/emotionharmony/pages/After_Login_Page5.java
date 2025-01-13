@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.R;
-import com.example.emotionharmony.classes.FiirstQuestions;
+import com.example.emotionharmony.classes.FirstQuestions;
 
 public class After_Login_Page5 extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class After_Login_Page5 extends AppCompatActivity {
         EditText txtDescription = findViewById(R.id.txtDescEmocao);
         ImageView btnBack1 = findViewById(R.id.btnBack3), btnNext2 = findViewById(R.id.btnNext4);
 
-        FiirstQuestions firstQuestions = FiirstQuestions.getInstance();
+        FirstQuestions firstQuestions = FirstQuestions.getInstance();
 
         btnNext2.setOnClickListener(v -> {
             try {

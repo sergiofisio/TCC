@@ -14,7 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.R;
-import com.example.emotionharmony.classes.FiirstQuestions;
+import com.example.emotionharmony.classes.FirstQuestions;
 
 public class After_Login_Page_Emotions extends AppCompatActivity {
 
@@ -35,7 +35,7 @@ public class After_Login_Page_Emotions extends AppCompatActivity {
             return insets;
         });
 
-        FiirstQuestions firstQuestions = FiirstQuestions.getInstance();
+        FirstQuestions firstQuestions = FirstQuestions.getInstance();
 
         linearLayouts = new LinearLayout[]{
                 findViewById(R.id.rdbAng),
