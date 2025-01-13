@@ -22,6 +22,7 @@
     "start": "node src/index.js",
     "prisma": "npm run migrate && npm run generate",
     "prisma:dev": "prisma migrate dev && yarn generate && yarn push && yarn seed",
+    "prisma:format": "prisma format",
     "migrate": "npx prisma migrate deploy",
     "generate": "npx prisma generate",
     "pull": "npx prisma db pull",

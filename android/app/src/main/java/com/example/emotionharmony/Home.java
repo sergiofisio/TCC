@@ -1,6 +1,7 @@
 package com.example.emotionharmony;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,16 +31,19 @@ public class Home extends AppCompatActivity {
         TextView lblCadastro = findViewById(R.id.lblCadastro);
         Button btnLogin = findViewById(R.id.btnLogin);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Home.this, After_Login_Page1.class);
-                startActivity(intent);
+        btnLogin.setOnClickListener(v-> {
 
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+            SharedPreferences preferences= getSharedPreferences("user_prefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("isLoggedIn", true);
+            editor.apply();
 
-                finish();
-            }
+            Intent intent = new Intent(Home.this, After_Login_Page1.class);
+            startActivity(intent);
+
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+            finish();
         });
 
         lblCadastro.setOnClickListener(new View.OnClickListener() {
