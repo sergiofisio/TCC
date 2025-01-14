@@ -8,10 +8,10 @@
     android:background="@drawable/gradient_background"
     tools:context=".pages.After_Login">
 
-    <include
-    layout="@layout/custom_bottom_menu"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:layout_constraintBottom_toBottomOf="parent" />
-
+    <com.example.emotionharmony.components.BottomMenuView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,7 @@ import androidx.core.os.HandlerCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.emotionharmony.pages.After_Login;
 import com.example.emotionharmony.pages.After_Login_Page1;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
 
                 if(isLoggedIn){
-                    intent = new Intent(MainActivity.this, After_Login_Page1.class);
+                    intent = new Intent(MainActivity.this, After_Login.class);
                 }else{
                     intent = new Intent(MainActivity.this, Home.class);
                 }
