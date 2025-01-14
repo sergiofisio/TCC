@@ -3,7 +3,6 @@ package com.example.emotionharmony;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -17,7 +16,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.pages.After_Login;
-import com.example.emotionharmony.pages.After_Login_Page1;
 
 public class MainActivity extends AppCompatActivity {
 

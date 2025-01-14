@@ -1,4 +1,4 @@
-package com.example.emotionharmony.pages;
+package com.example.emotionharmony.pages.meditation;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,21 +15,21 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.classes.FirstQuestions;
 
-public class After_Login_Page3 extends AppCompatActivity {
+public class After_Login_Page5 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_after_login_page3);
+        setContentView(R.layout.activity_after_login_page5);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        EditText txtDescription = findViewById(R.id.txtDescription2);
-        ImageView btnBack1 = findViewById(R.id.btnBack2), btnNext2 = findViewById(R.id.btnNext3);
+        EditText txtDescription = findViewById(R.id.txtDescEmocao);
+        ImageView btnBack1 = findViewById(R.id.btnBack3), btnNext2 = findViewById(R.id.btnNext4);
 
         FirstQuestions firstQuestions = FirstQuestions.getInstance();
 
@@ -41,19 +41,19 @@ public class After_Login_Page3 extends AppCompatActivity {
                     throw new Exception("Descreva o que você poderia fazer diferente");
                 }
 
-                firstQuestions.setQuestion2(description);
-
-                Intent intent = new Intent(After_Login_Page3.this, After_Login_Page_Emotions.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
+                firstQuestions.setDescription(description);
+                String msg = "questão 1: " + firstQuestions.getQuestion1() +
+                        " questão 2: " + firstQuestions.getQuestion2() +
+                        " emoção: " + firstQuestions.getEmotion() +
+                        " questão 3: " + firstQuestions.getDescription();
+                Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
             } catch (Exception e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
         btnBack1.setOnClickListener(v -> {
-            Intent intent = new Intent(After_Login_Page3.this, After_Login_Page2.class);
+            Intent intent = new Intent(After_Login_Page5.this, After_Login_Page_Emotions.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });

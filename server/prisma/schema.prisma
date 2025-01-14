@@ -37,12 +37,13 @@ model tb_users {
   lost_pasword_token_user String?     @db.VarChar(255)
   active_user             Boolean     @default(true)
   type_user               Type_user   @default(user)
-  phones_user             tb_phones[]
+  phones_user             tb_phone[]
+  meditations_user        tb_meditation[]
   created_at              DateTime    @default(now())
   updated_at              DateTime    @updatedAt
 }
 
-model tb_phones {
+model tb_phone{
   id_phone           Int           @id @default(autoincrement())
   type_phone         Type_contacts @default(mobile)
   country_code_phone Int           @default(55)
@@ -52,4 +53,15 @@ model tb_phones {
   users              tb_users      @relation(fields: [users_id], references: [id_user])
   created_at         DateTime      @default(now())
   updated_at         DateTime      @updatedAt
+}
+
+model tb_meditation{
+  id_meditation       Int         @id @default(autoincrement())
+  name_meditation     String      @db.VarChar(100)
+  time_meditation     Int
+  feel_after_meditation String    @db.VarChar(255)
+  users_id            Int
+  users               tb_users    @relation(fields: [users_id], references: [id_user])
+  created_at          DateTime    @default(now())
+  updated_at          DateTime    @updatedAt
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".pages.After_Login_Page1">
+    tools:context=".pages.meditation.After_Login_Page1">
 
     <ImageView
         android:id="@+id/imageView4"

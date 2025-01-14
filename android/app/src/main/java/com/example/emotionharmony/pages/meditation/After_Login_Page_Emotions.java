@@ -1,4 +1,4 @@
-package com.example.emotionharmony.pages;
+package com.example.emotionharmony.pages.meditation;
 
 import android.content.Intent;
 import android.os.Bundle;

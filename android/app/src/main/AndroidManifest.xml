@@ -13,22 +13,25 @@
         android:theme="@style/Theme.EmotionHarmony"
         tools:targetApi="31">
         <activity
+            android:name=".pages.Page_perfil"
+            android:exported="false" />
+        <activity
             android:name=".pages.After_Login"
             android:exported="false" />
         <activity
-            android:name=".pages.After_Login_Page5"
+            android:name=".pages.meditation.After_Login_Page5"
             android:exported="false" />
         <activity
-            android:name=".pages.After_Login_Page_Emotions"
+            android:name=".pages.meditation.After_Login_Page_Emotions"
             android:exported="false" />
         <activity
-            android:name=".pages.After_Login_Page3"
+            android:name=".pages.meditation.After_Login_Page3"
             android:exported="false" />
         <activity
-            android:name=".pages.After_Login_Page2"
+            android:name=".pages.meditation.After_Login_Page2"
             android:exported="false" />
         <activity
-            android:name=".pages.After_Login_Page1"
+            android:name=".pages.meditation.After_Login_Page1"
             android:exported="false" />
         <activity
             android:name=".pages.After_login_page1"

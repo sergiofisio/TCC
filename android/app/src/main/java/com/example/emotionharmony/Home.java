@@ -13,7 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.emotionharmony.pages.After_Login_Page1;
+import com.example.emotionharmony.pages.meditation.After_Login_Page1;
 
 public class Home extends AppCompatActivity {
 
