@@ -27,6 +27,14 @@ enum Type_contacts {
   emergency
 }
 
+enum Type_emotion {
+  happy
+  sad
+  angry
+  disgoust
+  fear
+}
+
 model tb_users {
   id_user                 Int         @id @default(autoincrement())
   name_user               String      @db.VarChar(100)
@@ -39,6 +47,7 @@ model tb_users {
   type_user               Type_user   @default(user)
   phones_user             tb_phone[]
   meditations_user        tb_meditation[]
+  breaths_user            tb_breath[]
   created_at              DateTime    @default(now())
   updated_at              DateTime    @updatedAt
 }
@@ -57,9 +66,23 @@ model tb_phone{
 
 model tb_meditation{
   id_meditation       Int         @id @default(autoincrement())
-  name_meditation     String      @db.VarChar(100)
-  time_meditation     Int
-  feel_after_meditation String    @db.VarChar(255)
+  description_meditation     String      @db.VarChar(255)
+  think_today_meditation     String      @db.VarChar(255)
+  emotion_meditation Type_emotion
+  caracter_meditation String      @db.VarChar(255)
+
+  users_id            Int
+  users               tb_users    @relation(fields: [users_id], references: [id_user])
+  created_at          DateTime    @default(now())
+  updated_at          DateTime    @updatedAt
+}
+
+model tb_breath{
+  id_breath           Int         @id @default(autoincrement())
+  breath_time         Int
+  breath_type         String      @db.VarChar(255)
+  feel_before_breath  String      @db.VarChar(255)
+  feel_after_breath   String      @db.VarChar(255)
   users_id            Int
   users               tb_users    @relation(fields: [users_id], references: [id_user])
   created_at          DateTime    @default(now())
