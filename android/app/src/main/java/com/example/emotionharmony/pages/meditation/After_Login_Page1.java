@@ -3,6 +3,7 @@ package com.example.emotionharmony.pages.meditation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.R;
+import com.example.emotionharmony.pages.After_Login;
 
 public class After_Login_Page1 extends AppCompatActivity {
 
@@ -27,6 +29,7 @@ public class After_Login_Page1 extends AppCompatActivity {
         });
 
         ImageView btnNext1 = findViewById(R.id.btnNext1);
+        Button btnSair = findViewById(R.id.btnSair);
 
         btnNext1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +39,13 @@ public class After_Login_Page1 extends AppCompatActivity {
 
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
+        });
+
+        btnSair.setOnClickListener(V ->{
+            Intent intent = new Intent(After_Login_Page1.this, After_Login.class);
+            startActivity(intent);
+
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
     }
 }
