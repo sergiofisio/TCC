@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,7 +15,7 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:background="@drawable/menu">
 
@@ -29,8 +28,8 @@
 
                 <LinearLayout
                     android:id="@+id/btn_user"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -43,16 +42,26 @@
 
                     <TextView
                         android:id="@+id/textView7"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Perfil" />
+                        android:layout_weight="1"
+                        android:autoText="true"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Perfil"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        app:autoSizeMaxTextSize="12sp"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform"
+                        tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btn_exercices"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="120dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="100dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -65,15 +74,24 @@
 
                     <TextView
                         android:id="@+id/textView8"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Exercícios" />
+                        android:autoText="true"
+                        android:clickable="false"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Exercícios"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        app:autoSizeMaxTextSize="12sp"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeTextType="uniform"
+                        tools:ignore="TouchTargetSizeCheck" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btn_invoice"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -86,15 +104,23 @@
 
                     <TextView
                         android:id="@+id/textView9"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Relatórios" />
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Relatórios"
+                        android:textAlignment="center"
+                        android:textColor="#000000"
+                        app:autoSizeMaxTextSize="12sp"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/btn_diary"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
@@ -107,9 +133,17 @@
 
                     <TextView
                         android:id="@+id/textView10"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Diário" />
+                        android:layout_weight="1"
+                        android:fontFamily="@font/montserrat"
+                        android:text="Diário"
+                        android:textAlignment="center"
+                        android:textColor="#020202"
+                        app:autoSizeMaxTextSize="12sp"
+                        app:autoSizeMinTextSize="8sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -135,7 +169,7 @@
     <LinearLayout
         android:id="@+id/ModalPanic"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#77909090"
         android:gravity="center"
         android:orientation="vertical"

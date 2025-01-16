@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.emotionharmony.pages.After_Login;
 import com.example.emotionharmony.pages.meditation.After_Login_Page1;
 
 public class Home extends AppCompatActivity {
@@ -38,7 +39,7 @@ public class Home extends AppCompatActivity {
             editor.putBoolean("isLoggedIn", true);
             editor.apply();
 
-            Intent intent = new Intent(Home.this, After_Login_Page1.class);
+            Intent intent = new Intent(Home.this, After_Login.class);
             startActivity(intent);
 
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);

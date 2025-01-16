@@ -1,11 +1,13 @@
 package com.example.emotionharmony.pages;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.emotionharmony.Home;
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.databinding.ActivityAfterLoginBinding;
 import com.example.emotionharmony.pages.breath.Breath_Page1;
@@ -23,12 +25,20 @@ public class After_Login extends AppCompatActivity {
         binding = ActivityAfterLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.btnBreath.setOnClickListener(v ->
-                navigateTo(Breath_Page1.class)
-        );
-        binding.btnMed.setOnClickListener(v ->
-                navigateTo(After_Login_Page1.class)
-        );
+            binding.btnBreath.setOnClickListener(v ->
+                    navigateTo(Breath_Page1.class)
+            );
+            binding.btnMed.setOnClickListener(v ->
+                    navigateTo(After_Login_Page1.class)
+            );
+
+            binding.btnLogout.setOnClickListener(v -> {
+                SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean("isLoggedIn", false);
+                editor.apply();
+                navigateTo(Home.class);
+            });
 
         }
 
