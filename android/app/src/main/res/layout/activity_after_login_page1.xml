@@ -10,13 +10,12 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_width="117dp"
+        android:layout_height="129dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintVertical_bias="0.533"
         app:srcCompat="@drawable/avatar" />
 
     <ImageView
@@ -32,20 +31,20 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="276dp"
-        android:layout_height="244dp"
-        android:layout_marginStart="124dp"
+        android:layout_width="222dp"
+        android:layout_height="318dp"
+        android:layout_marginEnd="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.26999998"
         app:srcCompat="@drawable/messenger" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="213dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_width="174dp"
+        android:layout_height="165dp"
+        android:layout_marginStart="152dp"
         android:text="@string/message"
         android:textAlignment="center"
         android:textAppearance="@style/CustomInput"
@@ -53,7 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.304" />
+        app:layout_constraintVertical_bias="0.335" />
 
     <ImageView
         android:id="@+id/btnNext1"
