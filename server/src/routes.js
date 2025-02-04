@@ -1,7 +1,7 @@
 const express = require("express");
 const verifyToken = require("./middleware/auth");
 
-const allRoutes = express();
+const allRoutes = express.Router();
 
 allRoutes.use(express.json());
 
@@ -12,10 +12,14 @@ allRoutes.use((req, _, next) => {
   next();
 });
 
-allRoutes.use(require("./route/openRoute"));
+const openRoute = require("./route/openRoute");
+allRoutes.use(openRoute);
 
-allRoutes.use(verifyToken);
+const authRoute = require("./route/authRoute");
+allRoutes.use("/auth", verifyToken, authRoute);
 
-allRoutes.use(require("./route/authRoute"));
+allRoutes.use((_, res) => {
+  res.status(404).json({ error: "Rota inválida" });
+})
 
 module.exports = allRoutes;

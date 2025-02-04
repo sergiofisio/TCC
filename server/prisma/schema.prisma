@@ -16,6 +16,7 @@ datasource db {
 enum Type_user {
   user
   therapist
+  admin
 }
 
 enum Type_contacts {
