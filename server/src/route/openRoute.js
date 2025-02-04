@@ -1,7 +1,7 @@
 const express = require("express");
-// const path = require("path");
 
 const schedule = require("node-schedule");
+const register = require("../controllers/user/register");
 // const serveFavicon = require("serve-favicon");
 
 const openRoute = express.Router();
@@ -9,6 +9,7 @@ const openRoute = express.Router();
 // openRoute.use(serveFavicon(path.join(__dirname, "..", "..", "favicon.ico")));
 
 openRoute.get(["/", ""], (_, res) => res.json({ init: true }));
-openRoute.post("/user");
+openRoute.post("/register", register);
+openRoute.post("/login",)
 
 module.exports = openRoute;

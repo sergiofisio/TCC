@@ -1,47 +1,61 @@
 const bcrypt = require("bcrypt");
 const { CustomError } = require("../../class/class");
 const { prisma } = require("../../prismaFunctions/prisma");
+const { verifyInput, verifyEmail, verifyCPF } = require("../../functions/verify");
 
 async function register(req, res) {
   try {
-    let { name, email, cpf, phone, password } = req.body;
+    let { nome, email, cpf, telefones, senha } = req.body;
 
-    password = await bcrypt.hash(password, 10);
+    const missingInput = verifyInput({ nome, email, cpf, telefones, senha });
 
-    phone = phone.replace(/\D/g, "");
+    if (missingInput) throw new CustomError(`Campo obrigatório ausente: ${missingInput}`, 400);
 
-    const findUser = await prisma.tb_users.findUnique({
+    if (!verifyEmail(email)) throw new CustomError("Email inválido", 400);
+
+    if (!verifyCPF(cpf)) throw new CustomError("CPF inválido", 400);
+
+    senha = await bcrypt.hash(senha, 10);
+
+    const findUser = await prisma.tb_users.findFirst({
       where: {
-        OR: [{ email }, { cpf }],
+        OR: [{ email_user: email }, { cpf_user: cpf }],
       },
     });
 
+    for (const item of telefones) {
+      if (!item.tipo) throw new CustomError("Campo obrigatório ausente: Tipo Telefone", 400);
+
+      item.telefone = item.telefone.replace(/\D/g, "");
+
+      if (item.telefone.length < 10 || item.telefone.length > 11)
+        throw new CustomError("Telefone inválido", 400);
+    }
     if (findUser) {
       throw new CustomError("Usuário já cadastrado", 409);
     }
 
-    const { id } = await prisma.tb_users.create({
+    await prisma.tb_users.create({
       data: {
-        name,
-        email,
-        cpf,
+        name_user: nome,
+        email_user: email,
+        cpf_user: cpf,
         phones_user: {
-          create: phone.map((ph) => ({
-            country_code: ph.slice(0, 2),
-            area_code: ph.slice(2, 4),
-            number: ph.slice(4),
+          create: telefones.map(({ tipo, telefone }) => ({
+            type_phone: tipo,
+            country_code_phone: telefone.pais || 55,
+            area_code_phone: Number(telefone.slice(0, 2)),
+            phone_number: Number(telefone.slice(2)),
           })),
         },
-        password,
+        password_user: senha,
       },
     });
+
+    return res.status(201).json({ message: "Usuário cadastrado com sucesso!" });
   } catch (error) {
     console.error({ error });
 
-    if (error.missingInput)
-      return res
-        .status(error.status || 500)
-        .json({ missingInput: error.missingInput });
     return res.status(error.status || 500).json({ error: error.message });
   }
 }

@@ -35,56 +35,60 @@ enum Type_emotion {
   fear
 }
 
+enum type_situation {
+  good
+  bad
+}
+
 model tb_users {
-  id_user                 Int         @id @default(autoincrement())
-  name_user               String      @db.VarChar(100)
-  email_user              String      @unique @db.VarChar(50)
-  cpf_user                String      @unique @db.VarChar(11)
-  password_user           String      @db.VarChar(255)
-  lost_password_user      Boolean     @default(false)
-  lost_pasword_token_user String?     @db.VarChar(255)
-  active_user             Boolean     @default(true)
-  type_user               Type_user   @default(user)
+  id_user                 Int             @id @default(autoincrement())
+  name_user               String          @db.VarChar(100)
+  email_user              String          @unique @db.VarChar(50)
+  cpf_user                String          @unique @db.VarChar(11)
+  password_user           String          @db.VarChar(255)
+  lost_pasword_token_user String?         @db.VarChar(255)
+  active_user             Boolean         @default(true)
+  type_user               Type_user       @default(user)
   phones_user             tb_phone[]
   meditations_user        tb_meditation[]
   breaths_user            tb_breath[]
-  created_at              DateTime    @default(now())
-  updated_at              DateTime    @updatedAt
+  created_at              DateTime        @default(now())
+  updated_at              DateTime        @updatedAt
 }
 
-model tb_phone{
+model tb_phone {
   id_phone           Int           @id @default(autoincrement())
   type_phone         Type_contacts @default(mobile)
   country_code_phone Int           @default(55)
   area_code_phone    Int
   phone_number       Int
   users_id           Int
-  users              tb_users      @relation(fields: [users_id], references: [id_user])
+  users              tb_users      @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
   created_at         DateTime      @default(now())
   updated_at         DateTime      @updatedAt
 }
 
-model tb_meditation{
-  id_meditation       Int         @id @default(autoincrement())
-  description_meditation     String      @db.VarChar(255)
-  think_today_meditation     String      @db.VarChar(255)
-  emotion_meditation Type_emotion
-  caracter_meditation String      @db.VarChar(255)
-
-  users_id            Int
-  users               tb_users    @relation(fields: [users_id], references: [id_user])
-  created_at          DateTime    @default(now())
-  updated_at          DateTime    @updatedAt
+model tb_meditation {
+  id_meditation             Int            @id @default(autoincrement())
+  description_meditation    String         @db.Text
+  think_today_meditation    String         @db.Text
+  emotion_meditation        Type_emotion
+  caracter_meditation       String         @db.Text
+  type_situation_meditation type_situation
+  felt_after_meditation     String         @db.Text
+  users_id                  Int
+  users                     tb_users       @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
+  created_at                DateTime       @default(now())
+  updated_at                DateTime       @updatedAt
 }
 
-model tb_breath{
-  id_breath           Int         @id @default(autoincrement())
-  breath_time         Int
-  breath_type         String      @db.VarChar(255)
-  feel_before_breath  String      @db.VarChar(255)
-  feel_after_breath   String      @db.VarChar(255)
+model tb_breath {
+  id_breath           Int      @id @default(autoincrement())
+  finished_breath     Boolean  @default(true)
+  felt_betther_breath Boolean  @default(true)
+  description_breath  String   @db.Text
   users_id            Int
-  users               tb_users    @relation(fields: [users_id], references: [id_user])
-  created_at          DateTime    @default(now())
-  updated_at          DateTime    @updatedAt
+  users               tb_users @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
 }
