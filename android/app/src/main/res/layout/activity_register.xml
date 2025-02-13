@@ -37,7 +37,7 @@
     <EditText
         android:id="@+id/txtPhone"
         android:layout_width="360dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="@string/Phone"
@@ -51,8 +51,8 @@
 
     <EditText
         android:id="@+id/txtEmergency"
-        android:layout_width="360dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="@string/Emergency"
@@ -67,7 +67,7 @@
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="360dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:focusable="auto"
@@ -109,7 +109,7 @@
     <EditText
         android:id="@+id/txtName"
         android:layout_width="360dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:focusable="auto"
@@ -148,7 +148,7 @@
     <EditText
         android:id="@+id/txtCPF"
         android:layout_width="360dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:autofillHints=""
         android:background="@drawable/rounded_edittext"
         android:ems="10"
@@ -165,7 +165,7 @@
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="290dp"
-        android:layout_height="70dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="52dp"
         android:background="@drawable/rounded_button"
         android:fontFamily="@font/montserrat_bold"
@@ -182,16 +182,15 @@
         android:id="@+id/txtMsgEmergency"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="292dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="12dp"
         android:background="@drawable/rounded_edittext"
         android:fontFamily="@font/montserrat_bold"
         android:padding="20dp"
         android:text="@string/textEmergency"
         android:textAlignment="center"
         android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/txtEmergency"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/txtLogin"
@@ -208,5 +207,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/senha_label"
+        android:textAppearance="@style/CustomInput"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmergency" />
+
+    <EditText
+        android:id="@+id/txttSenhaRegistro"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

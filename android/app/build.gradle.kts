@@ -30,6 +30,13 @@ android {
         }
     }
 
+    // 🚀 Garante que os arquivos em assets/ sejam incluídos no APK
+    sourceSets {
+        named("main") {
+            assets.srcDirs("src/main/assets")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -55,4 +62,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+
+    implementation("org.json:json:20210307")
 }

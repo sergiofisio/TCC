@@ -1,39 +1,43 @@
 const { prisma } = require("../prismaFunctions/prisma");
-
 const jwt = require("jsonwebtoken");
 
-const verifyToken = (req, res, next) => {
+const verifyToken = async (req, res, next) => {
+
   const authHeader = req.headers["authorization"];
   const token = authHeader ? authHeader.split(" ")[1] : null;
 
-  try {
-    if (!token) {
-      throw new Error("Token não fornecido");
+  if (!token) {
+    return res.status(401).json({ verifyToken: false, error: "Token não fornecido" });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ verifyToken: false, error: "Token inválido" });
     }
 
-    jwt.verify(token, process.env.JWT_SECRET, async (err, decoded) => {
-      if (err) {
-        throw new Error("Token inválido");
-      } else {
-        const user = await prisma.tb_users.findUnique({
-          where: {
-            id_user: decoded.id,
-          },
-        });
+    try {
+      const user = await prisma.tb_users.findUnique({
+        where: { id_user: decoded.id },
+      });
 
-        if (!user) {
-          throw new Error("Token inválido");
-        }
-        delete user.password;
-
-        req.user = user;
-
-        next();
+      if (!user) {
+        return res.status(401).json({ verifyToken: false, error: "Usuário não encontrado" });
       }
-    });
-  } catch (error) {
-    return res.status(408).json({ error: error.message });
-  }
+
+      delete user.password;
+
+      req.user = user;
+
+      if (req.path === "/verify") {
+        return res.status(200).json({ verifyToken: true, user });
+      }
+
+      next();
+    } catch (error) {
+      console.error("Erro no middleware de autenticação:", error);
+      return res.status(500).json({ verifyToken: false, error: "Erro interno no servidor" });
+    }
+  });
 };
 
 module.exports = verifyToken;

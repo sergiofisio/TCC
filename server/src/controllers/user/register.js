@@ -39,7 +39,7 @@ async function register(req, res) {
       data: {
         name_user: nome,
         email_user: email,
-        cpf_user: cpf,
+        cpf_user: cpf.replace(/\D/g, ""),
         phones_user: {
           create: telefones.map(({ tipo, telefone }) => ({
             type_phone: tipo,
@@ -54,7 +54,6 @@ async function register(req, res) {
 
     return res.status(201).json({ message: "Usuário cadastrado com sucesso!" });
   } catch (error) {
-    console.error({ error });
 
     return res.status(error.status || 500).json({ error: error.message });
   }

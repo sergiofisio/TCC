@@ -35,7 +35,7 @@ public class After_Login extends AppCompatActivity {
             binding.btnLogout.setOnClickListener(v -> {
                 SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putBoolean("isLoggedIn", false);
+                editor.putString("authToken", "");
                 editor.apply();
                 navigateTo(Home.class);
             });
