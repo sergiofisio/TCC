@@ -41,6 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Layout de treino de respiração -->
     <LinearLayout
         android:id="@+id/Breath"
         android:layout_width="0dp"
@@ -73,7 +74,6 @@
                 android:layout_height="wrap_content"
                 android:text="10:00"
                 android:textAppearance="@style/CustomInput" />
-
         </LinearLayout>
 
         <RelativeLayout
@@ -88,7 +88,7 @@
                 android:layout_centerInParent="true" />
 
             <TextView
-                android:id="@+id/breathingInstruction"
+                android:id="@+id/breathingMoviment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -102,15 +102,15 @@
 
     </LinearLayout>
 
+    <!-- Layout de instruções -->
     <LinearLayout
-        android:id="@+id/instructions"
+        android:id="@+id/breathInstructions"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="100dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="20dp"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,7 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:text="- Este exercício tem a duração de 10 minutos. É recomendado o uso de fones de ouvido, pois há um som durante o exercício, que potencializa o seu efeito."
+            android:text="- Este exercício tem a duração de 10 minutos. É recomendado o uso de fones de ouvido."
             android:textAlignment="viewStart"
             android:textAppearance="@style/CustomInput"
             android:textSize="14sp" />
@@ -142,56 +142,9 @@
             android:id="@+id/textView20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="- Acompanhe sua respiração conforme o movimento que o circulo vai fazer"
+            android:text="- Acompanhe sua respiração conforme o movimento do círculo."
             android:textAppearance="@style/CustomInput"
             android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:text="Ao crescer você vai inspirar (puxar o ar) pelo nariz."
-            android:textAlignment="viewStart"
-            android:textAppearance="@style/CustomInput"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="Ao diminuir você vai expirar (soltar o ar) pela boca"
-            android:textAppearance="@style/CustomInput"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="- Controle sua respiração para que o movimento de inspirar e expirar dure o movimento completo do ciruclo."
-            android:textAppearance="@style/CustomInput"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="- No começo pode ser desconfortávvel, mas conforme você for praticando o exercício se torna mais fácil."
-            android:textAppearance="@style/CustomInput"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView25"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="BOM TREINO"
-            android:textAlignment="center"
-            android:textAppearance="@style/CustomInput" />
 
         <Button
             android:id="@+id/btnBegin"
@@ -200,7 +153,6 @@
             android:backgroundTint="#11273D"
             android:text="INICIAR"
             android:textAppearance="@style/CustomInput" />
-
     </LinearLayout>
 
     <com.example.emotionharmony.components.BottomMenuView
@@ -212,10 +164,9 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.5" />
 
-    </com.example.emotionharmony.components.BottomMenuView>
-
+    <!-- Modal de finalização -->
     <LinearLayout
         android:id="@+id/modalEnd"
         android:layout_width="0dp"
@@ -229,8 +180,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5"
-        tools:visibility="gone">
+        app:layout_constraintVertical_bias="0.5">
 
         <LinearLayout
             android:layout_width="300dp"

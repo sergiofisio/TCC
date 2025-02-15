@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,16 +20,17 @@ import com.example.emotionharmony.databinding.ActivityBreathPage1Binding;
 
 public class Breath_Page1 extends AppCompatActivity {
 
-    private TextView timer, breathingInstruction;
+    private TextView timer, breathingMoviment;
     private CountDownTimer countDownTimer;
-    private long timeLeftIntMillis = 600000;
-    private LinearLayout instructions, Breath, modalEnd;
+    private long timeLeftInMillis = 600000;
+    private LinearLayout breathingInstruction, Breath;
     private ActivityBreathPage1Binding binding;
     private BreathingCircleView breathCircle;
     private Handler handler = new Handler(Looper.getMainLooper());
-    private int minute = 1,  rpm = 12;
+    private int minute = 1, rpm = 12;
     private ValueAnimator animator;
-    private Button btnBegin, btnSim, btnNao;
+    private Button btnBegin;
+    private boolean isExerciseRunning = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,23 +38,23 @@ public class Breath_Page1 extends AppCompatActivity {
         binding = ActivityBreathPage1Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        breathingInstruction = findViewById(R.id.breathInstructions);
+        Breath = findViewById(R.id.Breath);
         breathCircle = findViewById(R.id.breathingCircleView);
         timer = findViewById(R.id.timer);
-        breathingInstruction = findViewById(R.id.breathingInstruction);
+        breathingMoviment = findViewById(R.id.breathingMoviment);
         btnBegin = findViewById(R.id.btnBegin);
-        btnSim = findViewById(R.id.btnSim);
-        btnNao = findViewById(R.id.btnNao);
 
-        btnBegin.setOnClickListener(v->{
-
-            startBreathingExercise();
-        });
-
-
+        btnBegin.setOnClickListener(v -> startBreathingExercise());
     }
 
-    private void startBreathingExercise(){
-        instructions.setVisibility(View.GONE);
+    private void startBreathingExercise() {
+        if (isExerciseRunning) return;
+
+        isExerciseRunning = true;
+        breathingInstruction.setVisibility(View.GONE);
+        Breath.setVisibility(View.VISIBLE);
+        breathingMoviment.setVisibility(View.VISIBLE);
 
         new Thread(() -> {
             try {
@@ -67,14 +69,13 @@ public class Breath_Page1 extends AppCompatActivity {
                 startTimer();
             });
         }).start();
-
     }
 
     private void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeftIntMillis, 1000) {
+        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                timeLeftIntMillis = millisUntilFinished;
+                timeLeftInMillis = millisUntilFinished;
                 updateTimer();
             }
 
@@ -82,64 +83,81 @@ public class Breath_Page1 extends AppCompatActivity {
             public void onFinish() {
                 timer.setText("Tempo esgotado!");
                 stopBreathAnimation();
+                isExerciseRunning = false;
             }
         }.start();
     }
 
-    private void updateTimer(){
-        int minutes = (int) (timeLeftIntMillis/1000)/60;
-        int seconds = (int) (timeLeftIntMillis/1000)%60;
+    private void updateTimer() {
+        int minutes = (int) (timeLeftInMillis / 1000) / 60;
+        int seconds = (int) (timeLeftInMillis / 1000) % 60;
 
         String timeFormatted = String.format("%02d:%02d", minutes, seconds);
         timer.setText(timeFormatted);
     }
 
-    private void updateRPM(){
-        if (minute ==1){
+    private void updateRPM() {
+        if (minute <= 1) {
             rpm = 12;
-        } else if (minute <=3) {
+        } else if (minute <= 3) {
             rpm = 10;
-        } else if (minute <=6) {
+        } else if (minute <= 6) {
             rpm = 8;
-        }else{
-            rpm =6;
+        } else {
+            rpm = 6;
         }
     }
 
-    private void startBreathCycle(){
-        long cycleDuration = 60000 / rpm;
+    private void startBreathCycle() {
+        if (!isExerciseRunning) return;
+        updateRPM();
+        long respirationDuration = 60000 / rpm;
+        long halfCycleDuration = respirationDuration / 2;
+
+        if (animator != null && animator.isRunning()) {
+            animator.cancel();
+        }
 
         animator = ValueAnimator.ofFloat(0f, 360f);
-        animator.setDuration(cycleDuration);
+        animator.setDuration(halfCycleDuration);
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.REVERSE);
 
-        animator.addUpdateListener(animation ->{
+        animator.addUpdateListener(animation -> {
             float progress = (float) animation.getAnimatedValue();
-            breathCircle.setProgress(progress);
 
-            if (progress >= 359 ) {
-                breathingInstruction.setText("EXPIRE");
-                animateTextSize(breathingInstruction, 2f, 1f, cycleDuration);
-            } else if(progress<=3 ) {
-                breathingInstruction.setText("INSPIRE");
-                animateTextSize(breathingInstruction, 1f, 2f, cycleDuration);
+            if (breathCircle != null) {
+                breathCircle.setProgress(progress);
+            }
+
+            if (progress >= 359) {
+                breathingMoviment.setText("EXPIRE");
+                animateTextSize(breathingMoviment, 2f, 1f, halfCycleDuration);
+            } else if (progress <= 3) {
+                breathingMoviment.setText("INSPIRE");
+                animateTextSize(breathingMoviment, 1f, 2f, halfCycleDuration);
             }
         });
 
         animator.start();
 
-        handler.postDelayed(()->{
-            minute++;
-            updateRPM();
-            animator.setDuration(60000/rpm);
-        }, 60000);
+        handler.postDelayed(this::updateBreathCycle, 60000);
+    }
+
+    private void updateBreathCycle() {
+        if (!isExerciseRunning) return;
+        minute++;
+        updateRPM();
+        startBreathCycle();
     }
 
     private void stopBreathAnimation() {
+        Log.i("Encerrar", "Respiração encerrada.");
         if (animator != null && animator.isRunning()) {
             animator.cancel();
         }
+        handler.removeCallbacksAndMessages(null);
+        breathingMoviment.setText("FINALIZADO");
     }
 
     private void animateTextSize(TextView textView, float startScale, float endScale, long duration) {
