@@ -18,7 +18,6 @@ async function login(req, res) {
             },
         });
 
-
         const match = await bcrypt.compare(senha, password_user);
 
         if (!id_user || !match) throw new CustomError("Email e/ou Senha incorreta", 401);
