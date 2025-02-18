@@ -1,15 +1,65 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
+# Diretórios do build
 /build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+/.gradle
+/.idea
+/.cxx
+
+# Arquivos de ambiente e senhas sensíveis
+*.env
+/local.properties
+/key.properties
+/google-services.json
+/FirebaseAppDistribution.gradle
+
+# Configurações do sistema operacional
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Arquivos de cache do Gradle
+.gradle
+**/build/
+**/.gradle/
+**/.idea/caches/
+**/.idea/libraries/
+**/.idea/modules.xml
+**/.idea/workspace.xml
+**/.idea/navEditor.xml
+**/.idea/assetWizardSettings.xml
+
+# Binários gerados
+*.apk
+*.ap_
+*.aab
+
+# Logs e arquivos temporários
+*.log
+*.lock
+*.iml
+*.idx
+*.hprof
+
+# Arquivos de compilação do NDK
+/obj/
+/.externalNativeBuild/
+
+# Arquivos de depuração
+captures/
+hs_err_pid*
+
+# Arquivos de teste
+test-results/
+.idea/httpRequests/
+
+# Diretórios de cache específicos do Android Studio
+**/.idea/
+**/captures/
+**/outputs/
+**/androidTest-results/
+
+# Arquivos do Flutter (caso use Flutter no projeto)
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.dart_tool/
