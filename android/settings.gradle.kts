@@ -9,6 +9,8 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven { url = uri("https://jitpack.io")}
+        maven { url = uri("https://maven.google.com") }
     }
 }
 dependencyResolutionManagement {
@@ -16,9 +18,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://jitpack.io")}
+        maven { url = uri("https://maven.google.com") }
+        maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
     }
 }
 
 rootProject.name = "emotion harmony"
 include(":app")
- 

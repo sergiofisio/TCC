@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,51 +9,68 @@
     android:background="@drawable/gradient_background"
     tools:context=".pages.meditation.After_Login_Page1">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="117dp"
-        android:layout_height="129dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintWidth_percent="0.3"
+        android:scaleType="fitCenter"
         app:srcCompat="@drawable/avatar" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/logo"
+        android:scaleType="fitCenter"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.15"
         app:srcCompat="@drawable/icone_principal" />
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="222dp"
-        android:layout_height="318dp"
-        android:layout_marginEnd="14dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="2:3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26999998"
+        app:layout_constraintVertical_bias="0.27"
+        app:layout_constraintWidth_percent="0.6"
         app:srcCompat="@drawable/messenger" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="174dp"
-        android:layout_height="165dp"
-        android:layout_marginStart="152dp"
+        android:id="@+id/txtSpeech"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="@string/message"
         android:textAlignment="center"
         android:textAppearance="@style/CustomInput"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView6"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.335" />
+        app:layout_constraintVertical_bias="0.349"
+        app:layout_constraintWidth_percent="0.5" />
 
     <ImageView
         android:id="@+id/btnNext1"
@@ -69,10 +87,11 @@
         android:id="@+id/btnSair"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="18dp"
         android:text="Sair"
         android:textAppearance="@style/CustomInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

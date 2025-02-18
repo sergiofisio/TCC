@@ -62,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+        String apiKey = EnvConfig.get("GOOGLE_API");
+        Log.d("GoogleCloudTTS", "🔑 API Key carregada: " + apiKey);
+
     }
 
     private void VerifyToken(VerifyTokenCallback callback) {

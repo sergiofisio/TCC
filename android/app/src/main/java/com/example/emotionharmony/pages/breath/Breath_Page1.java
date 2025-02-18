@@ -2,6 +2,7 @@ package com.example.emotionharmony.pages.breath;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -17,11 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.classes.BreathingCircleView;
 import com.example.emotionharmony.databinding.ActivityBreathPage1Binding;
+import com.example.emotionharmony.pages.After_Login;
 
 public class Breath_Page1 extends AppCompatActivity {
 
     private TextView timer, breathingMoviment;
-    private CountDownTimer countDownTimer;
     private long timeLeftInMillis = 600000;
     private LinearLayout breathingInstruction, Breath;
     private ActivityBreathPage1Binding binding;
@@ -29,7 +30,7 @@ public class Breath_Page1 extends AppCompatActivity {
     private Handler handler = new Handler(Looper.getMainLooper());
     private int minute = 1, rpm = 12;
     private ValueAnimator animator;
-    private Button btnBegin;
+    private Button btnBegin, btnEnd;
     private boolean isExerciseRunning = false;
 
     @Override
@@ -44,10 +45,19 @@ public class Breath_Page1 extends AppCompatActivity {
         timer = findViewById(R.id.timer);
         breathingMoviment = findViewById(R.id.breathingMoviment);
         btnBegin = findViewById(R.id.btnBegin);
+        btnEnd = findViewById(R.id.btnEnd);
 
         btnBegin.setOnClickListener(v -> startBreathingExercise());
+        btnEnd.setOnClickListener(v -> endBreathingExercise());
     }
 
+    private void endBreathingExercise(){
+        Intent intent = new Intent(Breath_Page1.this, Page_End.class);
+
+        startActivity(intent);
+
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+    }
     private void startBreathingExercise() {
         if (isExerciseRunning) return;
 
@@ -72,7 +82,7 @@ public class Breath_Page1 extends AppCompatActivity {
     }
 
     private void startTimer() {
-        countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+        CountDownTimer countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;

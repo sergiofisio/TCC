@@ -12,10 +12,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.emotionharmony.CustomToast;
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.classes.FirstQuestions;
 
 public class After_Login_Page2 extends AppCompatActivity {
+
+    private EditText txtDescription;
+    private FirstQuestions firstQuestions;
+
+    private CustomToast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +34,16 @@ public class After_Login_Page2 extends AppCompatActivity {
             return insets;
         });
 
-        EditText txtDescription = findViewById(R.id.txtDescription);
+        toast = new CustomToast(this);
+
+        txtDescription = findViewById(R.id.txtDescription);
         ImageView btnBack1 = findViewById(R.id.btnBack1), btnNext2 = findViewById(R.id.btnNext2);
 
-        FirstQuestions firstQuestions = FirstQuestions.getInstance();
+        firstQuestions = FirstQuestions.getInstance();
+
+        if(firstQuestions.getQuestion1()!=null){
+            txtDescription.setText(firstQuestions.getQuestion1());
+        }
 
         btnNext2.setOnClickListener(v -> {
             try {
@@ -48,7 +60,7 @@ public class After_Login_Page2 extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
             } catch (Exception e) {
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                toast.show(e.getMessage(), Toast.LENGTH_LONG, "#FF0000", "error");
             }
         });
 

@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.emotionharmony.CustomToast;
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.classes.FirstQuestions;
 
@@ -23,6 +24,9 @@ public class After_Login_Page_Emotions extends AppCompatActivity {
     private String[] emotions = {"Raiva", "Desgosto", "Medo", "Tristeza", "Felicidade"};
 
     private String Emotion;
+    private FirstQuestions firstQuestions;
+
+    private CustomToast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,9 @@ public class After_Login_Page_Emotions extends AppCompatActivity {
             return insets;
         });
 
-        FirstQuestions firstQuestions = FirstQuestions.getInstance();
+        toast = new CustomToast(this);
+        firstQuestions = FirstQuestions.getInstance();
+        Emotion = firstQuestions.getEmotion();
 
         linearLayouts = new LinearLayout[]{
                 findViewById(R.id.rdbAng),
@@ -58,6 +64,15 @@ public class After_Login_Page_Emotions extends AppCompatActivity {
             linearLayouts[i].setOnClickListener(v -> handleRadioButtonSelection(index));
         }
 
+        if(Emotion!=null){
+            for(int i=0;i<emotions.length;i++){
+                if(emotions[i].equals(Emotion)){
+                    radioButtons[i].setChecked(true);
+                    break;
+                }
+            }
+        }
+
         ImageView btnNext = findViewById(R.id.btnNext), btnBack=findViewById(R.id.btnBack);
 
         btnNext.setOnClickListener(v ->{
@@ -76,7 +91,7 @@ public class After_Login_Page_Emotions extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
             }catch(Exception e){
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                toast.show(e.getMessage(), Toast.LENGTH_LONG, "#FF0000", "error");
             }
         });
 

@@ -17,6 +17,9 @@ import com.example.emotionharmony.classes.FirstQuestions;
 
 public class After_Login_Page5 extends AppCompatActivity {
 
+    private FirstQuestions firstQuestions;
+    private EditText txtDescription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +31,14 @@ public class After_Login_Page5 extends AppCompatActivity {
             return insets;
         });
 
-        EditText txtDescription = findViewById(R.id.txtDescEmocao);
+        txtDescription = findViewById(R.id.txtDescEmocao);
         ImageView btnBack1 = findViewById(R.id.btnBack3), btnNext2 = findViewById(R.id.btnNext4);
 
-        FirstQuestions firstQuestions = FirstQuestions.getInstance();
+        firstQuestions = FirstQuestions.getInstance();
+
+        if(firstQuestions.getDescription()!=null){
+            txtDescription.setText(firstQuestions.getDescription());
+        }
 
         btnNext2.setOnClickListener(v -> {
             try {
