@@ -6,6 +6,7 @@
 
 # Arquivos de ambiente e senhas sensíveis
 *.env
+/config.env
 /local.properties
 /key.properties
 /google-services.json
