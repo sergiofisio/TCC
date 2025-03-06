@@ -58,7 +58,7 @@
         app:srcCompat="@drawable/messenger" />
 
     <TextView
-        android:id="@+id/txtSpeech"
+        android:id="@+id/txtSpeech1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"

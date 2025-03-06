@@ -42,7 +42,7 @@
         android:weightSum="2"
         app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/txtSpeech4"
         app:layout_constraintWidth_percent="0.45">
 
         <RadioButton
@@ -62,13 +62,13 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtSpeech4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="5dp"
-        android:text="O que você pensa hoje sobre aquele momento? O que você acha que poderia ter feito diferente?"
+        android:text="Qual emoção mais descreve aquele momento?"
         android:textAlignment="center"
         android:textAppearance="@style/CustomInput"
         android:textSize="16sp"
@@ -100,7 +100,7 @@
         android:weightSum="2"
         app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toEndOf="@+id/rdbAng"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/txtSpeech4"
         app:layout_constraintWidth_percent="0.45">
 
         <RadioButton

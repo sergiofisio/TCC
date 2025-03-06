@@ -9,11 +9,11 @@
     tools:context=".pages.meditation.After_Login_Page2">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtSpeech2"
         android:layout_width="355dp"
         android:layout_height="185dp"
         android:layout_marginTop="116dp"
-        android:text="Descreva uma situação recente, de preferencia no últimos 6 meses que você acredita que te afetou positiva ou negativamente de alguma forma. O que aconteceu, quando foi, o que você escutou, o que você viu, etc. dê a maior quantidade de detalhes que você conseguir. Não se preocupe, não há resposta errada para esta pergunta"
+        android:text="Descreva uma situação recente, de preferência no últimos 6 meses que você acredita que te afetou positiva ou negativamente de alguma forma. O que aconteceu, quando foi, o que você escutou, o que você viu, etc. dê a maior quantidade de detalhes que você conseguir. Não se preocupe, não há resposta errada para esta pergunta"
         android:textAlignment="center"
         android:textAppearance="@style/CustomInput"
         android:textSize="16sp"
