@@ -29,11 +29,11 @@ enum Type_contacts {
 }
 
 enum Type_emotion {
-  happy
-  sad
-  angry
-  disgoust
-  fear
+  Felicidade
+  Tristeza
+  Angry
+  Desgosto
+  Medo
 }
 
 enum type_situation {

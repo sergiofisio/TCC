@@ -3,8 +3,9 @@ package com.example.emotionharmony.pages.meditation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,68 +17,108 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.CustomToast;
 import com.example.emotionharmony.R;
-import com.example.emotionharmony.classes.FirstQuestions;
+import com.example.emotionharmony.classes.Questions_Meditation;
 import com.example.emotionharmony.utils.TTSHelper;
 
-public class After_Login_Page5 extends AppCompatActivity {
+public class Meditation_Page_Emotions extends AppCompatActivity {
 
     private TextView txtSpeech;
-    private FirstQuestions firstQuestions;
-    private EditText txtDescription;
-    private TTSHelper ttsHelper;
+    private LinearLayout[] linearLayouts;
+    private RadioButton[] radioButtons;
+    private String[] emotions = {"Raiva", "Desgosto", "Medo", "Tristeza", "Felicidade"};
+    private ImageView btnBack, btnNext;
+    private String Emotion;
+    private Questions_Meditation firstQuestions;
     private CustomToast toast;
+    private TTSHelper ttsHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_after_login_page5);
+        setContentView(R.layout.activity_meditation_page_emotions);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        toast = new CustomToast(this);
-
-        txtSpeech = findViewById(R.id.txtSpeech5);
+        txtSpeech = findViewById(R.id.txtSpeech4);
         ttsHelper = TTSHelper.getInstance();
 
-        new Handler().postDelayed(()-> ttsHelper.speakText(this, txtSpeech), 1500);
+        new Handler().postDelayed(() -> ttsHelper.speakText(this, txtSpeech), 1500);
 
-        txtDescription = findViewById(R.id.txtDescEmocao);
-        ImageView btnBack1 = findViewById(R.id.btnBack3), btnNext2 = findViewById(R.id.btnNext4);
+        toast = new CustomToast(this);
+        firstQuestions = Questions_Meditation.getInstance();
+        Emotion = firstQuestions.getEmotion();
 
-        firstQuestions = FirstQuestions.getInstance();
+        linearLayouts = new LinearLayout[]{
+                findViewById(R.id.rdbAng),
+                findViewById(R.id.rdbDesg),
+                findViewById(R.id.rdbFear),
+                findViewById(R.id.rdbSad),
+                findViewById(R.id.rdbHappy)
+        };
 
-        if(firstQuestions.getDescription()!=null){
-            txtDescription.setText(firstQuestions.getDescription());
+        radioButtons = new RadioButton[]{
+                findViewById(R.id.radioAngry),
+                findViewById(R.id.radioDes),
+                findViewById(R.id.radioFear),
+                findViewById(R.id.radioSad),
+                findViewById(R.id.radioHappy)
+        };
+
+        for (int i = 0; i < linearLayouts.length; i++) {
+            int index = i;
+            linearLayouts[i].setOnClickListener(v -> handleRadioButtonSelection(index));
         }
 
-        btnNext2.setOnClickListener(v -> {
+        if (Emotion != null) {
+            for (int i = 0; i < emotions.length; i++) {
+                if (emotions[i].equals(Emotion)) {
+                    radioButtons[i].setChecked(true);
+                    break;
+                }
+            }
+        }
+
+        btnNext = findViewById(R.id.btnNextEmotions);
+        btnBack = findViewById(R.id.btnBackEmotions);
+
+        btnNext.setOnClickListener(v -> {
             try {
                 ttsHelper.stopSpeaking();
-                String description = txtDescription.getText().toString().trim();
-
-                if (description.isEmpty()) {
-                    throw new Exception("Descreva o que você poderia fazer diferente");
+                if (Emotion == null || Emotion.isEmpty()) {
+                    throw new Exception("Escolha uma emoção");
                 }
 
-                firstQuestions.setDescription(description);
+                firstQuestions.setEmotion(Emotion);
 
-
+                Intent intent = new Intent(Meditation_Page_Emotions.this, Meditation_Page5.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
             } catch (Exception e) {
                 toast.show(e.getMessage(), Toast.LENGTH_LONG, "#FF0000", "error");
             }
         });
 
-        btnBack1.setOnClickListener(v -> {
+        btnBack.setOnClickListener(v -> {
             ttsHelper.stopSpeaking();
-            Intent intent = new Intent(After_Login_Page5.this, After_Login_Page_Emotions.class);
+            Intent intent = new Intent(Meditation_Page_Emotions.this, Meditation_Page3.class);
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         });
+    }
+
+    private void handleRadioButtonSelection(int selectedIndex) {
+        for (int i = 0; i < radioButtons.length; i++) {
+            radioButtons[i].setChecked(i == selectedIndex);
+            if (i == selectedIndex) {
+                Emotion = emotions[i];
+                ttsHelper.speakText(this, Emotion);
+            }
+        }
     }
 
     @Override

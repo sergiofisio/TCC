@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".pages.meditation.After_Login_Page5">
+    tools:context=".pages.meditation.Meditation_Page_Emotions">
 
     <ImageView
-        android:id="@+id/btnBack3"
+        android:id="@+id/btnBackEmotions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/back" />
 
     <ImageView
-        android:id="@+id/btnNext4"
+        android:id="@+id/btnNextEmotions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -30,31 +30,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/next" />
 
-    <EditText
-        android:id="@+id/txtDescEmocao"
+    <LinearLayout
+        android:id="@+id/rdbAng"
         android:layout_width="0dp"
-        android:layout_height="230dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="320dp"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/rounded_edittext"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/situacao"
-        android:inputType="textMultiLine"
-        android:paddingTop="10dp"
-        android:textAppearance="@style/CustomInput"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="133dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSpeech4"
+        app:layout_constraintWidth_percent="0.45">
+
+        <RadioButton
+            android:id="@+id/radioAngry"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imageViewDisc"
+            android:layout_width="111dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="Angry"
+            app:srcCompat="@drawable/angry" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/txtSpeech5"
-        android:layout_width="355dp"
+        android:id="@+id/txtSpeech4"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:text="Feche os olhos e sinta no seu corpo onde a emoção esta presente. De algumas características, se possível, como cor, temperatura, tamanho, etc. Não se preocupe se não conseguir dar as características, no começo temos dificuldade, com o treino fica mais fácil. "
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="5dp"
+        android:text="Qual emoção mais descreve aquele momento?"
         android:textAlignment="center"
         android:textAppearance="@style/CustomInput"
         android:textSize="16sp"
@@ -64,7 +78,7 @@
         tools:ignore="TextSizeCheck" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/imageView9"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="18dp"
@@ -74,4 +88,120 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icone_principal"
         tools:ignore="ImageContrastCheck" />
+
+    <LinearLayout
+        android:id="@+id/rdbDesg"
+        android:layout_width="0dp"
+        android:layout_height="133dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintStart_toEndOf="@+id/rdbAng"
+        app:layout_constraintTop_toBottomOf="@+id/txtSpeech4"
+        app:layout_constraintWidth_percent="0.45">
+
+        <RadioButton
+            android:id="@+id/radioDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/desgust" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rdbFear"
+        android:layout_width="0dp"
+        android:layout_height="133dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rdbAng"
+        app:layout_constraintWidth_percent="0.45">
+
+        <RadioButton
+            android:id="@+id/radioFear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/fear" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rdbSad"
+        android:layout_width="0dp"
+        android:layout_height="133dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintStart_toEndOf="@+id/rdbFear"
+        app:layout_constraintTop_toBottomOf="@+id/rdbDesg"
+        app:layout_constraintWidth_percent="0.45">
+
+        <RadioButton
+            android:id="@+id/radioSad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/sad" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/rdbHappy"
+        android:layout_width="0dp"
+        android:layout_height="133dp"
+        android:layout_margin="8dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rdbFear"
+        app:layout_constraintWidth_percent="0.45">
+
+        <RadioButton
+            android:id="@+id/radioHappy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minWidth="48dp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/happy" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
