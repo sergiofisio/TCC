@@ -31,7 +31,7 @@ enum Type_contacts {
 enum Type_emotion {
   Felicidade
   Tristeza
-  Angry
+  Raiva
   Desgosto
   Medo
 }
