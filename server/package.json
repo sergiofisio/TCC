@@ -24,7 +24,7 @@
     "dev": "nodemon src/index.js",
     "begin": "yarn && yarn prisma",
     "start": "node src/index.js",
-    "prisma": "npm run migrate deploy && npm run generate",
+    "prisma": "yarn migrate && yarn generate",
     "prisma:dev": "prisma migrate dev && yarn generate && yarn push",
     "prisma:format": "prisma format",
     "migrate": "npx prisma migrate deploy",
