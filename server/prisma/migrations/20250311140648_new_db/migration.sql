@@ -35,7 +35,7 @@ CREATE TABLE `tb_meditation` (
     `id_meditation` INTEGER NOT NULL AUTO_INCREMENT,
     `description_meditation` TEXT NOT NULL,
     `think_today_meditation` TEXT NOT NULL,
-    `emotion_meditation` ENUM('happy', 'sad', 'angry', 'disgoust', 'fear') NOT NULL,
+    `emotion_meditation` ENUM('Felicidade', 'Tristeza', 'Angry', 'Desgosto', 'Medo') NOT NULL,
     `caracter_meditation` TEXT NOT NULL,
     `type_situation_meditation` ENUM('good', 'bad') NOT NULL,
     `felt_after_meditation` TEXT NOT NULL,

@@ -2,6 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "servidor para aplicação emotion harmony",
+  "engines": {
+    "node": ">=20.0.0",
+    "yarn": ">=1.22.0"
+  },
   "keywords": [
     "emotion",
     "harmony",
@@ -18,9 +22,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "begin": "yarn && npm run generate",
+    "begin": "yarn && yarn prisma",
     "start": "node src/index.js",
-    "prisma": "npm run migrate && npm run generate",
+    "prisma": "npm run migrate deploy && npm run generate",
     "prisma:dev": "prisma migrate dev && yarn generate && yarn push",
     "prisma:format": "prisma format",
     "migrate": "npx prisma migrate deploy",
@@ -29,7 +33,7 @@
     "push": "npx prisma db push"
   },
   "dependencies": {
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "^6.4.1",
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
@@ -44,6 +48,6 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "prisma": "^6.2.1"
+    "prisma": "^6.4.1"
   }
 }
