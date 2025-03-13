@@ -41,6 +41,12 @@ enum type_situation {
   bad
 }
 
+enum Type_day {
+  morning
+  afternoon
+  evening
+}
+
 model tb_users {
   id_user                 Int             @id @default(autoincrement())
   name_user               String          @db.VarChar(100)
@@ -53,6 +59,7 @@ model tb_users {
   phones_user             tb_phone[]
   meditations_user        tb_meditation[]
   breaths_user            tb_breath[]
+  todays_user             tb_today[]
   created_at              DateTime        @default(now())
   updated_at              DateTime        @updatedAt
 }
@@ -67,6 +74,17 @@ model tb_phone {
   users              tb_users      @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
   created_at         DateTime      @default(now())
   updated_at         DateTime      @updatedAt
+}
+
+model tb_today {
+  id_today                  Int          @id @default(autoincrement())
+  emotion_today             Type_emotion
+  description_today         String?      @db.Text
+  morning_afternoon_evening Type_day
+  users_id                  Int
+  users                     tb_users     @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
+  created_at                DateTime     @default(now())
+  updated_at                DateTime     @updatedAt
 }
 
 model tb_meditation {
