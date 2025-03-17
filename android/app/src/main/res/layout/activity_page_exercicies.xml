@@ -25,9 +25,20 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:text="Logout"
+        android:text="@string/logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/btnLogout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        style="?android:attr/progressBarStyleLarge"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -37,12 +48,14 @@
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="30dp"
@@ -56,18 +69,93 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
-                android:text="Como você sente hoje?"
+                android:text="@string/hoje"
                 android:textAppearance="@style/CustomInput" />
 
-            <Button
-                android:id="@+id/btnFeel"
-                android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:backgroundTint="#FDFDFD"
-                android:text="Iniciar"
-                android:textAppearance="@style/CustomInput"
-                android:textColor="#000000" />
+            <LinearLayout
+                android:id="@+id/momento_dia"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/manha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/MANHA"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/CustomInput" />
+
+                    <ImageView
+                        android:id="@+id/imgManha"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        tools:srcCompat="@drawable/choose_emotion" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tarde"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/TARDE"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/CustomInput" />
+
+                    <ImageView
+                        android:id="@+id/imgTarde"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:srcCompat="@drawable/choose_emotion" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/noite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:foregroundGravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/NOITE"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/CustomInput" />
+
+                    <ImageView
+                        android:id="@+id/imgNoite"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        app:srcCompat="@drawable/choose_emotion" />
+
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -86,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:text="Respiração"
+                android:text="@string/respiracao"
                 android:textAppearance="@style/CustomInput"
                 android:textColor="#FFFFFF"
                 android:textSize="34sp" />
@@ -98,7 +186,7 @@
                 android:background="@drawable/rounded_edittext"
                 android:gravity="center"
                 android:padding="0dp"
-                android:text="+"
+                android:text="@string/add"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="24sp" />
@@ -120,7 +208,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:text="Meditação"
+                android:text="@string/meditacao"
                 android:textAppearance="@style/CustomInput"
                 android:textColor="#FFFFFF"
                 android:textSize="34sp" />
@@ -132,7 +220,7 @@
                 android:background="@drawable/rounded_edittext"
                 android:gravity="center"
                 android:padding="0dp"
-                android:text="+"
+                android:text="@string/add"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="24sp" />

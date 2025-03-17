@@ -15,17 +15,14 @@ datasource db {
 
 enum Type_user {
   user
-  therapist
   admin
 }
 
 enum Type_contacts {
-  home
-  work
-  mobile
-  office
-  clinic
-  emergency
+  casa
+  trabalho
+  celular
+  emergencia
 }
 
 enum Type_emotion {
@@ -37,14 +34,14 @@ enum Type_emotion {
 }
 
 enum type_situation {
-  good
-  bad
+  boa
+  ruim
 }
 
 enum Type_day {
-  morning
-  afternoon
-  evening
+  manhã
+  tarde
+  noite
 }
 
 model tb_users {
@@ -66,7 +63,7 @@ model tb_users {
 
 model tb_phone {
   id_phone           Int           @id @default(autoincrement())
-  type_phone         Type_contacts @default(mobile)
+  type_phone         Type_contacts @default(celular)
   country_code_phone Int           @default(55)
   area_code_phone    Int
   phone_number       Int
@@ -94,7 +91,6 @@ model tb_meditation {
   emotion_meditation        Type_emotion
   caracter_meditation       String         @db.Text
   type_situation_meditation type_situation
-  felt_after_meditation     String         @db.Text
   users_id                  Int
   users                     tb_users       @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
   created_at                DateTime       @default(now())
