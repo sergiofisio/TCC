@@ -22,6 +22,11 @@ app.use(function (_, res, next) {
 
 app.use(allRoutes);
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log(`Servidor rodando http://localhost:${process.env.PORT || 3000}`);
+const SERVER_PORT = process.env.PORT || 3000;
+const SERVER_HOST =
+  process.env.HOST ||
+  (process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost");
+
+app.listen(SERVER_PORT, () => {
+  console.log(`Servidor rodando em http://${SERVER_HOST}:${SERVER_PORT}`);
 });

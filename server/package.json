@@ -30,7 +30,8 @@
     "migrate": "npx prisma migrate deploy",
     "generate": "npx prisma generate",
     "pull": "npx prisma db pull",
-    "push": "npx prisma db push"
+    "push": "npx prisma db push",
+    "seed": "node ./prisma/seed.js"
   },
   "dependencies": {
     "@prisma/client": "^6.4.1",

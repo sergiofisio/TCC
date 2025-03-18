@@ -5,6 +5,8 @@ const verifyAdmin = require("../middleware/admin");
 const deleteUser = require("../controllers/user/delete");
 const getUserInfo = require("../controllers/user/info");
 const addEmotion = require("../controllers/emotion/add");
+const backupDatabase = require("../controllers/backup");
+const update = require("../controllers/user/update");
 
 const authRoute = express.Router();
 
@@ -12,9 +14,11 @@ authRoute.get("/find/:activity/:id_activity?", find);
 authRoute.get("/user", getUserInfo);
 authRoute.post("/add/:activity", add);
 authRoute.post("/addEmotion", addEmotion);
+authRoute.patch("/update", update);
 
 authRoute.use(verifyAdmin);
 
+authRoute.get("/backup", backupDatabase);
 authRoute.delete("/user/:id", deleteUser);
 
 module.exports = authRoute;

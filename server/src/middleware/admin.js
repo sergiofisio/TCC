@@ -1,26 +1,27 @@
 const { prisma } = require("../prismaFunctions/prisma");
 const { CustomError } = require("../class/class");
 
+const verifyAdmin = async (req, res, next) => {
+  try {
+    const user = req.user;
 
-const verifyAdmin = (req, res, next) => {
-    try {
-        const user = req.user;
+    const userInfo = await prisma.tb_users.findUnique({
+      where: {
+        id_user: Number(user.id_user),
+      },
+    });
 
-        const userInfo = prisma.tb_users.findUnique({
-            where: {
-                id_user: Number(user.id_user)
-            }
-        })
+    console.log({ userInfo });
 
-        if (userInfo.type_user !== 'admin') throw new CustomError("Acesso negado", 403);
+    if (userInfo.type_user !== "admin")
+      throw new CustomError("Acesso negado", 403);
 
-        next();
-    } catch (error) {
-        console.error({ error });
+    next();
+  } catch (error) {
+    console.error({ error });
 
-        return res.status(error.status || 500).json({ error: error.message });
-
-    }
+    return res.status(error.status || 500).json({ error: error.message });
+  }
 };
 
 module.exports = verifyAdmin;

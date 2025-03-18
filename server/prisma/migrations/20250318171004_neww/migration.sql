@@ -7,7 +7,7 @@ CREATE TABLE `tb_users` (
     `password_user` VARCHAR(255) NOT NULL,
     `lost_pasword_token_user` VARCHAR(255) NULL,
     `active_user` BOOLEAN NOT NULL DEFAULT true,
-    `type_user` ENUM('user', 'therapist', 'admin') NOT NULL DEFAULT 'user',
+    `type_user` ENUM('user', 'admin') NOT NULL DEFAULT 'user',
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
@@ -19,7 +19,7 @@ CREATE TABLE `tb_users` (
 -- CreateTable
 CREATE TABLE `tb_phone` (
     `id_phone` INTEGER NOT NULL AUTO_INCREMENT,
-    `type_phone` ENUM('home', 'work', 'mobile', 'office', 'clinic', 'emergency') NOT NULL DEFAULT 'mobile',
+    `type_phone` ENUM('casa', 'trabalho', 'celular', 'emergencia') NOT NULL DEFAULT 'celular',
     `country_code_phone` INTEGER NOT NULL DEFAULT 55,
     `area_code_phone` INTEGER NOT NULL,
     `phone_number` INTEGER NOT NULL,
@@ -31,14 +31,26 @@ CREATE TABLE `tb_phone` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `tb_today` (
+    `id_today` INTEGER NOT NULL AUTO_INCREMENT,
+    `emotion_today` ENUM('Felicidade', 'Tristeza', 'Raiva', 'Desgosto', 'Medo') NOT NULL,
+    `description_today` TEXT NULL,
+    `morning_afternoon_evening` ENUM('manhã', 'tarde', 'noite') NOT NULL,
+    `users_id` INTEGER NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL,
+
+    PRIMARY KEY (`id_today`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `tb_meditation` (
     `id_meditation` INTEGER NOT NULL AUTO_INCREMENT,
     `description_meditation` TEXT NOT NULL,
     `think_today_meditation` TEXT NOT NULL,
-    `emotion_meditation` ENUM('Felicidade', 'Tristeza', 'Angry', 'Desgosto', 'Medo') NOT NULL,
+    `emotion_meditation` ENUM('Felicidade', 'Tristeza', 'Raiva', 'Desgosto', 'Medo') NOT NULL,
     `caracter_meditation` TEXT NOT NULL,
-    `type_situation_meditation` ENUM('good', 'bad') NOT NULL,
-    `felt_after_meditation` TEXT NOT NULL,
+    `type_situation_meditation` ENUM('boa', 'ruim') NOT NULL,
     `users_id` INTEGER NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
@@ -61,6 +73,9 @@ CREATE TABLE `tb_breath` (
 
 -- AddForeignKey
 ALTER TABLE `tb_phone` ADD CONSTRAINT `tb_phone_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `tb_today` ADD CONSTRAINT `tb_today_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `tb_meditation` ADD CONSTRAINT `tb_meditation_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
