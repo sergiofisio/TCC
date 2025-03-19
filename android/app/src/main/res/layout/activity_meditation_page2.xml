@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".pages.meditation.After_Login_Page2">
+    tools:context=".pages.meditation.Meditation_Page2">
 
     <TextView
         android:id="@+id/txtSpeech2"
@@ -32,28 +32,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icone_principal" />
 
-    <ImageView
-        android:id="@+id/btnNext2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="80dp"
-        android:contentDescription="next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/next" />
-
     <EditText
         android:id="@+id/txtDescription"
-        android:layout_width="350dp"
+        android:layout_width="0dp"
         android:layout_height="230dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="320dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/situacao"
         android:inputType="textMultiLine"
-        android:paddingTop="10dp"
+        android:padding="20dp"
         android:textAppearance="@style/CustomInput"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,13 +52,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/btnBack1"
+        android:id="@+id/btnNext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/next" />
+
+    <ImageView
+        android:id="@+id/btnBack2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="80dp"
-        android:contentDescription="back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/back" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

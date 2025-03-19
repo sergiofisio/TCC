@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.R;
+import com.example.emotionharmony.components.BottomMenuView;
 
 public class Page_Diary extends AppCompatActivity {
 
@@ -22,5 +23,8 @@ public class Page_Diary extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        BottomMenuView bottomMenu = findViewById(R.id.bottomMenu);
+        bottomMenu.setActivityContext(this);
     }
 }

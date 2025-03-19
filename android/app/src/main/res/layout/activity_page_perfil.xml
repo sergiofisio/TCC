@@ -5,6 +5,206 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".pages.Page_perfil">
+
+    <TextView
+        android:id="@+id/lblNomePerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/Nome"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="VisualLintOverlap" />
+
+    <EditText
+        android:id="@+id/txtNomePerfil"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:foregroundGravity="fill"
+        android:hint="@string/Nome"
+        android:inputType="text|textAutoComplete|textAutoCorrect"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNomePerfil"
+        tools:ignore="Autofill,VisualLintTextFieldSize,VisualLintOverlap,DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+    <TextView
+        android:id="@+id/lblEmailPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/email_label"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNomePerfil"
+        tools:ignore="VisualLintOverlap" />
+
+    <EditText
+        android:id="@+id/txtEmailPerfil"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="@string/email_label"
+        android:inputType="text|textEmailAddress|textAutoComplete|textAutoCorrect"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblEmailPerfil"
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintTextFieldSize,VisualLintOverlap" />
+
+    <TextView
+        android:id="@+id/lblCpfPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/CPF"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtEmailPerfil"
+        tools:ignore="VisualLintOverlap" />
+
+    <EditText
+        android:id="@+id/txtCpfPerfil"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="@string/CPF"
+        android:inputType="text"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblCpfPerfil"
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintTextFieldSize,VisualLintOverlap" />
+
+    <TextView
+        android:id="@+id/lblCelularPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/Phone"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtCpfPerfil"
+        tools:ignore="VisualLintOverlap" />
+
+    <EditText
+        android:id="@+id/txtCelularPerfil"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="@string/Phone"
+        android:inputType="phone"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblCelularPerfil"
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintTextFieldSize,VisualLintOverlap" />
+
+    <TextView
+        android:id="@+id/lblemergenciaPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/Emergency"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtCelularPerfil"
+        tools:ignore="VisualLintOverlap" />
+
+    <EditText
+        android:id="@+id/txtEmergenciaPerfil"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="@string/Emergency"
+        android:inputType="text"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblemergenciaPerfil"
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintTextFieldSize,VisualLintOverlap" />
+
+    <TextView
+        android:id="@+id/lblSenhaPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/Senha"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtEmergenciaPerfil"
+        tools:ignore="VisualLintOverlap" />
+
+    <EditText
+        android:id="@+id/txtSenhaPerfil"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="@string/Senha"
+        android:inputType="text|textPassword"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblSenhaPerfil"
+        tools:ignore="Autofill,TextContrastCheck,DuplicateSpeakableTextCheck,VisualLintTextFieldSize,VisualLintOverlap" />
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="290dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/montserrat_bold"
+        android:foregroundGravity="center"
+        android:gravity="center"
+        android:text="@string/Editar"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSenhaPerfil"
+        tools:ignore="TextSizeCheck,VisualLintOverlap" />
+
+    <com.example.emotionharmony.components.BottomMenuView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+    </com.example.emotionharmony.components.BottomMenuView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

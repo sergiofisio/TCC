@@ -1,8 +1,8 @@
 package com.example.emotionharmony.pages.meditation;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,15 +16,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.CustomToast;
 import com.example.emotionharmony.R;
-import com.example.emotionharmony.classes.FirstQuestions;
+import com.example.emotionharmony.classes.Questions_Meditation;
+import com.example.emotionharmony.utils.NavigationHelper;
 import com.example.emotionharmony.utils.TTSHelper;
 
-public class After_Login_Page3 extends AppCompatActivity {
+public class Meditation_Page3 extends AppCompatActivity {
 
     private TextView txtSpeech;
     private EditText txtDescription;
-    private FirstQuestions firstQuestions;
-
+    private Questions_Meditation questionsMeditation;
     private CustomToast toast;
     private TTSHelper ttsHelper;
 
@@ -32,7 +32,7 @@ public class After_Login_Page3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_after_login_page3);
+        setContentView(R.layout.activity_meditation_page3);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -42,44 +42,46 @@ public class After_Login_Page3 extends AppCompatActivity {
         toast = new CustomToast(this);
 
         txtSpeech = findViewById(R.id.txtSpeech3);
-        ttsHelper = TTSHelper.getInstance();
+        ttsHelper = TTSHelper.getInstance(this);
 
-        new Handler().postDelayed(()-> ttsHelper.speakText(this, txtSpeech), 1500);
+        new Handler().postDelayed(()-> ttsHelper.speakText(txtSpeech.getText().toString()), 1500);
 
         txtDescription = findViewById(R.id.txtDescription2);
-        ImageView btnBack1 = findViewById(R.id.btnBack2), btnNext2 = findViewById(R.id.btnNext3);
+        ImageView btnBack = findViewById(R.id.btnBack3);
+        ImageView btnNext = findViewById(R.id.btnNext3);
 
-        firstQuestions = FirstQuestions.getInstance();
+        questionsMeditation = Questions_Meditation.getInstance();
 
-        if (firstQuestions.getQuestion2() != null) {
-            txtDescription.setText(firstQuestions.getQuestion2());
+        if (questionsMeditation.getThinkToday() != null) {
+            txtDescription.setText(questionsMeditation.getThinkToday());
         }
 
-        btnNext2.setOnClickListener(v -> {
+        btnNext.setOnClickListener(v -> {
             try {
-                ttsHelper.stopSpeaking();
                 String description = txtDescription.getText().toString().trim();
 
                 if (description.isEmpty()) {
                     throw new Exception("Descreva o que você poderia fazer diferente");
                 }
 
-                firstQuestions.setQuestion2(description);
+                questionsMeditation.setThinkToday(description);
+                NavigationHelper.navigateTo(Meditation_Page3.this, Meditation_Page4.class, true);
 
-                Intent intent = new Intent(After_Login_Page3.this, After_Login_Page_Emotions.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
             } catch (Exception e) {
                 toast.show(e.getMessage(), Toast.LENGTH_LONG, "#FF0000", "error");
             }
         });
 
-        btnBack1.setOnClickListener(v -> {
-            ttsHelper.stopSpeaking();
-            Intent intent = new Intent(After_Login_Page3.this, After_Login_Page2.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        btnBack.setOnClickListener(v -> NavigationHelper.navigateTo(Meditation_Page3.this, Meditation_Page2.class, false));
+
+        findViewById(R.id.main).setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                NavigationHelper.hideKeyboard(Meditation_Page3.this);
+                v.performClick();
+                return true;
+            }
+            return false;
         });
     }
 

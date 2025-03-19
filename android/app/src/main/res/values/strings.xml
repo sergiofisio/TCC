@@ -1,7 +1,7 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Emotion Harmony</string>
     <string name="logo">logo</string>
-    <string name="txtCarregamento">Carregando ...</string>
+    <string name="txtCarregamento" tools:ignore="TypographyEllipsis">Carregando ...</string>
     <string name="email_label">Email</string>
     <string name="senha_label">Senha</string>
     <string name="cadastro">Não tem cadastro?\nCLIQUE AQUI</string>
@@ -19,6 +19,36 @@
     <string name="cadastrar">cadastrar-se</string>
     <string name="Emergency">Telefone Emergência</string>
     <string name="textEmergency">Porque pedimos isso? Temos uma preocupação com a saúde mental dos nossos usuario e este contato de emergência é uma forma de caso você esteja passando por alguma dificuldade o nosso sistema fara a ligação para este contato para te ajudar nesta situação.</string>
-    <string name="message">Vamos fazer um pequeno questionário para saber em que situação você se encontra no momento.</string>
+    <string name="message" tools:ignore="Typos">Vamos fazer um pequeno questionário para saber em que situação você se encontra no momento.</string>
     <string name="situacao">Escreva aqui.</string>
+    <string name="exercicioBad">Imagine que estas caracteristicas que você deu no exercícioo anterior são uma pedra e esta na sua mão e com toda sua força você o joga o mais longe possivel, quando você faz isso ele some no horizonte e você se sente mais leve por ter se livrado disso.</string>
+    <string name="exercicioGood">Imagine que estas caracteristicas que você deu no exercícioo anterior são um objeto e você vai guardar em um lugar especial no seu coração e cada vez que o seu coração bate ele estará sendo espalhado pelo seu corpo inteiro. </string>
+    <string name="Senha">Senha</string>
+    <string name="avatar">Img avatar</string>
+    <string name="back">back</string>
+    <string name="finalizar">Finalizar</string>
+    <string name="logout">Logout</string>
+    <string name="hoje">Como estão suas emoções hoje</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="respiracao">Respiração</string>
+    <string name="add">+</string>
+    <string name="meditacao">Meditação</string>
+    <string name="exResp">Exercício respiratório</string>
+    <string name="tempo">TEMPO</string>
+    <string name="cronometro">10:00</string>
+    <string name="INSTRUÇÕES">INSTRUÇÕES</string>
+    <string name="instrucao_txt1">- Este exercício tem a duração de 10 minutos. É recomendado o uso de fones de ouvido.</string>
+    <string name="instrucao_txt2">- Acompanhe sua respiração conforme o movimento do círculo.</string>
+    <string name="INICIAR">INICIAR</string>
+    <string name="MANHA">MANHÃ</string>
+    <string name="TARDE">TARDE</string>
+    <string name="NOITE">NOITE</string>
+    <string name="sair">Sair</string>
+    <string name="Editar">EDITAR</string>
+    <string name="relatorio" >RELATÓRIOS</string>
+    <string name="diario">MEUS DIAS</string>
+    <string name="respiracoes">RESPIRAÇÕES</string>
+    <string name="meditacoes">MEDITAÇÕES</string>
+    <string name="emocao">EMOÇÃO</string>
+    <string name="exercicios">EXERCICIOS REALIZADOS</string>
 </resources>

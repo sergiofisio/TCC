@@ -52,7 +52,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    // ✅ **Correção: Excluindo arquivos duplicados do META-INF**
     packaging {
         resources.excludes.add("META-INF/DEPENDENCIES")
         resources.excludes.add("META-INF/LICENSE")
@@ -61,12 +60,13 @@ android {
         resources.excludes.add("META-INF/NOTICE")
         resources.excludes.add("META-INF/NOTICE.txt")
         resources.excludes.add("META-INF/notice.txt")
-        resources.excludes.add("META-INF/INDEX.LIST") // 🔴 **Adicionando essa linha**
+        resources.excludes.add("META-INF/INDEX.LIST")
     }
 }
 
 dependencies {
     implementation("com.google.auth:google-auth-library-oauth2-http:1.18.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
     implementation("com.google.protobuf:protobuf-java:3.21.7")
 

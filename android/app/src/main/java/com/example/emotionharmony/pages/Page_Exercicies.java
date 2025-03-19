@@ -19,7 +19,7 @@ import com.example.emotionharmony.CustomToast;
 import com.example.emotionharmony.Home;
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.components.BottomMenuView;
-import com.example.emotionharmony.databinding.ActivityAfterLoginBinding;
+import com.example.emotionharmony.databinding.ActivityPageExerciciesBinding;
 import com.example.emotionharmony.pages.breath.Breath_Page1;
 import com.example.emotionharmony.pages.choose.Choose_Emotion;
 import com.example.emotionharmony.pages.meditation.Meditation_Page1;
@@ -33,7 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class After_Login extends AppCompatActivity {
+public class Page_Exercicies extends AppCompatActivity {
 
     private ImageView imgManha, imgTarde, imgNoite;
     private SharedPreferences preferences;
@@ -46,7 +46,7 @@ public class After_Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityAfterLoginBinding binding = ActivityAfterLoginBinding.inflate(getLayoutInflater());
+        ActivityPageExerciciesBinding binding = ActivityPageExerciciesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         imgManha = findViewById(R.id.imgManha);
@@ -123,44 +123,65 @@ public class After_Login extends AppCompatActivity {
                 uiHandler.post(() -> {
                     try {
                         JSONObject jsonResponse = new JSONObject(response);
+                        JSONArray phones = jsonResponse.getJSONArray("phones_user");
+                        for (int i = 0; i < phones.length(); i++) {
+                            JSONObject phone = phones.getJSONObject(i);
+                            String type = phone.getString("type_phone");
+
+                            if (type.equalsIgnoreCase("emergencia")) {
+                                String emergencyPhone = formatPhoneNumber(phone);
+                                saveEmergencyPhone(emergencyPhone);
+                                Log.d("emergencyPhone", "Telefone de emergência salvo: " + emergencyPhone);
+                            }
+                        }
+
                         JSONArray emotionsArray = jsonResponse.getJSONArray("todays_user");
+                        JSONArray todayEmotions = new JSONArray();
+                        JSONObject emotion;
 
                         String dataAtual = getDataAtual();
+
+
+                        for (int i = 0; i < emotionsArray.length(); i++) {
+                            emotion = emotionsArray.getJSONObject(i);
+                            String dataEmocao = emotion.getString("created_at").split("T")[0];
+
+                            if (dataEmocao.equals(dataAtual)) {
+                                todayEmotions.put(emotion);
+                            }
+                        }
 
                         manhaEscolhida = false;
                         tardeEscolhida = false;
                         noiteEscolhida = false;
 
-                        for (int i = 0; i < emotionsArray.length(); i++) {
-                            JSONObject emotion = emotionsArray.getJSONObject(i);
-                            String dataEmocao = emotion.getString("created_at").split("T")[0];
-                            String momento = emotion.getString("morning_afternoon_evening"), emotionType = emotion.getString("emotion_today");
-
-                            if (dataEmocao.equals(dataAtual)) {
-                                switch (momento) {
-                                    case "manhã":
-                                        atualizarImagemEmocao(imgManha, emotionType);
-                                        manhaEscolhida = true;
-                                        break;
-                                    case "tarde":
-                                        atualizarImagemEmocao(imgTarde, emotionType);
-                                        tardeEscolhida = true;
-                                        break;
-                                    case "noite":
-                                        atualizarImagemEmocao(imgNoite, emotionType);
-                                        noiteEscolhida = true;
-                                        break;
-                                }
-                            }else{
-                                imgManha.setImageResource(R.drawable.choose_emotion);
-                                imgTarde.setImageResource(R.drawable.choose_emotion);
-                                imgNoite.setImageResource(R.drawable.choose_emotion);
+                        if(todayEmotions.length()>0){
+                            for (int i = 0; i < todayEmotions.length(); i++) {
+                                emotion = todayEmotions.getJSONObject(i);
+                                String momento = emotion.getString("morning_afternoon_evening"), emotionType = emotion.getString("emotion_today");
+                                    switch (momento) {
+                                        case "manhã":
+                                            atualizarImagemEmocao(imgManha, emotionType);
+                                            manhaEscolhida = true;
+                                            break;
+                                        case "tarde":
+                                            atualizarImagemEmocao(imgTarde, emotionType);
+                                            tardeEscolhida = true;
+                                            break;
+                                        case "noite":
+                                            atualizarImagemEmocao(imgNoite, emotionType);
+                                            noiteEscolhida = true;
+                                            break;
+                                    }
                             }
+                        }else{
+                            imgManha.setImageResource(R.drawable.choose_emotion);
+                            imgTarde.setImageResource(R.drawable.choose_emotion);
+                            imgNoite.setImageResource(R.drawable.choose_emotion);
                         }
-
                         configurarEventosClique();
                     } catch (JSONException e) {
-                        Log.e("After_Login", "❌ Erro ao processar JSON", e);
+                        Log.e("Page_exercicios", "❌ Erro ao processar JSON", e);
                     }
                     onComplete.run();
                 });
@@ -168,14 +189,18 @@ public class After_Login extends AppCompatActivity {
 
             @Override
             public void onError(String error) {
-                uiHandler.post(onComplete);
+                if (onComplete != null) uiHandler.post(onComplete);
             }
         });
     }
 
     private void atualizarImagemEmocao(ImageView imageView, String emotionType) {
-        Log.d("atualizarImagemEmocao", "ImageView"+imageView);
-        Log.d("atualizarImagemEmocao", "emotionType"+emotionType);
+        if (emotionType == null || emotionType.isEmpty()) {
+            Log.e("atualizarImagemEmocao", "⚠ emotionType é null ou vazio, definindo como padrão.");
+            imageView.setImageResource(R.drawable.choose_emotion);
+            return;
+        }
+
         switch (emotionType) {
             case "Felicidade":
                 imageView.setImageResource(R.drawable.happy);
@@ -216,5 +241,19 @@ public class After_Login extends AppCompatActivity {
     private void logout() {
         preferences.edit().remove("authToken").apply();
         navigateTo(Home.class);
+    }
+
+    private String formatPhoneNumber(JSONObject phone) throws JSONException {
+        int countryCode = phone.getInt("country_code_phone");
+        int areaCode = phone.getInt("area_code_phone");
+        int number = phone.getInt("phone_number");
+        return "+" + countryCode + " (" + areaCode + ") " + number;
+    }
+
+    private void saveEmergencyPhone(String phoneNumber) {
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("emergency_phone", phoneNumber);
+        editor.apply();
     }
 }

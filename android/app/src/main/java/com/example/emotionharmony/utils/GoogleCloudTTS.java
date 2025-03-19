@@ -29,13 +29,19 @@ public class GoogleCloudTTS {
                         .build();
 
                 try (Response response = client.newCall(request).execute()) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        JSONObject responseBody = new JSONObject(response.body().string());
-                        return responseBody.getString("audioContent");
-                    } else {
+                    if (!response.isSuccessful() || response.body() == null) {
                         Log.e("GoogleCloudTTS", "❌ Erro na requisição: " + response.code() + " - " + response.message());
                         return null;
                     }
+
+                    JSONObject responseBody = new JSONObject(response.body().string());
+                    if (!responseBody.has("audioContent")) {
+                        Log.e("GoogleCloudTTS", "❌ Resposta da API não contém áudio!");
+                        return null;
+                    }
+
+                    Log.d("GoogleCloudTTS", "✅ Resposta da API recebida.");
+                    return responseBody.getString("audioContent");
                 }
             } catch (IOException e) {
                 Log.e("GoogleCloudTTS", "❌ Erro de rede: " + e.getMessage());

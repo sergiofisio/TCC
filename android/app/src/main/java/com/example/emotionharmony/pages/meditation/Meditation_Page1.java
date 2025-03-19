@@ -1,12 +1,9 @@
 package com.example.emotionharmony.pages.meditation;
 
-import android.content.Context;
-import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,18 +14,21 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.R;
-import com.example.emotionharmony.pages.After_Login;
+import com.example.emotionharmony.pages.Page_Exercicies;
+import com.example.emotionharmony.utils.NavigationHelper;
 import com.example.emotionharmony.utils.TTSHelper;
 
-public class After_Login_Page1 extends AppCompatActivity {
+public class Meditation_Page1 extends AppCompatActivity {
 
     private TextView txtSpeech;
+    private MediaPlayer mediaPlayer;
     private TTSHelper ttsHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_after_login_page1);
+        setContentView(R.layout.activity_meditation_page1);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -37,49 +37,32 @@ public class After_Login_Page1 extends AppCompatActivity {
         });
 
         txtSpeech = findViewById(R.id.txtSpeech1);
-        ImageView btnNext1 = findViewById(R.id.btnNext1);
+        ImageView btnNext = findViewById(R.id.btnNext1);
         Button btnSair = findViewById(R.id.btnSair);
 
-        ttsHelper = TTSHelper.getInstance();
+        ttsHelper = TTSHelper.getInstance(this);
 
-        new Handler().postDelayed(()-> ttsHelper.speakText(this, txtSpeech), 1500);
+        new Handler().postDelayed(()-> ttsHelper.speakText(txtSpeech.getText().toString()), 1500);
 
-        btnNext1.setOnClickListener(v -> {
-            ttsHelper.stopSpeaking();
-            hideKeyboard();
-            Intent intent = new Intent(After_Login_Page1.this, After_Login_Page2.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        });
+        btnNext.setOnClickListener(v ->  NavigationHelper.navigateTo(Meditation_Page1.this, Meditation_Page2.class, true));
 
-        btnSair.setOnClickListener(v -> {
-            ttsHelper.stopSpeaking();
-            hideKeyboard();
-            Intent intent = new Intent(After_Login_Page1.this, After_Login.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        });
+        btnSair.setOnClickListener(v -> NavigationHelper.navigateTo(Meditation_Page1.this, Page_Exercicies.class, false));
 
         findViewById(R.id.main).setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                hideKeyboard();
+                NavigationHelper.hideKeyboard(Meditation_Page1.this);
+                v.performClick();
+                return true;
             }
             return false;
         });
     }
 
-    private void hideKeyboard() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
     @Override
     protected void onDestroy() {
-        if (ttsHelper != null) {
-            ttsHelper.release();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
         super.onDestroy();
     }

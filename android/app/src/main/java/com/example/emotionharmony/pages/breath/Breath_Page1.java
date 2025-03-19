@@ -2,7 +2,7 @@ package com.example.emotionharmony.pages.breath;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -17,26 +17,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.classes.BreathingCircleView;
+import com.example.emotionharmony.classes.Questions_Breath;
 import com.example.emotionharmony.databinding.ActivityBreathPage1Binding;
-import com.example.emotionharmony.pages.After_Login;
+import com.example.emotionharmony.utils.NavigationHelper;
+import com.example.emotionharmony.utils.TTSHelper;
+
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Breath_Page1 extends AppCompatActivity {
 
-    private TextView timer, breathingMoviment;
+    private TextView timer, breathingMoviment, txtSpeechBreathInstrucao, txtSpeechBreath1, txtSpeechBreath2;
     private long timeLeftInMillis = 600000;
     private LinearLayout breathingInstruction, Breath;
-    private ActivityBreathPage1Binding binding;
     private BreathingCircleView breathCircle;
-    private Handler handler = new Handler(Looper.getMainLooper());
+    private final Handler handler = new Handler(Looper.getMainLooper());
     private int minute = 1, rpm = 12;
     private ValueAnimator animator;
-    private Button btnBegin, btnEnd;
     private boolean isExerciseRunning = false;
+    private Questions_Breath questionsBreath;
+    private TTSHelper ttsHelper;
+    private Button btnBegin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityBreathPage1Binding.inflate(getLayoutInflater());
+        ActivityBreathPage1Binding binding = ActivityBreathPage1Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         breathingInstruction = findViewById(R.id.breathInstructions);
@@ -45,50 +51,78 @@ public class Breath_Page1 extends AppCompatActivity {
         timer = findViewById(R.id.timer);
         breathingMoviment = findViewById(R.id.breathingMoviment);
         btnBegin = findViewById(R.id.btnBegin);
-        btnEnd = findViewById(R.id.btnEnd);
+        Button btnEnd = findViewById(R.id.btnEnd);
+        ttsHelper = TTSHelper.getInstance(this);
+        txtSpeechBreathInstrucao = findViewById(R.id.txtSpeechBreathInstrucao);
+        txtSpeechBreath1 = findViewById(R.id.txtSpeechBreath1);
+        txtSpeechBreath2 = findViewById(R.id.txtSpeechBreath2);
 
-        btnBegin.setOnClickListener(v -> startBreathingExercise());
+        questionsBreath = Questions_Breath.getInstance();
+
+        btnBegin.setOnClickListener(v -> speakInstructions());
         btnEnd.setOnClickListener(v -> endBreathingExercise());
     }
 
-    private void endBreathingExercise(){
-        Intent intent = new Intent(Breath_Page1.this, Page_End.class);
+    private void speakInstructions() {
+        txtSpeechBreathInstrucao.setVisibility(View.VISIBLE);
+        txtSpeechBreath1.setVisibility(View.VISIBLE);
+        txtSpeechBreath2.setVisibility(View.VISIBLE);
+        btnBegin.setVisibility(View.GONE);
+        Queue<String> speechQueue = new LinkedList<>();
+        speechQueue.add(txtSpeechBreathInstrucao.getText().toString());
+        speechQueue.add(txtSpeechBreath1.getText().toString());
+        speechQueue.add(txtSpeechBreath2.getText().toString());
 
-        startActivity(intent);
-
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        ttsHelper.speakSequentially(speechQueue, this::startCountdown);
     }
-    private void startBreathingExercise() {
+
+    private void endBreathingExercise(){
+        NavigationHelper.navigateTo(Breath_Page1.this, Page_End.class, true);
+
+        questionsBreath.setDescription_breath("Exercicio Geral");
+        Log.i("setFinished_breath", String.valueOf(isExerciseRunning));
+        questionsBreath.setFinished_breath(true);
+    }
+    @SuppressLint("SetTextI18n")
+    private void startCountdown() {
         if (isExerciseRunning) return;
 
-        isExerciseRunning = true;
         breathingInstruction.setVisibility(View.GONE);
         Breath.setVisibility(View.VISIBLE);
-        breathingMoviment.setVisibility(View.VISIBLE);
+        breathingMoviment.setText("Prepare-se");
 
-        new Thread(() -> {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        new Handler().postDelayed(() -> {
+            breathingMoviment.setText("3");
+            new Handler().postDelayed(() -> {
+                breathingMoviment.setText("2");
+                new Handler().postDelayed(() -> {
+                    breathingMoviment.setText("1");
+                    new Handler().postDelayed(() -> {
+                        breathingMoviment.setText("Iniciar");
+                        startBreathingExercise();
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
+    }
 
-            runOnUiThread(() -> {
-                updateRPM();
-                startBreathCycle();
-                startTimer();
-            });
-        }).start();
+    private void startBreathingExercise() {
+        isExerciseRunning = true;
+
+        updateRPM();
+        startBreathCycle();
+        startTimer();
     }
 
     private void startTimer() {
-        CountDownTimer countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
+        new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;
                 updateTimer();
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onFinish() {
                 timer.setText("Tempo esgotado!");
@@ -101,8 +135,7 @@ public class Breath_Page1 extends AppCompatActivity {
     private void updateTimer() {
         int minutes = (int) (timeLeftInMillis / 1000) / 60;
         int seconds = (int) (timeLeftInMillis / 1000) % 60;
-
-        String timeFormatted = String.format("%02d:%02d", minutes, seconds);
+        @SuppressLint("DefaultLocale") String timeFormatted = String.format("%02d:%02d", minutes, seconds);
         timer.setText(timeFormatted);
     }
 
@@ -118,6 +151,7 @@ public class Breath_Page1 extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void startBreathCycle() {
         if (!isExerciseRunning) return;
         updateRPM();
@@ -161,6 +195,7 @@ public class Breath_Page1 extends AppCompatActivity {
         startBreathCycle();
     }
 
+    @SuppressLint("SetTextI18n")
     private void stopBreathAnimation() {
         Log.i("Encerrar", "Respiração encerrada.");
         if (animator != null && animator.isRunning()) {
@@ -168,6 +203,7 @@ public class Breath_Page1 extends AppCompatActivity {
         }
         handler.removeCallbacksAndMessages(null);
         breathingMoviment.setText("FINALIZADO");
+        isExerciseRunning = true;
     }
 
     private void animateTextSize(TextView textView, float startScale, float endScale, long duration) {

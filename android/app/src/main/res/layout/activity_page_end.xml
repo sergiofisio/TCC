@@ -17,7 +17,8 @@
         android:contentDescription="@string/logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icone_principal" />
+        app:srcCompat="@drawable/icone_principal"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/textView21"
@@ -28,48 +29,87 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView21" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView21"
+        tools:ignore="HardcodedText" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btnEndBreath"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView21">
+        app:layout_constraintTop_toBottomOf="@+id/textView21"
+        app:layout_constraintVertical_bias="0.5">
 
         <TextView
-            android:id="@+id/txtMesma"
-            android:layout_width="wrap_content"
+            android:id="@+id/txtBad"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="Na mesma"
+            android:textAlignment="center"
             android:textAppearance="@style/CustomInput"
-            android:textColor="#807F7F" />
+            android:textColor="#807F7F"
+            android:textSize="34sp"
+            tools:ignore="HardcodedText,TextContrastCheck" />
 
         <Switch
-            android:id="@+id/SwFeel"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:checked="false"
+            android:id="@+id/SwSituation"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:checked="true"
+            android:foregroundGravity="center"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
             android:showText="false"
             android:splitTrack="true"
             android:thumbTint="@color/switch_colors"
             android:trackTint="@color/switch_colors"
-            tools:checked="true" />
+            tools:checked="true"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <TextView
-            android:id="@+id/txtMelhor"
-            android:layout_width="wrap_content"
+            android:id="@+id/txtGood"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="Melhor"
+            android:textAlignment="center"
             android:textAppearance="@style/CustomInput"
             android:textColor="#0026FF"
-            android:textStyle="bold" />
+            android:textSize="34sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnBackBreath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <TextView
+        android:id="@+id/btnEndBreath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="@string/finalizar"
+        android:textAppearance="@style/CustomInput"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

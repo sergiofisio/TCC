@@ -36,8 +36,10 @@
 
     <EditText
         android:id="@+id/txtPhone"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="@string/Phone"
@@ -47,12 +49,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblPhone"
-        tools:ignore="Autofill,DuplicateSpeakableTextCheck" />
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/txtEmergency"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="@string/Emergency"
@@ -62,12 +66,14 @@
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblEmergency"
-        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck" />
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/txtEmail"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:focusable="auto"
@@ -80,7 +86,7 @@
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblEmail"
-        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck" />
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintTextFieldSize" />
 
     <TextView
         android:id="@+id/lblEmail"
@@ -108,8 +114,10 @@
 
     <EditText
         android:id="@+id/txtName"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:focusable="auto"
@@ -121,7 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lblNome"
-        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck" />
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,TextContrastCheck,VisualLintTextFieldSize" />
 
     <TextView
         android:id="@+id/lblNome"
@@ -147,8 +155,9 @@
 
     <EditText
         android:id="@+id/txtCPF"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
         android:autofillHints=""
         android:background="@drawable/rounded_edittext"
         android:ems="10"
@@ -160,7 +169,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblCpf"
-        tools:ignore="DuplicateSpeakableTextCheck" />
+        tools:ignore="DuplicateSpeakableTextCheck,VisualLintTextFieldSize" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -175,8 +184,8 @@
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="TextSizeCheck" />
 
     <TextView
         android:id="@+id/txtMsgEmergency"
@@ -206,7 +215,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText,TextSizeCheck" />
 
     <TextView
         android:id="@+id/textView17"
@@ -224,12 +234,17 @@
         android:id="@+id/txttSenhaRegistro"
         android:layout_width="0dp"
         android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
+        android:hint="@string/Senha"
         android:inputType="textPassword"
+        android:textAppearance="@style/CustomInput"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        tools:ignore="Autofill,DuplicateSpeakableTextCheck,VisualLintTextFieldSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

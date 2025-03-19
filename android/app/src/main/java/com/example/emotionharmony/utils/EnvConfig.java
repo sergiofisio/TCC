@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class EnvConfig {
-    private static Properties properties = new Properties();
+    private static final Properties properties = new Properties();
 
     public static void load(Context context) {
         try {

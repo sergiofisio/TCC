@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.emotionharmony.pages.After_Login;
+import com.example.emotionharmony.pages.Page_Exercicies;
 import com.example.emotionharmony.utils.InputField;
 import com.example.emotionharmony.utils.ServerConnection;
 import com.example.emotionharmony.utils.Validator;
@@ -30,8 +29,6 @@ public class Home extends AppCompatActivity {
 
     private CustomToast customToast;
     private EditText txtEmail, txtSenha;
-    private Button btnLogin;
-    private TextView lblCadastro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +52,8 @@ public class Home extends AppCompatActivity {
 
         txtEmail = findViewById(R.id.txtEmail);
         txtSenha = findViewById(R.id.txtSenha);
-        btnLogin = findViewById(R.id.btnLogin);
-        lblCadastro = findViewById(R.id.lblCadastro);
+        Button btnLogin = findViewById(R.id.btnLogin);
+        TextView lblCadastro = findViewById(R.id.lblCadastro);
 
         btnLogin.setOnClickListener(v -> handleLogin());
         lblCadastro.setOnClickListener(v -> navigateToRegister());
@@ -135,7 +132,7 @@ public class Home extends AppCompatActivity {
     }
 
     private void navigateToAfterLogin() {
-        startActivity(new Intent(Home.this, After_Login.class));
+        startActivity(new Intent(Home.this, Page_Exercicies.class));
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
     }

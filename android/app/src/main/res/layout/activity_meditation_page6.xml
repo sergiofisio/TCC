@@ -6,43 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".pages.meditation.Meditation_Page5">
-
-    <ImageView
-        android:id="@+id/btnBack5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="80dp"
-        android:contentDescription="back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/back" />
-
-    <ImageView
-        android:id="@+id/btnNext5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="80dp"
-        android:contentDescription="next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/next" />
+    tools:context=".pages.meditation.Meditation_Page6">
 
     <EditText
         android:id="@+id/txtDescEmocao"
         android:layout_width="0dp"
         android:layout_height="230dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="320dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:gravity="start|top"
         android:hint="@string/situacao"
         android:inputType="textMultiLine"
-        android:paddingTop="10dp"
+        android:paddingTop="20dp"
         android:textAppearance="@style/CustomInput"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,4 +52,24 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/icone_principal"
         tools:ignore="ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/btnBack6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/back" />
+
+    <ImageView
+        android:id="@+id/btnNext6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/next" />
 </androidx.constraintlayout.widget.ConstraintLayout>

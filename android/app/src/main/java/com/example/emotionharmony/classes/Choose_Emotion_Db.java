@@ -1,15 +1,15 @@
 package com.example.emotionharmony.classes;
 
-public class Choose_Emotion {
+public class Choose_Emotion_Db {
 
-    private static Choose_Emotion instance;
+    private static Choose_Emotion_Db instance;
 
     private String emotion_today, description, morning_afternoon_evening;
-    private Choose_Emotion() {}
+    private Choose_Emotion_Db() {}
 
-    public static Choose_Emotion getInstance() {
+    public static Choose_Emotion_Db getInstance() {
         if (instance == null) {
-            instance = new Choose_Emotion();
+            instance = new Choose_Emotion_Db();
         }
         return instance;
     }

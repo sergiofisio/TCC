@@ -1,8 +1,6 @@
 package com.example.emotionharmony;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.classes.MaskUtil;
 import com.example.emotionharmony.utils.InputField;
+import com.example.emotionharmony.utils.NavigationHelper;
 import com.example.emotionharmony.utils.ServerConnection;
 import com.example.emotionharmony.utils.Validator;
 
@@ -30,8 +29,6 @@ public class Register extends AppCompatActivity {
     private CustomToast customToast;
     private EditText nome, email, cpf, telefone, emergencia, senha;
     private TextView msgEmergency;
-    private Button btnRegister;
-    private TextView txtLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +57,13 @@ public class Register extends AppCompatActivity {
         emergencia = findViewById(R.id.txtEmergency);
         senha = findViewById(R.id.txttSenhaRegistro);
         msgEmergency = findViewById(R.id.txtMsgEmergency);
-        btnRegister = findViewById(R.id.btnRegister);
-        txtLogin = findViewById(R.id.txtLogin);
+        Button btnRegister = findViewById(R.id.btnRegister);
+        TextView txtLogin = findViewById(R.id.txtLogin);
 
         applyInputMasks();
 
         btnRegister.setOnClickListener(v -> registerUser());
-        txtLogin.setOnClickListener(v -> navigateToLogin());
+        txtLogin.setOnClickListener(v -> NavigationHelper.navigateTo(Register.this, Home.class, false));
     }
 
     private void applyInputMasks() {
@@ -116,8 +113,8 @@ public class Register extends AppCompatActivity {
                 .put("cpf", cpf.getText().toString().trim())
                 .put("senha", senha.getText().toString().trim())
                 .put("telefones", new JSONArray()
-                        .put(createPhoneObject("mobile", userPhone))
-                        .put(createPhoneObject("emergency", emergencyPhone)));
+                        .put(createPhoneObject("celular", userPhone))
+                        .put(createPhoneObject("emergencia", emergencyPhone)));
     }
 
     private JSONObject createPhoneObject(String type, String phone) throws JSONException {
@@ -131,7 +128,7 @@ public class Register extends AppCompatActivity {
                 runOnUiThread(() -> {
                     customToast.show("✅ Usuário registrado com sucesso! Redirecionando...",
                             Toast.LENGTH_LONG, "#11273D", "success");
-                    navigateToLogin();
+                    NavigationHelper.navigateTo(Register.this, Home.class, true);
                 });
             }
 
@@ -144,11 +141,5 @@ public class Register extends AppCompatActivity {
 
     private void showErrorMessage(String error) {
         customToast.show(error, Toast.LENGTH_LONG, "#FF0000", "error");
-    }
-
-    private void navigateToLogin() {
-        startActivity(new Intent(Register.this, Home.class));
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        finish();
     }
 }

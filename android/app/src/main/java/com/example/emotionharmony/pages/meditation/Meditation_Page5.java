@@ -1,6 +1,5 @@
 package com.example.emotionharmony.pages.meditation;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
@@ -18,15 +17,14 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.emotionharmony.CustomToast;
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.classes.Questions_Meditation;
+import com.example.emotionharmony.utils.NavigationHelper;
 import com.example.emotionharmony.utils.TTSHelper;
 
-public class Meditation_Page_Emotions extends AppCompatActivity {
+public class Meditation_Page5 extends AppCompatActivity {
 
     private TextView txtSpeech;
-    private LinearLayout[] linearLayouts;
     private RadioButton[] radioButtons;
-    private String[] emotions = {"Raiva", "Desgosto", "Medo", "Tristeza", "Felicidade"};
-    private ImageView btnBack, btnNext;
+    private final String[] emotions = {"Raiva", "Desgosto", "Medo", "Tristeza", "Felicidade"};
     private String Emotion;
     private Questions_Meditation firstQuestions;
     private CustomToast toast;
@@ -36,7 +34,7 @@ public class Meditation_Page_Emotions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_meditation_page_emotions);
+        setContentView(R.layout.activity_meditation_page5);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -44,15 +42,15 @@ public class Meditation_Page_Emotions extends AppCompatActivity {
         });
 
         txtSpeech = findViewById(R.id.txtSpeech4);
-        ttsHelper = TTSHelper.getInstance();
+        ttsHelper = TTSHelper.getInstance(this);
 
-        new Handler().postDelayed(() -> ttsHelper.speakText(this, txtSpeech), 1500);
+        new Handler().postDelayed(() -> ttsHelper.speakText(txtSpeech.getText().toString()), 1500);
 
         toast = new CustomToast(this);
         firstQuestions = Questions_Meditation.getInstance();
         Emotion = firstQuestions.getEmotion();
 
-        linearLayouts = new LinearLayout[]{
+        LinearLayout[] linearLayouts = new LinearLayout[]{
                 findViewById(R.id.rdbAng),
                 findViewById(R.id.rdbDesg),
                 findViewById(R.id.rdbFear),
@@ -82,33 +80,26 @@ public class Meditation_Page_Emotions extends AppCompatActivity {
             }
         }
 
-        btnNext = findViewById(R.id.btnNextEmotions);
-        btnBack = findViewById(R.id.btnBackEmotions);
+        ImageView btnNext = findViewById(R.id.btnNext5);
+        ImageView btnBack = findViewById(R.id.btnBack5);
 
         btnNext.setOnClickListener(v -> {
             try {
-                ttsHelper.stopSpeaking();
                 if (Emotion == null || Emotion.isEmpty()) {
                     throw new Exception("Escolha uma emoção");
                 }
 
                 firstQuestions.setEmotion(Emotion);
 
-                Intent intent = new Intent(Meditation_Page_Emotions.this, Meditation_Page5.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                NavigationHelper.navigateTo(Meditation_Page5.this, Meditation_Page6.class, true);
+
 
             } catch (Exception e) {
                 toast.show(e.getMessage(), Toast.LENGTH_LONG, "#FF0000", "error");
             }
         });
 
-        btnBack.setOnClickListener(v -> {
-            ttsHelper.stopSpeaking();
-            Intent intent = new Intent(Meditation_Page_Emotions.this, Meditation_Page3.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-        });
+        btnBack.setOnClickListener(v -> NavigationHelper.navigateTo(Meditation_Page5.this, Meditation_Page4.class, false));
     }
 
     private void handleRadioButtonSelection(int selectedIndex) {
@@ -116,7 +107,7 @@ public class Meditation_Page_Emotions extends AppCompatActivity {
             radioButtons[i].setChecked(i == selectedIndex);
             if (i == selectedIndex) {
                 Emotion = emotions[i];
-                ttsHelper.speakText(this, Emotion);
+                ttsHelper.speakText(Emotion);
             }
         }
     }

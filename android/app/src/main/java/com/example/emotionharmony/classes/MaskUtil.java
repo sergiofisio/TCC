@@ -48,7 +48,7 @@ public class MaskUtil {
             public void afterTextChanged(Editable s) {}
 
             private String unmask(String s) {
-                return s.replaceAll("[^\\d]", "");
+                return s.replaceAll("\\D", "");
             }
         };
     }

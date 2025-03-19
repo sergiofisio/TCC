@@ -7,6 +7,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 public class BreathingCircleView extends View {
 
     private Paint borderPaint;
@@ -34,7 +36,7 @@ public class BreathingCircleView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NonNull Canvas canvas) {
         super.onDraw(canvas);
 
         canvas.drawArc(circleBounds, -90, progress, false, borderPaint);

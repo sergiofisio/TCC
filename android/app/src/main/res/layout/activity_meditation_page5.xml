@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".pages.meditation.Meditation_Page_Emotions">
+    tools:context=".pages.meditation.Meditation_Page5">
 
     <ImageView
-        android:id="@+id/btnBackEmotions"
+        android:id="@+id/btnBack5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/back" />
 
     <ImageView
-        android:id="@+id/btnNextEmotions"
+        android:id="@+id/btnNext5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
@@ -56,7 +56,7 @@
             android:layout_width="111dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="Angry"
+            android:contentDescription="angry"
             app:srcCompat="@drawable/angry" />
 
     </LinearLayout>

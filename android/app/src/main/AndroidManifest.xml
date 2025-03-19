@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -15,42 +17,51 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmotionHarmony"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="31" >
         <activity
-            android:name=".pages.breath.Page_End"
+            android:name=".pages.diary.Page_All_Diary"
             android:exported="false" />
         <activity
-            android:name=".CustomToast"
+            android:name=".pages.Page_Diary"
+            android:exported="false" />
+        <activity
+            android:name=".pages.Page_Invoice"
+            android:exported="false" />
+        <activity
+            android:name=".pages.choose.Choose_Emotion"
+            android:exported="false" />
+        <activity
+            android:name=".pages.meditation.Meditation_Page7"
+            android:exported="false" />
+        <activity
+            android:name=".pages.meditation.Meditation_Page4"
+            android:exported="false" />
+        <activity
+            android:name=".pages.breath.Page_End"
             android:exported="false" />
         <activity
             android:name=".pages.breath.Breath_Page1"
             android:exported="false" />
         <activity
-            android:name=".pages.breath.Breath_page1"
-            android:exported="false" />
-        <activity
             android:name=".pages.Page_perfil"
             android:exported="false" />
         <activity
-            android:name=".pages.After_Login"
+            android:name=".pages.Page_Exercicies"
             android:exported="false" />
         <activity
-            android:name=".pages.meditation.After_Login_Page5"
+            android:name=".pages.meditation.Meditation_Page6"
             android:exported="false" />
         <activity
-            android:name=".pages.meditation.After_Login_Page_Emotions"
+            android:name=".pages.meditation.Meditation_Page5"
             android:exported="false" />
         <activity
-            android:name=".pages.meditation.After_Login_Page3"
+            android:name=".pages.meditation.Meditation_Page3"
             android:exported="false" />
         <activity
-            android:name=".pages.meditation.After_Login_Page2"
+            android:name=".pages.meditation.Meditation_Page2"
             android:exported="false" />
         <activity
-            android:name=".pages.meditation.After_Login_Page1"
-            android:exported="false" />
-        <activity
-            android:name=".pages.After_login_page1"
+            android:name=".pages.meditation.Meditation_Page1"
             android:exported="false" />
         <activity
             android:name=".Register"
@@ -60,7 +71,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

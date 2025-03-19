@@ -1,34 +1,26 @@
 package com.example.emotionharmony.classes;
 
-public class FirstQuestions {
+public class Questions_Meditation {
 
-    private static FirstQuestions instance;
+    private static Questions_Meditation instance;
 
-    private String question1, question2, emotion, description;
+    private String thinkToday, emotion, caracter, typeSituation, feltAfter, description;
 
-    private FirstQuestions() {}
+    private Questions_Meditation() {}
 
-    public static FirstQuestions getInstance() {
+    public static Questions_Meditation getInstance() {
         if (instance == null) {
-            instance = new FirstQuestions();
+            instance = new Questions_Meditation();
         }
         return instance;
     }
 
-    public String getQuestion1() {
-        return question1;
+    public String getThinkToday() {
+        return thinkToday;
     }
 
-    public void setQuestion1(String question1) {
-        this.question1 = question1;
-    }
-
-    public String getQuestion2() {
-        return question2;
-    }
-
-    public void setQuestion2(String question2) {
-        this.question2 = question2;
+    public void setThinkToday(String thinkToday) {
+        this.thinkToday = thinkToday;
     }
 
     public String getEmotion() {
@@ -37,6 +29,22 @@ public class FirstQuestions {
 
     public void setEmotion(String emotion) {
         this.emotion = emotion;
+    }
+
+    public String getCaracter() {
+        return caracter;
+    }
+
+    public void setCaracter(String caracter) {
+        this.caracter = caracter;
+    }
+
+    public String getTypeSituation() {
+        return typeSituation;
+    }
+
+    public void setTypeSituation(String typeSituation) {
+        this.typeSituation = typeSituation;
     }
 
     public String getDescription() {

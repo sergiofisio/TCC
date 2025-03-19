@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".pages.meditation.After_Login_Page1">
+    tools:context=".pages.meditation.Meditation_Page1">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_center"

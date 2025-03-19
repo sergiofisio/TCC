@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".pages.After_Login">
+    tools:context=".pages.Page_Exercicies">
 
     <ImageView
         android:id="@+id/imageView16"
@@ -99,6 +99,7 @@
                         android:id="@+id/imgManha"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:contentDescription="@string/MANHA"
                         tools:srcCompat="@drawable/choose_emotion" />
 
                 </LinearLayout>
@@ -125,6 +126,7 @@
                         android:id="@+id/imgTarde"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:contentDescription="@string/TARDE"
                         app:srcCompat="@drawable/choose_emotion" />
 
                 </LinearLayout>
@@ -151,6 +153,7 @@
                         android:id="@+id/imgNoite"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:contentDescription="@string/NOITE"
                         app:srcCompat="@drawable/choose_emotion" />
 
                 </LinearLayout>
@@ -234,10 +237,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintVertical_bias="0.0">
 
     </com.example.emotionharmony.components.BottomMenuView>
 
