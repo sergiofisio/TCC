@@ -24,9 +24,15 @@ app.use(allRoutes);
 
 const SERVER_PORT = process.env.PORT || 3000;
 const SERVER_HOST =
-  process.env.HOST ||
-  (process.env.NODE_ENV === "production" ? "0.0.0.0" : "localhost");
+  process.env.NODE_ENV === "production"
+    ? process.env.HOST || "0.0.0.0"
+    : "localhost";
 
-app.listen(SERVER_PORT, () => {
-  console.log(`Servidor rodando em http://${SERVER_HOST}:${SERVER_PORT}`);
+const SERVER_URL =
+  process.env.NODE_ENV === "production"
+    ? `https://${process.env.HOST || "seu-servidor.com"}`
+    : `http://localhost:${SERVER_PORT}`;
+
+app.listen(SERVER_PORT, SERVER_HOST, () => {
+  console.log(`🚀 Servidor rodando em ${SERVER_URL}:${SERVER_PORT}`);
 });
