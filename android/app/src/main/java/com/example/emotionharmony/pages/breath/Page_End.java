@@ -103,6 +103,11 @@ public class Page_End extends AppCompatActivity {
             if(token ==null) throw new JSONException("Erro: Usuário não autenticado!");
 
             JSONObject breathData = createBreathData();
+            toast.show("Finalizando exercício", Toast.LENGTH_SHORT, "#11273D", "success");
+
+            btnFinish.setEnabled(false);
+            btnFinish.setTextColor(getColor(R.color.btnInactive));
+            btnBack.setEnabled(false);
 
             ServerConnection.postRequestWithAuth("/auth/add/breath", token, breathData, new ServerConnection.ServerCallback(){
                 @Override
@@ -110,14 +115,21 @@ public class Page_End extends AppCompatActivity {
                     runOnUiThread(()->{
                         toast.show("Respiração Finalizada", Toast.LENGTH_LONG, "#11273D", "success");
                         NavigationHelper.navigateTo(Page_End.this, Page_Exercicies.class, true);
+                        btnFinish.setEnabled(true);
+                        btnBack.setEnabled(true);
+                        btnFinish.setTextColor(getColor(R.color.black));
                     });
                 }
 
                 @Override
                 public void onError(String error){
                     runOnUiThread(() -> {
-                        toast.show("❌ Erro ao salvar meditação: " + error, Toast.LENGTH_LONG, "#FF0000", "error");
-                        Log.e("Page_End", "❌ Erro ao salvar meditação: " + error);
+                        if(error.toLowerCase().contains("timeout")) sendBreathData();
+                        else {
+                            toast.show("❌ Erro ao salvar Respiração: " + error, Toast.LENGTH_LONG, "#FF0000", "error");
+                            Log.e("Page_End", "❌ Erro ao salvar meditação: " + error);
+                            btnBack.setEnabled(true);
+                        }
                     });
                 }
             });

@@ -20,13 +20,15 @@
 
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/logo"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.15"
         app:srcCompat="@drawable/icone_principal" />
 
     <TextView
@@ -34,14 +36,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="@string/exResp"
         android:textAlignment="center"
         android:textAppearance="@style/CustomInput"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Layout de treino de respiração -->
     <LinearLayout
         android:id="@+id/Breath"
         android:layout_width="0dp"
@@ -65,16 +68,18 @@
                 android:id="@+id/textView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
                 android:text="@string/tempo"
-                android:textAppearance="@style/CustomInput" />
+                android:textAppearance="@style/CustomInput"
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/timer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
                 android:text="@string/cronometro"
-                android:textAppearance="@style/CustomInput" />
+                android:textAppearance="@style/CustomInput"
+                android:textSize="22sp" />
         </LinearLayout>
 
         <RelativeLayout
@@ -95,6 +100,7 @@
                 android:layout_centerInParent="true"
                 android:textAlignment="center"
                 android:textAppearance="@style/CustomInput"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:visibility="visible"
                 tools:text="INSPIRAR" />
@@ -103,7 +109,6 @@
 
     </LinearLayout>
 
-    <!-- Layout de instruções -->
     <LinearLayout
         android:id="@+id/breathInstructions"
         android:layout_width="0dp"
@@ -127,6 +132,7 @@
             android:textAllCaps="true"
             android:textAppearance="@style/CustomInput"
             android:textColor="#000"
+            android:textSize="22sp"
             android:textStyle="bold"
             android:visibility="gone" />
 
@@ -138,7 +144,7 @@
             android:text="@string/instrucao_txt1"
             android:textAlignment="viewStart"
             android:textAppearance="@style/CustomInput"
-            android:textSize="14sp"
+            android:textSize="22sp"
             android:visibility="gone" />
 
         <TextView
@@ -147,18 +153,39 @@
             android:layout_height="wrap_content"
             android:text="@string/instrucao_txt2"
             android:textAppearance="@style/CustomInput"
-            android:textSize="14sp"
+            android:textSize="22sp"
             android:visibility="gone" />
 
-        <Button
-            android:id="@+id/btnBegin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#11273D"
-            android:text="@string/INICIAR"
-            android:textAppearance="@style/CustomInput" />
     </LinearLayout>
 
-    <!-- Modal de finalização -->
+    <Button
+        android:id="@+id/btnBegin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="#11273D"
+        android:fontFamily="@font/montserrat_extrabold"
+        android:text="@string/INICIAR"
+        android:textAlignment="center"
+        android:textAppearance="@style/CustomInput"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+    <TextView
+        android:id="@+id/btnSairBreath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="80dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/sair"
+        android:textAppearance="@style/CustomInput"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

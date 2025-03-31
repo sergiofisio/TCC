@@ -33,7 +33,7 @@
     <TextView
         android:id="@+id/txtSpeech3"
         android:layout_width="355dp"
-        android:layout_height="185dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="116dp"
         android:text="O que você pensa hoje sobre aquele momento? O que você acha que poderia ter feito diferente?"
         android:textAlignment="center"
@@ -48,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="230dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="143dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
@@ -60,7 +60,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSpeech3" />
 
     <ImageView
         android:id="@+id/imageView7"

@@ -51,4 +51,9 @@
     <string name="meditacoes">MEDITAÇÕES</string>
     <string name="emocao">EMOÇÃO</string>
     <string name="exercicios">EXERCICIOS REALIZADOS</string>
+    <string name="raiva">raiva</string>
+    <string name="nojo">nojo</string>
+    <string name="medo">medo</string>
+    <string name="tristeza">tristeza</string>
+    <string name="felicidade">felicidade</string>
 </resources>

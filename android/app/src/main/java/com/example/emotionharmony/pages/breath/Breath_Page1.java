@@ -19,6 +19,7 @@ import com.example.emotionharmony.R;
 import com.example.emotionharmony.classes.BreathingCircleView;
 import com.example.emotionharmony.classes.Questions_Breath;
 import com.example.emotionharmony.databinding.ActivityBreathPage1Binding;
+import com.example.emotionharmony.pages.Page_Exercicies;
 import com.example.emotionharmony.utils.NavigationHelper;
 import com.example.emotionharmony.utils.TTSHelper;
 
@@ -52,6 +53,7 @@ public class Breath_Page1 extends AppCompatActivity {
         breathingMoviment = findViewById(R.id.breathingMoviment);
         btnBegin = findViewById(R.id.btnBegin);
         Button btnEnd = findViewById(R.id.btnEnd);
+        TextView btnSair = findViewById(R.id.btnSairBreath);
         ttsHelper = TTSHelper.getInstance(this);
         txtSpeechBreathInstrucao = findViewById(R.id.txtSpeechBreathInstrucao);
         txtSpeechBreath1 = findViewById(R.id.txtSpeechBreath1);
@@ -60,6 +62,7 @@ public class Breath_Page1 extends AppCompatActivity {
         questionsBreath = Questions_Breath.getInstance();
 
         btnBegin.setOnClickListener(v -> speakInstructions());
+        btnSair.setOnClickListener(v -> NavigationHelper.navigateTo(Breath_Page1.this, Page_Exercicies.class, false));
         btnEnd.setOnClickListener(v -> endBreathingExercise());
     }
 
@@ -128,6 +131,7 @@ public class Breath_Page1 extends AppCompatActivity {
                 timer.setText("Tempo esgotado!");
                 stopBreathAnimation();
                 isExerciseRunning = false;
+                new Handler().postDelayed(()->endBreathingExercise(), 1000);
             }
         }.start();
     }

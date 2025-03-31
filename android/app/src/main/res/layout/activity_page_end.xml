@@ -26,6 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Como você se sente após o exercício?"
+        android:textAppearance="@style/CustomInput"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

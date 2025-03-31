@@ -73,7 +73,7 @@ public class TTSHelper {
             isSpeaking = true;
             GoogleCloudTTS.synthesizeSpeech(nextText).thenAccept(audioBase64 -> {
                 if (audioBase64 != null) {
-                    playAudio(audioBase64, () -> speakNext(onComplete)); // Chama o próximo áudio ao finalizar
+                    playAudio(audioBase64, () -> speakNext(onComplete));
                 } else {
                     Log.e("TTSHelper", "❌ Falha ao obter áudio da API.");
                     speakNext(onComplete);

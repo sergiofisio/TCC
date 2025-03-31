@@ -15,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.emotionharmony.CustomToast;
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.classes.Questions_Meditation;
 import com.example.emotionharmony.pages.Page_Exercicies;
@@ -28,6 +29,9 @@ public class Meditation_Page7 extends AppCompatActivity {
 
     private Questions_Meditation questionsMeditation;
     private TTSHelper ttsHelper;
+    private CustomToast toast;
+    ImageView btnBack;
+    TextView btnFinish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +44,11 @@ public class Meditation_Page7 extends AppCompatActivity {
             return insets;
         });
 
-        TextView btnFinish = findViewById(R.id.btnFinish);
-        ImageView btnBack = findViewById(R.id.btnBack7);
+        btnFinish = findViewById(R.id.btnFinish);
+        btnBack = findViewById(R.id.btnBack7);
         TextView txtSpeech = findViewById(R.id.txtSpeech6);
         ttsHelper = TTSHelper.getInstance(this);
+        toast = new CustomToast(this);
         questionsMeditation = Questions_Meditation.getInstance();
 
         String typeOf = questionsMeditation.getTypeSituation();
@@ -85,11 +90,16 @@ public class Meditation_Page7 extends AppCompatActivity {
 
             JSONObject meditationData = createMeditationData();
 
+            toast.show("Finalizando Meditação", Toast.LENGTH_SHORT, "#11273D", "success");
+
+            btnFinish.setEnabled(false);
+            btnFinish.setTextColor(getColor(R.color.btnInactive));
+
             ServerConnection.postRequestWithAuth("/auth/add/meditate", token, meditationData, new ServerConnection.ServerCallback() {
                 @Override
                 public void onSuccess(String response) {
                     runOnUiThread(() -> {
-                        Toast.makeText(Meditation_Page7.this, "✅ Meditação salva com sucesso!", Toast.LENGTH_LONG).show();
+                        toast.show("Meditação Finalizada", Toast.LENGTH_LONG, "#11273D", "success");
                         Intent intent = new Intent(Meditation_Page7.this, Page_Exercicies.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -100,8 +110,11 @@ public class Meditation_Page7 extends AppCompatActivity {
                 @Override
                 public void onError(String error) {
                     runOnUiThread(() -> {
-                        Toast.makeText(Meditation_Page7.this, "❌ Erro ao salvar meditação: " + error, Toast.LENGTH_LONG).show();
-                        Log.e("Meditation_Page7", "Erro na API: " + error);
+                        if(error.toLowerCase().contains("timeout")) sendMeditationData();
+                        else {
+                            toast.show("❌ Erro ao salvar meditação: " + error, Toast.LENGTH_LONG, "#FF0000", "error");
+                            Log.e("Page_End", "❌ Erro ao salvar meditação: " + error);
+                        }
                     });
                 }
             });

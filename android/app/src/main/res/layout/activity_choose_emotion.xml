@@ -10,11 +10,14 @@
 
     <ImageView
         android:id="@+id/imageView25"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintWidth_percent="0.15"
         android:layout_marginStart="18dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/icone_principal"
+        android:contentDescription="@string/logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,7 +43,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <LinearLayout
         android:id="@+id/rdbAng"
@@ -68,7 +72,7 @@
             android:layout_width="111dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="angry"
+            android:contentDescription="@string/raiva"
             app:srcCompat="@drawable/angry" />
 
     </LinearLayout>
@@ -79,6 +83,7 @@
         android:layout_height="100dp"
         android:layout_margin="8dp"
         android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2"
@@ -98,6 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/nojo"
             app:srcCompat="@drawable/desgust" />
     </LinearLayout>
 
@@ -107,6 +113,7 @@
         android:layout_height="100dp"
         android:layout_margin="8dp"
         android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2"
@@ -126,6 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/medo"
             app:srcCompat="@drawable/fear" />
     </LinearLayout>
 
@@ -135,6 +143,7 @@
         android:layout_height="100dp"
         android:layout_margin="8dp"
         android:clickable="true"
+        android:focusable="true"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2"
@@ -154,6 +163,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/tristeza"
             app:srcCompat="@drawable/sad" />
     </LinearLayout>
 
@@ -185,6 +195,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/felicidade"
             app:srcCompat="@drawable/happy" />
     </LinearLayout>
 

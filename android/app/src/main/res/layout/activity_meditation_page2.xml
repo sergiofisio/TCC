@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/txtSpeech2"
         android:layout_width="355dp"
-        android:layout_height="185dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="116dp"
         android:text="Descreva uma situação recente, de preferência no últimos 6 meses que você acredita que te afetou positiva ou negativamente de alguma forma. O que aconteceu, quando foi, o que você escutou, o que você viu, etc. dê a maior quantidade de detalhes que você conseguir. Não se preocupe, não há resposta errada para esta pergunta"
         android:textAlignment="center"
@@ -37,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="230dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="5dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
@@ -49,7 +49,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSpeech2" />
 
     <ImageView
         android:id="@+id/btnNext2"

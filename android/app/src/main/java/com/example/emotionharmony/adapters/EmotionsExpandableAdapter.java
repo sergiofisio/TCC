@@ -97,6 +97,7 @@ public class EmotionsExpandableAdapter extends BaseExpandableListAdapter {
         return convertView;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         List<JSONObject> emotions = new ArrayList<>(emotionsMap.get(dateList.get(groupPosition)));
@@ -109,24 +110,21 @@ public class EmotionsExpandableAdapter extends BaseExpandableListAdapter {
         }
 
         ImageView imageView = convertView.findViewById(R.id.emotionIcon);
-        TextView textViewTime = convertView.findViewById(R.id.emotionTime);
-        TextView textViewBreath = convertView.findViewById(R.id.breathingExercisesCount);
-        TextView textViewMeditation = convertView.findViewById(R.id.meditationsCount);
+        TextView textViewBreath = convertView.findViewById(R.id.breathingExercisesCount), textViewTime = convertView.findViewById(R.id.emotionTime), emotionDescription = convertView.findViewById(R.id.emotionDescription), textViewMeditation = convertView.findViewById(R.id.meditationsCount);
 
         String timeOfDay = emotion.optString("morning_afternoon_evening", "Indefinido");
         String type = emotion.optString("emotion_today", "Desconhecido");
         textViewTime.setText(timeOfDay);
+        emotionDescription.setText(type);
         imageView.setImageResource(getEmotionDrawable(type));
 
-        // Obtém a data correspondente para pegar os exercícios e meditações
         String date = dateList.get(groupPosition);
         JSONObject exerciseData = exercisesMeditationsMap.getOrDefault(date, new JSONObject());
 
-        // Pega os valores para o período do dia
+        assert exerciseData != null;
         int breathCount = exerciseData.optInt(getBreathKey(timeOfDay), 0);
         int meditationCount = exerciseData.optInt(getMeditationKey(timeOfDay), 0);
 
-        // Define os textos de respiração e meditação
         textViewBreath.setText("Respiratórios: " + breathCount);
         textViewMeditation.setText("Meditações: " + meditationCount);
 
