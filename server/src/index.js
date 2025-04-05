@@ -34,5 +34,5 @@ const SERVER_URL =
     : `http://localhost:${SERVER_PORT}`;
 
 app.listen(SERVER_PORT, SERVER_HOST, () => {
-  console.log(`🚀 Servidor rodando em ${SERVER_URL}:${SERVER_PORT}`);
+  console.log(`🚀 Servidor rodando em ${SERVER_URL}`);
 });

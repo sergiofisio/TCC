@@ -21,6 +21,7 @@ authRoute.use(verifyAdmin);
 
 authRoute.get("/backup", backupDatabase);
 authRoute.get("/users", getUsers)
+authRoute.get("/users/:id", getUserInfo);
 authRoute.delete("/user/:id", deleteUser);
 
 module.exports = authRoute;

@@ -11,8 +11,6 @@ const verifyAdmin = async (req, res, next) => {
       },
     });
 
-    console.log({ userInfo });
-
     if (userInfo.type_user !== "admin")
       throw new CustomError("Acesso negado", 403);
 

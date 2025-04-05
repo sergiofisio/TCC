@@ -3,7 +3,7 @@ const { prisma } = require("../../prismaFunctions/prisma");
 
 async function getUserInfo(req, res) {
   try {
-    const { id_user } = req.user;
+    const { id_user } = req.params.id || req.user.id_user;
 
     const userInfo = await prisma.tb_users.findUnique({
       where: {
