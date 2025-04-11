@@ -1,5 +1,5 @@
-main {
+.home {
   background-color: white;
-  max-height: calc(100vh - 200px);
+  min-height: 86vh;
   overflow-y: auto;
 }

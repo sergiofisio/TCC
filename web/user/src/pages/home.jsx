@@ -23,7 +23,7 @@ const sections = [
 
 export default function Home() {
   return (
-    <main>
+    <main className="home">
       {sections.map((section) => (
         <Section key={section.id} {...section} />
       ))}

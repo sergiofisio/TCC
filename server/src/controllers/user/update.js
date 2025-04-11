@@ -8,8 +8,6 @@ async function update(req, res) {
     const { id_user } = req.user;
     let { nome, email, cpf, senha, telefones } = req.body;
 
-    console.log({ telefones });
-
     const user = await prisma.tb_users.findUnique({
       where: { id_user },
     });

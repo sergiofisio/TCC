@@ -101,9 +101,10 @@ module.exports = async function seedUsers() {
       }
     }
   } catch (error) {
-    console.error(
-      `${colors.red}❌ Erro ao inserir usuários:${colors.reset}`,
-      error
-    );
+    console.error({ error });
+    // console.error(
+    //   `${colors.red}❌ Erro ao inserir usuários:${colors.reset}`,
+    //   error
+    // );
   }
 };

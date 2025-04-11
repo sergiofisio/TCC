@@ -38,7 +38,6 @@ export default function AppSection() {
       </div>
       <div className="divOs">
         {osInfo.map(({ id, name, img, url }) => {
-          console.log({ url });
           return <Os key={id} title={name} img={img} url={url} />;
         })}
       </div>

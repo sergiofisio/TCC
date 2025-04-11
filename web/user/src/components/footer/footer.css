@@ -1,10 +1,13 @@
 footer {
-  height: 40px;
+  position: relative;
   justify-content: space-between;
+  min-height: 4vh
 }
 
 footer div {
-  height: 30px;
+  position: absolute;
+  top: 0;
+  left: 1rem;
   align-self: flex-end;
 }
 
@@ -19,6 +22,7 @@ footer .title {
 
 footer p {
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
   text-align: center;
