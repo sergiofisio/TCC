@@ -1,5 +1,6 @@
 {
-  "dependencies": {
-    "nodemailer": "^6.10.0"
+  "scripts":{
+    "server":"cd server && npm run dev",
+    "web":"cd web/user && npm run dev"
   }
 }
