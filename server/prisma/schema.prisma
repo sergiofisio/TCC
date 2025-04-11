@@ -50,6 +50,7 @@ model tb_users {
   email_user              String          @unique @db.VarChar(50)
   cpf_user                String          @unique @db.VarChar(11)
   password_user           String          @db.VarChar(255)
+  password_changed        Boolean         @default(false)
   lost_pasword_token_user String?         @db.VarChar(255)
   active_user             Boolean         @default(true)
   type_user               Type_user       @default(user)

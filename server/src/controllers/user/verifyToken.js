@@ -8,9 +8,9 @@ async function verifyTokenLogged(req, res) {
 
     if (!token) throw new CustomError("Token inválido", 404);
 
-    await extractUserToken(token);
+    const user = await extractUserToken(token);
 
-    res.json({ verifyToken: true });
+    res.json({ verifyToken: true, passwordChanged: user.password_changed });
   } catch (error) {
     console.error("Erro no middleware de autenticação:", error);
     return res

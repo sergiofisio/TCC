@@ -38,6 +38,7 @@ async function lostPassword(req, res) {
       data: {
         password_user: hashPassword,
         lost_pasword_token_user: null,
+        password_changed: true,
       },
     });
 
