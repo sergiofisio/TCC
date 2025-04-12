@@ -17,7 +17,7 @@ import axios from "./service/api";
 
 function App() {
   const [modal, setModal] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -29,6 +29,8 @@ function App() {
             Authorization: `Bearer ${token}`,
           },
         });
+        console.log({ response });
+
         setIsAdmin(response.data.verifyToken);
       } catch (error) {
         console.log(error);
@@ -57,7 +59,13 @@ function App() {
         />
         <Route
           path="/admin"
-          element={isAdmin ? <Admin /> : <Navigate to="/" replace />}
+          element={
+            isAdmin ? (
+              <Admin setIsAdmin={setIsAdmin} />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
         />
       </Routes>
     </Router>

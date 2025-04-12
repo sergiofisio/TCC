@@ -30,6 +30,13 @@ async function login(req, res) {
 
     const token = generateToken(id_user);
 
+    await prisma.tb_users.update({
+      where: { id_user: Number(id_user) },
+      data: {
+        password_changed: false,
+      },
+    });
+
     return res.status(200).json({
       message: "Login efetuado com sucesso!",
       token,

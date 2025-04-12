@@ -19,7 +19,9 @@ export default function Header({ setModal, isAdmin }) {
         <h2 className="title">EMOTION HARMONY</h2>
       </div>
       <button type="button" className="btn-login" onClick={handleLogin}>
-        Painel Admin
+        {!isAdmin
+          ? "Entrar Painel Admin"
+          : "Logado - clique para entrar no Painel"}
       </button>
     </header>
   );

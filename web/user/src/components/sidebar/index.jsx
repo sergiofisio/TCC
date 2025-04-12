@@ -1,10 +1,11 @@
 import "./style.css";
 import { useNavigate } from "react-router-dom";
-export default function Sidebar({ setView }) {
+export default function Sidebar({ setView, setIsAdmin }) {
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    setIsAdmin(false);
+    navigate("/");
   };
   return (
     <aside className="sidebar">

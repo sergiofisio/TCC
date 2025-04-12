@@ -28,7 +28,7 @@ async function sendRcovery(req, res) {
       <div style="text-align: center; margin: 30px 0;">
         <a href="${link}" style="background-color: #213e70; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px;">Redefinir Senha</a>
       </div>
-      <p>Se você não solicitou a recuperação, apenas ignore este e-mail.</p>
+      <p>Se você não solicitou a recuperação, faça a mudança dad sua senha mesmo assim.</p>
       <hr />
       <p style="font-size: 12px; color: #aaa;">© ${new Date().getFullYear()} - Sua Empresa. Todos os direitos reservados.</p>
     `;

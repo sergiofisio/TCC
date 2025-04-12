@@ -109,26 +109,30 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         String token = preferences.getString("authToken", null);
 
-        if (token == null) {
-            Log.e("VerifyToken", "❌ Nenhum token salvo. Redirecionando para login...");
+        if (token == null || token.isEmpty()) {
+            Log.w("VerifyToken", "⚠️ Nenhum token encontrado. Redirecionando para login...");
             RedirectTo(Home.class);
             return;
         }
 
-        ServerConnection.getRequestWithAuth("/verify", token, new ServerConnection.ServerCallback() {
+        ServerConnection.getRequestWithAuth("/auth/verify", token, new ServerConnection.ServerCallback() {
             @Override
             public void onSuccess(String response) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean isValid = jsonResponse.getBoolean("verifyToken");
+                    boolean passwordChanged = jsonResponse.getBoolean("passwordChanged");
 
-                    if (isValid) {
-                        Log.d("VerifyToken", "✅ Token válido! Redirecionando...");
-                        RedirectTo(Page_Exercicies.class);
-                    } else {
-                        Log.e("VerifyToken", "❌ Token inválido! Redirecionando para login...");
+                    if (!isValid || passwordChanged) {
+                        String motivo = !isValid ? "⚠️ Token inválido" : "ℹ️ Senha foi alterada";
+                        Log.w("VerifyToken", motivo + ". Redirecionando para login...");
                         RedirectTo(Home.class);
+                        return;
                     }
+
+                    Log.d("VerifyToken", "✅ Token válido. Redirecionando para exercícios...");
+                    RedirectTo(Page_Exercicies.class);
+
                 } catch (JSONException e) {
                     Log.e("VerifyToken", "❌ Erro ao processar JSON: " + e.getMessage());
                     RedirectTo(Home.class);

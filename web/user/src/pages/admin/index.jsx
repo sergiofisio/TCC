@@ -8,7 +8,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import "./style.css";
 import ChartsView from "../../components/views/charts";
 
-export default function Dashboard() {
+export default function Dashboard({ setIsAdmin }) {
   const [view, setView] = useState("users");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,27 +44,28 @@ export default function Dashboard() {
     setModalOpen(true);
   };
 
-  const handleSave = (id, data) => {
+  const handleSave = async (id, data) => {
     setUsers((prevUsers) =>
       prevUsers.map((user) =>
         user.id_user === id ? { ...user, ...data } : user
       )
     );
-    setModalOpen(false);
-  };
+    const response = await axios.delete(`/auth/user/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      data: {
+        active: false,
+      },
+    });
+    console.log({ response });
 
-  const handleDelete = (id) => {
-    setUsers((prevUsers) =>
-      prevUsers.map((user) =>
-        user.id_user === id ? { ...user, ...data } : user
-      )
-    );
     setModalOpen(false);
   };
 
   return (
     <div className="dashboard">
-      <Sidebar setView={setView} />
+      <Sidebar setView={setView} setIsAdmin={setIsAdmin} />
 
       <main className="dashboard-content">
         {loading ? (
@@ -87,7 +88,6 @@ export default function Dashboard() {
           user={selectedUser}
           action={modalAction}
           onSave={handleSave}
-          onDelete={handleDelete}
         />
       </main>
     </div>
