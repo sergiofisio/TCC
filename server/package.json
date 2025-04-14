@@ -27,7 +27,7 @@
     "prisma": "yarn migrate && yarn generate",
     "prisma:dev": "prisma migrate dev && npm run generate && npm run push && npm run seed",
     "prisma:format": "prisma format",
-    "migrate": "npx prisma migrate deploy",
+    "migrate": "npx prisma migrate dev",
     "generate": "npx prisma generate",
     "pull": "npx prisma db pull",
     "push": "npx prisma db push",
