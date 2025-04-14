@@ -5,9 +5,11 @@ CREATE TABLE `tb_users` (
     `email_user` VARCHAR(50) NOT NULL,
     `cpf_user` VARCHAR(11) NOT NULL,
     `password_user` VARCHAR(255) NOT NULL,
+    `password_changed` BOOLEAN NOT NULL DEFAULT false,
     `lost_pasword_token_user` VARCHAR(255) NULL,
     `active_user` BOOLEAN NOT NULL DEFAULT true,
     `type_user` ENUM('user', 'admin') NOT NULL DEFAULT 'user',
+    `last_login_date_user` DATETIME(3) NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 

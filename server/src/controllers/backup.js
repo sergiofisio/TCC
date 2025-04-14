@@ -1,11 +1,30 @@
 const { prisma } = require("../prismaFunctions/prisma");
 const fs = require("fs");
+const path = require("path");
+const { sendMail } = require("../functions/mailer");
 
 async function backupDatabase(_, res) {
-  let backup;
-
   try {
-    backup = await prisma.tb_users.findMany({
+    const now = new Date();
+    const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+
+    const activeUsers = await prisma.tb_users.findMany({
+      where: { active_user: true },
+    });
+
+    const updates = activeUsers.map(async (user) => {
+      const lastLogin = user.last_login_date_user;
+      if (lastLogin && now - new Date(lastLogin) > THIRTY_DAYS_MS) {
+        await prisma.tb_users.update({
+          where: { id_user: user.id_user },
+          data: { active_user: false },
+        });
+      }
+    });
+
+    await Promise.all(updates);
+
+    const backup = await prisma.tb_users.findMany({
       include: {
         phones_user: true,
         meditations_user: true,
@@ -14,9 +33,32 @@ async function backupDatabase(_, res) {
       },
     });
 
-    fs.writeFileSync("../../backup/DBTCC/backup.json", JSON.stringify(backup));
+    const dataString =
+      "module.exports = users = " +
+      JSON.stringify(backup, null, 2)
+        .replace(/"([^"]+)":/g, "$1:")
+        .replace(/\\n/g, "\n")
+        .replace(/\\\"/g, '"')
+        .replace(/\\\\/g, "\\") +
+      ";\n";
 
-    res.status(200).json({ message: "Backup realizado com sucesso" });
+    const outputPath = path.join(__dirname, "../../prisma/data.js");
+
+    fs.writeFileSync(outputPath, dataString, "utf-8");
+
+    await sendMail(
+      "sergiobastosfisio@gmail.com",
+      "Backup do Banco de Dados - Emotion Harmony",
+      "<p>Segue em anexo o backup do banco de dados (.json).</p>",
+      [
+        {
+          filename: "data.json",
+          path: outputPath,
+        },
+      ]
+    );
+
+    res.status(200).json({ message: "Backup realizado e enviado com sucesso" });
   } catch (error) {
     console.error({ error });
     res.status(error.status || 500).json({ error: error.message });
