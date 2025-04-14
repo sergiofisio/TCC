@@ -58,6 +58,7 @@ model tb_users {
   meditations_user        tb_meditation[]
   breaths_user            tb_breath[]
   todays_user             tb_today[]
+  last_login_date_user    DateTime?
   created_at              DateTime        @default(now())
   updated_at              DateTime        @updatedAt
 }

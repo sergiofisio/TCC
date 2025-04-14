@@ -1,6 +1,6 @@
-const users = require("../../../../backup/DBTCC/users");
 const { colors } = require("../../src/functions/colors");
 const { prisma } = require("../../src/prismaFunctions/prisma");
+const users = require("../data");
 
 module.exports = async function seedUsers() {
   try {
