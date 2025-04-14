@@ -21,33 +21,25 @@ app.use(function (_, res, next) {
   next();
 });
 
+global.SERVER_URL = "";
+
+app.use((req, res, next) => {
+  if (!global.SERVER_URL) {
+    const protocol = req.protocol;
+    const host = req.get("host");
+    global.SERVER_URL = `${protocol}://${host}`;
+    console.log("🌐 URL detectada dinamicamente:", global.SERVER_URL);
+  }
+  next();
+});
+
 app.use(allRoutes);
 
+app.get("/ping", (req, res) => {
+  res.send(`Servidor online em: ${global.SERVER_URL || "não detectado ainda"}`);
+});
+
 const SERVER_PORT = process.env.PORT || 3000;
-const SERVER_HOST =
-  process.env.NODE_ENV === "production"
-    ? process.env.HOST || "0.0.0.0"
-    : "0.0.0.0"; // ou use "localhost" se quiser restringir
-
-// Função para obter o IP local
-function getLocalIPAddress() {
-  const interfaces = os.networkInterfaces();
-  for (const iface of Object.values(interfaces)) {
-    for (const config of iface) {
-      if (config.family === "IPv4" && !config.internal) {
-        return config.address;
-      }
-    }
-  }
-  return "localhost";
-}
-
-const ipAddress = getLocalIPAddress();
-const SERVER_URL =
-  process.env.NODE_ENV === "production"
-    ? `https://${process.env.HOST || ipAddress}`
-    : `http://${ipAddress}:${SERVER_PORT}`;
-
-app.listen(SERVER_PORT, SERVER_HOST, () => {
-  console.log(`🚀 Servidor rodando em ${SERVER_URL}`);
+app.listen(SERVER_PORT, "0.0.0.0", () => {
+  console.log(`🚀 Servidor rodando na porta ${SERVER_PORT}`);
 });
