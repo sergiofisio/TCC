@@ -1,43 +1,40 @@
 .modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 999;
+  padding: 1rem;
 }
 
 .modal-content {
-  position: relative;
-  background-color: #f9fafb;
-  padding: 2rem;
+  background-color: #ffffff;
   border-radius: 12px;
-  width: 90%;
-  max-width: 600px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  width: 100%;
+  max-width: 650px;
+  max-height: 90vh;
+  overflow-y: auto;
+  font-family: "Segoe UI", Tahoma, sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 1rem;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  overflow: hidden;
+  gap: 1.5rem;
 }
 
 .modal h3,
 .modal h4 {
-  color: #1a202c;
-  margin-bottom: 1rem;
   text-align: center;
+  color: #1a202c;
+  margin-bottom: 0.75rem;
 }
 
 .modal p {
   color: #4a5568;
-  margin: 0.25rem 0;
-  line-height: 1.4;
+  line-height: 1.6;
+  margin: 0.5rem 0;
 }
 
 .modal hr {
@@ -51,29 +48,31 @@
   border: 1px solid #cbd5e0;
   border-radius: 6px;
   font-size: 1rem;
+  width: 100%;
 }
 
 .modal label {
-  font-weight: bold;
-  margin-top: 1rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  display: block;
 }
 
 .modal button {
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
   border: none;
   border-radius: 6px;
-  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .modal .btn-edit {
-  background-color: #3182ce;
+  background-color: #2b6cb0;
   color: #fff;
 }
 
 .modal .btn-edit:hover {
-  background-color: #2b6cb0;
+  background-color: #2c5282;
 }
 
 .modal .btn-delete {
@@ -85,33 +84,34 @@
   background-color: #c53030;
 }
 
-.modal .tab-buttons {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 1rem;
-  gap: 0.5rem;
+.modal .close {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: #718096;
+  cursor: pointer;
 }
 
-.modal .tab-buttons button {
-  background-color: #edf2f7;
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tab-buttons button {
+  background-color: #f7fafc;
+  color: #2b6cb0;
+  border: 1px solid #2b6cb0;
   padding: 0.5rem 1rem;
-  border: 1px solid #cbd5e0;
   border-radius: 6px;
-  cursor: pointer;
 }
 
 .modal .tab-buttons button:hover,
 .modal .tab-buttons button:focus {
-  background-color: #e2e8f0;
-}
-
-.modal .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 20px;
-  color: #4a5568;
+  background-color: #2b6cb0;
+  color: white;
 }
 
 .modal-body {
@@ -125,54 +125,72 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
 }
 
 .calendar-controls button {
-  background-color: #213e70;
+  background-color: #2b6cb0;
   color: white;
+  padding: 0.4rem 1rem;
   border: none;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
+  border-radius: 5px;
   font-weight: bold;
-  transition: background-color 0.2s;
 }
 
 .calendar-controls button:hover {
-  background-color: #1a2d57;
+  background-color: #2c5282;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.4rem;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding-right: 0.3rem;
 }
 
 .calendar-header {
-  font-weight: bold;
+  background-color: #2b6cb0;
+  color: white;
   text-align: center;
+  font-weight: bold;
   padding: 0.5rem;
-  background-color: #213e70;
   border-radius: 4px;
 }
 
 .calendar-cell {
   background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 0.5rem;
-  min-height: 80px;
+  border-radius: 6px;
+  min-height: 100px;
+  width: 150px;
+  height: 100px; /* altura fixa */
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  justify-content: flex-start;
+  padding: 0.5rem;
+  overflow-y: auto;
+  font-size: 0.85rem;
+  box-sizing: border-box;
+}
+
+.calendar-cell.outside {
+  opacity: 0.3;
 }
 
 .calendar-date {
-  font-size: 0.9rem;
   font-weight: bold;
+  font-size: 0.9rem;
   margin-bottom: 0.25rem;
-  color: #333;
 }
 
 .emotion-entry {
   font-size: 0.8rem;
-  padding-left: 0.25rem;
-  border-left: 3px solid #213e70;
+  border-left: 3px solid #2b6cb0;
+  padding-left: 0.4rem;
+  margin-left: 0.2rem;
+  color: #4a5568;
+  text-transform: capitalize;
 }
 
 .emotion-entry :where(span, strong) {
@@ -200,15 +218,6 @@
   background-color: #213e70;
   color: #fff;
   border-color: #213e70;
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
-  max-height: 60vh;
-  overflow-y: auto;
-  padding: 0.5rem;
 }
 
 .modal-content {
@@ -239,11 +248,10 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-top: 0.5rem;
 }
 
 .switch-label {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .switch {
@@ -289,4 +297,25 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(26px);
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 1.25rem;
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+  }
+
+  .calendar-cell {
+    min-height: 60px;
+    font-size: 0.75rem;
+  }
+
+  .tab-buttons button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
 }

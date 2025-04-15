@@ -7,6 +7,7 @@ import { toastFail } from "../../functions/toast";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./style.css";
 import ChartsView from "../../components/views/charts";
+import { getItem } from "../../functions/token";
 
 export default function Dashboard({ setIsAdmin }) {
   const [view, setView] = useState("users");
@@ -21,7 +22,7 @@ export default function Dashboard({ setIsAdmin }) {
     try {
       const response = await axios.get("/auth/infoDb", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${getItem("token")}`,
         },
       });
       setUsers(response.data.users);
@@ -52,7 +53,7 @@ export default function Dashboard({ setIsAdmin }) {
     );
     const response = await axios.delete(`/auth/user/${id}`, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${getItem("token")}`,
       },
       data: {
         active: false,

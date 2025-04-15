@@ -15,13 +15,14 @@ import Home from "./pages/home";
 import Admin from "./pages/admin";
 import axios from "./service/api";
 import Lost from "./pages/lost";
+import { getItem } from "./functions/token";
 
 function App() {
   const [modal, setModal] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
+    const token = getItem("token");
 
     async function verifyToken() {
       try {
