@@ -24,7 +24,7 @@ export default function Form() {
       if (response.data.type_user !== "admin")
         throw new Error("Apenas administradores podem acessar essa área!");
 
-      localStorage.setItem("token", response.data.token);
+      sessionStorage.setItem("token", response.data.token);
       toastSuccess("Login efetuado com sucesso!", 3000, "top-center");
       setTimeout(() => {
         window.location.href = "/admin";
