@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 export default function Sidebar({ setView, setIsAdmin }) {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    sessionStorage.clear();
     setIsAdmin(false);
     navigate("/");
   };
