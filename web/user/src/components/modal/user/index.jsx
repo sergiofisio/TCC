@@ -19,7 +19,6 @@ export default function UserModal({ user, isOpen, onClose, onSave, action }) {
 
   const [formData, setFormData] = useState("");
   const [tab, setTab] = useState("usuario");
-  const [currentMonth, setCurrentMonth] = useState(new Date());
 
   useEffect(() => {
     if (user) setFormData(user);
@@ -70,13 +69,7 @@ export default function UserModal({ user, isOpen, onClose, onSave, action }) {
 
           {tab === "usuario" && <UserDetails user={user} />}
           {tab === "exercicios" && <UserExercises user={user} />}
-          {tab === "emocao" && (
-            <UserEmotionDiary
-              user={user}
-              currentMonth={currentMonth}
-              setCurrentMonth={setCurrentMonth}
-            />
-          )}
+          {tab === "emocao" && <UserEmotionDiary user={user} />}
         </>
       )}
     </Modal>

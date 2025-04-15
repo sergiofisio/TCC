@@ -9,12 +9,10 @@ import {
   subMonths,
 } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useState } from "react";
 
-export default function UserEmotionDiary({
-  user,
-  currentMonth,
-  setCurrentMonth,
-}) {
+export default function UserEmotionDiary({ user }) {
+  const [currentMonth, setCurrentMonth] = useState(new Date());
   const getMonthData = () => {
     const startMonth = startOfMonth(currentMonth);
     const endMonth = endOfMonth(currentMonth);
@@ -71,12 +69,20 @@ export default function UserEmotionDiary({
               className={`calendar-cell ${isOutsideMonth ? "outside" : ""}`}
             >
               <div className="calendar-date">{getDate(date)}</div>
-              {emotionEntries.map((entry, i) => (
-                <div key={i} className="emotion-entry">
-                  <span>{entry.morning_afternoon_evening}</span>:{" "}
-                  <strong>{entry.emotion_today}</strong>
-                </div>
-              ))}
+              {[...emotionEntries]
+                .sort((a, b) => {
+                  const ordem = { manhã: 0, tarde: 1, noite: 2 };
+                  return (
+                    ordem[a.morning_afternoon_evening] -
+                    ordem[b.morning_afternoon_evening]
+                  );
+                })
+                .map((entry, i) => (
+                  <div key={i} className="emotion-entry">
+                    <span>{entry.morning_afternoon_evening}</span>:{" "}
+                    <strong>{entry.emotion_today}</strong>
+                  </div>
+                ))}
             </div>
           );
         })}
