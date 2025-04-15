@@ -45,7 +45,7 @@
     <string name="NOITE">NOITE</string>
     <string name="sair">Sair</string>
     <string name="Editar">EDITAR</string>
-    <string name="relatorio" >RELATÓRIOS</string>
+    <string name="relatorio">RELATÓRIOS</string>
     <string name="diario">MEUS DIAS</string>
     <string name="respiracoes">RESPIRAÇÕES</string>
     <string name="meditacoes">MEDITAÇÕES</string>
@@ -56,4 +56,8 @@
     <string name="medo">medo</string>
     <string name="tristeza">tristeza</string>
     <string name="felicidade">felicidade</string>
+    <string name="lostPass">Digite seu email para refazer sua senha.</string>
+    <string name="btn_lost">Recuperar senha</string>
+    <string name="lembrou">LEMBROU SUA SENHA? CLIQUE AQUI.</string>
+    <string name="forgot">Esqueci minha senha</string>
 </resources>

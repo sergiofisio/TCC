@@ -1,6 +1,6 @@
 package com.example.emotionharmony;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.pages.Page_Exercicies;
 import com.example.emotionharmony.utils.InputField;
+import com.example.emotionharmony.utils.NavigationHelper;
 import com.example.emotionharmony.utils.ServerConnection;
 import com.example.emotionharmony.utils.Validator;
 
@@ -44,10 +45,11 @@ public class Home extends AppCompatActivity {
             return insets;
         });
 
-        initUI();
+        initUI(this);
     }
 
-    private void initUI() {
+    private void initUI(Activity activity) {
+
         customToast = new CustomToast(this);
 
         txtEmail = findViewById(R.id.txtEmail);
@@ -55,11 +57,16 @@ public class Home extends AppCompatActivity {
         Button btnLogin = findViewById(R.id.btnLogin);
         TextView lblCadastro = findViewById(R.id.lblCadastro);
 
-        btnLogin.setOnClickListener(v -> handleLogin());
-        lblCadastro.setOnClickListener(v -> navigateToRegister());
+        TextView TxtForgot = findViewById(R.id.TxtForgot);
+
+        TxtForgot.setOnClickListener(v -> NavigationHelper.navigateTo(activity, lost_password.class, true));
+
+        btnLogin.setOnClickListener(v -> handleLogin(activity));
+        lblCadastro.setOnClickListener(v -> NavigationHelper.navigateTo(activity, Register.class, true));
+
     }
 
-    private void handleLogin() {
+    private void handleLogin(Activity activity) {
         try {
             String email = txtEmail.getText().toString().trim();
             String senha = txtSenha.getText().toString().trim();
@@ -74,18 +81,18 @@ public class Home extends AppCompatActivity {
             loginData.put("email", email);
             loginData.put("senha", senha);
 
-            sendLoginRequest(loginData);
+            sendLoginRequest(loginData, activity);
 
         } catch (Exception e) {
             showErrorMessage(e.getMessage());
         }
     }
 
-    private void sendLoginRequest(JSONObject loginData) {
+    private void sendLoginRequest(JSONObject loginData, Activity activity) {
         ServerConnection.postRequest("/login", loginData, new ServerConnection.ServerCallback() {
             @Override
             public void onSuccess(String response) {
-                runOnUiThread(() -> processLoginResponse(response));
+                runOnUiThread(() -> processLoginResponse(response, activity));
             }
 
             @Override
@@ -95,7 +102,7 @@ public class Home extends AppCompatActivity {
         });
     }
 
-    private void processLoginResponse(String response) {
+    private void processLoginResponse(String response, Activity activity) {
         try {
             JSONObject jsonResponse = new JSONObject(response);
             String token = jsonResponse.optString("token", "");
@@ -103,7 +110,7 @@ public class Home extends AppCompatActivity {
             if (!token.isEmpty()) {
                 saveAuthToken(token);
                 customToast.show("✅ Login realizado com sucesso!", Toast.LENGTH_LONG, "#11273D", "success");
-                navigateToAfterLogin();
+                NavigationHelper.navigateTo(activity, Page_Exercicies.class, true);
             } else {
                 showErrorMessage("❌ Erro ao autenticar.");
             }
@@ -123,17 +130,5 @@ public class Home extends AppCompatActivity {
         Log.e("LoginError", "❌ Erro no login: " + error);
 
         customToast.show(error, Toast.LENGTH_LONG, "#FF0000", "error");
-    }
-
-    private void navigateToRegister() {
-        startActivity(new Intent(Home.this, Register.class));
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        finish();
-    }
-
-    private void navigateToAfterLogin() {
-        startActivity(new Intent(Home.this, Page_Exercicies.class));
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        finish();
     }
 }

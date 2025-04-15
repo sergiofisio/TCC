@@ -14,6 +14,7 @@ import Footer from "./components/footer";
 import Home from "./pages/home";
 import Admin from "./pages/admin";
 import axios from "./service/api";
+import Lost from "./pages/lost";
 
 function App() {
   const [modal, setModal] = useState(false);
@@ -67,6 +68,7 @@ function App() {
             )
           }
         />
+        <Route path="lostpassword/:id/:token" element={<Lost />} />
       </Routes>
     </Router>
   );
