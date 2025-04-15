@@ -5,6 +5,7 @@ const verifyToken = require("../middleware/auth");
 const sendRcovery = require("../controllers/user/recovery");
 const lostPassword = require("../controllers/user/lostPassword");
 const schedule = require("node-schedule");
+const backupDatabase = require("../controllers/backup");
 
 const openRoute = express.Router();
 
@@ -15,6 +16,6 @@ openRoute.post("/login", login);
 openRoute.post("/recovery", sendRcovery);
 openRoute.post("/lostpassword/:id_user/:token", lostPassword);
 
-schedule.scheduleJob("0 11 * * *", backup);
+schedule.scheduleJob("0 11 * * *", backupDatabase);
 
 module.exports = openRoute;
