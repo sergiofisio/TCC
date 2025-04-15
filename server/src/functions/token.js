@@ -5,9 +5,9 @@ const { CustomError } = require("../class/class");
 
 const verifyAsync = util.promisify(jwt.verify);
 
-const generateToken = (id) =>
+const generateToken = (id, time) =>
   jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
+    expiresIn: time || "30d",
   });
 
 const extractUserToken = async (token) => {

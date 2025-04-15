@@ -7,6 +7,7 @@ const bcrypt = require("bcrypt");
 async function login(req, res) {
   try {
     const { email, senha } = req.body;
+    const today = new Date();
 
     const missingInput = verifyInput({ email, senha });
 
@@ -34,6 +35,8 @@ async function login(req, res) {
       where: { id_user: Number(id_user) },
       data: {
         password_changed: false,
+        last_login_date_user: today,
+        lost_pasword_token_user: null,
       },
     });
 

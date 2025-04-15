@@ -58,10 +58,15 @@ async function backupDatabase(_, res) {
       ]
     );
 
-    res.status(200).json({ message: "Backup realizado e enviado com sucesso" });
+    console.log("Backup realizado e enviado com sucesso");
   } catch (error) {
     console.error({ error });
     res.status(error.status || 500).json({ error: error.message });
+  } finally {
+    await prisma.$disconnect();
+    if (res) {
+      res.json({ message: "Backup realizado e enviado com sucesso" });
+    }
   }
 }
 

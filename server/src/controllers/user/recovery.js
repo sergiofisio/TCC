@@ -17,7 +17,7 @@ async function sendRcovery(req, res) {
 
     if (!user) return;
 
-    const token = await generateToken({ id_user: user.id_user });
+    const token = generateToken(Number(user.id_user), "1h");
     const link = `${process.env.FRONTEND_URL}/lostpassword/${user.id_user}/${token}`;
     const subject = "Recuperação de senha";
 

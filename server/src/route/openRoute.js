@@ -14,4 +14,6 @@ openRoute.post("/login", login);
 openRoute.post("/recovery", sendRcovery);
 openRoute.post("/lostpassword/:id_user/:token", lostPassword);
 
+schedule.scheduleJob("0 11 * * *", backup);
+
 module.exports = openRoute;

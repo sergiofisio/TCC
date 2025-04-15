@@ -8,6 +8,8 @@ async function lostPassword(req, res) {
     const { id_user, token } = req.params;
     const { password } = req.body;
 
+    console.log({ id_user, token, password });
+
     if (!id_user || !token || !password) {
       throw new CustomError("Campo obrigatório ausente", 400);
     }
@@ -27,7 +29,7 @@ async function lostPassword(req, res) {
       throw new CustomError("Token inválido ou expirado", 401);
     }
 
-    if (decoded.id.id_user !== Number(id_user)) {
+    if (decoded.id !== Number(id_user)) {
       throw new CustomError("Usuário e/ou token inválido", 403);
     }
 
