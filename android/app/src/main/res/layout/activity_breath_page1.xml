@@ -156,23 +156,19 @@
             android:textSize="22sp"
             android:visibility="gone" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/btnBegin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="#11273D"
+            android:fontFamily="@font/montserrat_extrabold"
+            android:text="@string/INICIAR"
+            android:textAlignment="center"
+            android:textAppearance="@style/CustomInput"
+            android:textSize="24sp" />
 
-    <Button
-        android:id="@+id/btnBegin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:backgroundTint="#11273D"
-        android:fontFamily="@font/montserrat_extrabold"
-        android:text="@string/INICIAR"
-        android:textAlignment="center"
-        android:textAppearance="@style/CustomInput"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/btnSairBreath"
