@@ -1,18 +1,29 @@
 footer {
-  position: relative;
+  display: flex;
   justify-content: space-between;
-  min-height: 4vh
+  min-height: 10vh;
+  width: 100%;
+  padding: 0 2rem;
 }
 
 footer div {
-  position: absolute;
-  top: 0;
-  left: 1rem;
-  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 100%;
+}
+
+footer button {
+  background-color: var(--navy-blue);
+}
+
+.logo-footer {
+  max-height: 30px;
 }
 
 footer .title,
 .copy {
+  text-align: center;
   font-size: 0.7rem;
 }
 
@@ -24,7 +35,7 @@ footer p {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: fit-content;
   text-align: center;
   color: white;
 }

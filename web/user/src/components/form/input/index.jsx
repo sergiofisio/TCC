@@ -2,6 +2,7 @@ import "./style.css";
 import eye from "../../../assets/openEye.svg";
 import eyeClose from "../../../assets/closeEye.svg";
 import { useState } from "react";
+import InputMask from "react-input-mask";
 
 export default function Input({
   type,
@@ -10,6 +11,7 @@ export default function Input({
   value,
   onChange,
   name,
+  mask,
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -17,23 +19,38 @@ export default function Input({
     <div className="input">
       <label>{label}</label>
       <div className="input-container relative">
-        <input
-          type={
-            (label === "Senha" || label === "Confirmar Senha") && showPassword
-              ? "text"
-              : type
-          }
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          name={name}
-        />
-        {(label === "Senha" || label === "Confirmar Senha") && (
-          <img
-            className="absolute"
-            src={showPassword ? eyeClose : eye}
-            alt={`imagem olho ${showPassword ? "fechaddo" : "aberto"}`}
-            onClick={() => setShowPassword(!showPassword)}
+        {type !== "textarea" ? (
+          <>
+            <InputMask
+              type={
+                (label === "Senha" || label === "Confirmar Senha") &&
+                showPassword
+                  ? "text"
+                  : type
+              }
+              mask={mask || ""}
+              placeholder={placeholder}
+              value={value}
+              onChange={onChange}
+              name={name}
+            />
+            {(label === "Senha" || label === "Confirmar Senha") && (
+              <img
+                className="absolute"
+                src={showPassword ? eyeClose : eye}
+                alt={`imagem olho ${showPassword ? "fechado" : "aberto"}`}
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            )}
+          </>
+        ) : (
+          <textarea
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+            name={name}
+            cols={30}
+            rows={10}
           />
         )}
       </div>

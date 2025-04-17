@@ -19,6 +19,7 @@ import { getItem } from "./functions/token";
 
 function App() {
   const [modal, setModal] = useState(false);
+  const [contato, setContato] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
@@ -54,8 +55,9 @@ function App() {
             <>
               <Header setModal={setModal} isAdmin={isAdmin} />
               <Home />
-              <Footer />
-              {modal && <Modal setModal={setModal} />}
+              <Footer setModal={setContato} />
+              {modal && <Modal setModal={setModal} contato={false} />}
+              {contato && <Modal setModal={setContato} contato={true} />}
             </>
           }
         />

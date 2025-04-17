@@ -20,7 +20,8 @@ label {
   color: #333;
 }
 
-input {
+input,
+textarea {
   outline: none;
   border: none;
   border-radius: 1rem;

@@ -11,11 +11,13 @@
   --gluten: "Gluten", cursive;
 
   --light-blue: #a7c7e7;
-  --background: linear-gradient(180deg,
-      rgba(189, 234, 238, 1) 0%,
-      rgba(118, 180, 189, 1) 20%,
-      rgba(85, 161, 172, 1) 70%,
-      rgba(46, 139, 153, 1) 100%);
+  --background: linear-gradient(
+    180deg,
+    rgba(189, 234, 238, 1) 0%,
+    rgba(118, 180, 189, 1) 20%,
+    rgba(85, 161, 172, 1) 70%,
+    rgba(46, 139, 153, 1) 100%
+  );
   --pastel-green: #cde5d1;
   --lavender: #e4d9ff;
   --light-gray: #f4f4f4;
@@ -61,15 +63,13 @@ header {
   min-height: 10vh;
 }
 
-header,
-footer {
+header {
   display: flex;
   width: 100%;
   padding: 0 1rem;
 }
 
-header>div,
-footer>div {
+header > div {
   display: flex;
   align-items: center;
   width: 100%;
