@@ -112,7 +112,7 @@ public class TTSHelper {
                 Log.d("TTSHelper", "✅ Reprodução concluída.");
                 mp.release();
                 mediaPlayer = null;
-                onComplete.run(); // Chama o próximo áudio
+                onComplete.run();
             });
 
             mediaPlayer.prepareAsync();

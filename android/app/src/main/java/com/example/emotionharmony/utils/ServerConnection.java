@@ -35,7 +35,6 @@ public class ServerConnection {
         makeRequest(endpoint, token, "GET", callback);
     }
 
-    // Métodos POST
     public static void postRequest(String endpoint, JSONObject jsonData, ServerCallback callback) {
         makeRequest(endpoint, null, "POST", callback, jsonData);
     }

@@ -110,7 +110,10 @@ public class EmotionsExpandableAdapter extends BaseExpandableListAdapter {
         }
 
         ImageView imageView = convertView.findViewById(R.id.emotionIcon);
-        TextView textViewBreath = convertView.findViewById(R.id.breathingExercisesCount), textViewTime = convertView.findViewById(R.id.emotionTime), emotionDescription = convertView.findViewById(R.id.emotionDescription), textViewMeditation = convertView.findViewById(R.id.meditationsCount);
+        TextView textViewBreath = convertView.findViewById(R.id.breathingExercisesCount),
+                textViewTime = convertView.findViewById(R.id.emotionTime),
+                emotionDescription = convertView.findViewById(R.id.emotionDescription),
+                textViewMeditation = convertView.findViewById(R.id.meditationsCount);
 
         String timeOfDay = emotion.optString("morning_afternoon_evening", "Indefinido");
         String type = emotion.optString("emotion_today", "Desconhecido");
