@@ -17,7 +17,7 @@
   },
   "repository": "git+https://github.com/sergiofisio/TCC.git",
   "license": "MIT",
-  "author": "",
+  "author": "Equipe Emotion Harmony <sergiobastosfisio@gmail.com>",
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
