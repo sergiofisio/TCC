@@ -1,31 +1,41 @@
+// 📦 Importações necessárias
 const { CustomError } = require("../../class/class");
 const getModel = require("../../functions/model");
 
-
+// ➕ Controlador responsável por adicionar uma nova atividade (respiração ou meditação)
 const add = async (req, res) => {
-    try {
-        const { id_user } = req.user;
-        const { activity } = req.params;
-        const data = req.body;
+  try {
+    // 🔹 Extrai o ID do usuário autenticado
+    const { id_user } = req.user;
 
-        if (activity !== "breath" && activity !== "meditate") throw new CustomError("Atividade inválida", 400);
+    // 🔹 Extrai o tipo da atividade (ex: "breath" ou "meditate") e os dados enviados no corpo da requisição
+    const { activity } = req.params;
+    const data = req.body;
 
-        const model = getModel(activity);
+    // 🔹 Valida se o tipo de atividade é permitido
+    if (activity !== "breath" && activity !== "meditate")
+      throw new CustomError("Atividade inválida", 400);
 
-        const result = await model.create({
-            data: {
-                users_id: id_user,
-                ...data,
-            },
-        });
+    // 🔹 Obtém dinamicamente o modelo do Prisma com base na atividade
+    const model = getModel(activity);
 
-        return res.status(201).json(result);
+    // 🔹 Cria o novo registro da atividade no banco, vinculando ao usuário
+    const result = await model.create({
+      data: {
+        users_id: id_user,
+        ...data,
+      },
+    });
 
-    } catch (error) {
-        console.error({ error });
+    // 🔹 Retorna sucesso com o objeto criado
+    return res.status(201).json(result);
+  } catch (error) {
+    // 🔹 Tratamento de erro
+    console.error({ error });
 
-        return res.status(error.status || 500).json({ error: error.message });
-    }
-}
+    return res.status(error.status || 500).json({ error: error.message });
+  }
+};
 
+// 🚀 Exporta a função para uso nas rotas
 module.exports = add;
