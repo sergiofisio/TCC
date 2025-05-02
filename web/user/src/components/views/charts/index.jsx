@@ -1,3 +1,4 @@
+//import de bibliotecas do recharts
 import {
   BarChart,
   Bar,
@@ -8,6 +9,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+//função para criação do componente de gráficos
 export default function ChartsView({ users }) {
   const chartData = [
     {

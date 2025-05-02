@@ -15,6 +15,7 @@ public class ServerConnection {
     private static String loadBaseUrl() {
         String url = EnvConfig.get("BASE_URL");
 
+        // noinspection ConstantConditions
         if (url == null || url.trim().isEmpty()) {
             throw new IllegalStateException("❌ BASE_URL não definida no arquivo .env!");
         }
@@ -86,19 +87,19 @@ public class ServerConnection {
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) {
-                try {
-                    if (response.body() == null) {
+                try (ResponseBody responseBody = response.body()) {
+                    if (responseBody == null) {
                         callback.onError("❌ Erro: Corpo da resposta vazio.");
                         return;
                     }
 
-                    String responseBody = response.body().string();
+                    String responseString  = responseBody.string();
                     if (!response.isSuccessful()) {
-                        JSONObject jsonError = new JSONObject(responseBody);
+                        JSONObject jsonError = new JSONObject(responseString );
                         String errorMessage = jsonError.optString("error", "Erro desconhecido");
                         callback.onError(errorMessage);
                     } else {
-                        callback.onSuccess(responseBody);
+                        callback.onSuccess(responseString );
                     }
                 } catch (IOException | JSONException e) {
                     callback.onError("❌ Erro inesperado no processamento da resposta do servidor: " + e.getMessage());

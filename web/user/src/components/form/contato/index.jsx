@@ -4,7 +4,9 @@ import Input from "../input";
 import emailjs from "@emailjs/browser";
 import Form from "./../index";
 
+// Função principal que renderiza o componente de Contato
 export default function Contato() {
+  // Estado para armazenar os dados do formulário
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -12,11 +14,14 @@ export default function Contato() {
     mensagem: "",
   });
 
+  // Estado para controlar o carregamento do botão
   const [loading, setLoading] = useState(false);
 
+  // Função para lidar com o envio do formulário
   const onSubmit = async (e, data) => {
     e.preventDefault();
     e.stopPropagation();
+    // Desestruturação dos dados do formulário
     const { name, email, telefone, mensagem } = data;
     setLoading(true);
 
@@ -24,6 +29,7 @@ export default function Contato() {
       if (!name || !email || !mensagem || !telefone)
         throw new Error("Todos os campos são obrigatórios!");
 
+      // Envio dos dados para o servidor usando EmailJS
       const res = await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,

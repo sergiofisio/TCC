@@ -1,3 +1,4 @@
+//função para formatar o telefone
 export const formatPhone = (phone) => {
   if (!phone) return "-";
   const number = String(phone.phone_number).padStart(9, "0");

@@ -6,29 +6,36 @@ import "./style.css";
 import Button from "../../button";
 import Form from "./../index";
 
+// Função principal que renderiza o componente de Login
 export default function Login() {
+  // Estado para armazenar os dados do formulário
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
+  // Estado para controlar o carregamento do botão
   const [loading, setLoading] = useState(false);
 
+  // Função para lidar com o envio do formulário
   const onSubmit = async (e, data) => {
     setLoading(true);
     e.preventDefault();
     e.stopPropagation();
 
+    // Desestruturação dos dados do formulário
     const { email, password } = data;
     try {
       if (!email || !password)
         throw new Error("Todos os campos são obrigatórios!");
 
+      // Envio dos dados para o servidor
       const response = await axios.post("/login", {
         email,
         senha,
       });
 
+      // Verifica se o usuário é um administrador
       if (response.data.type_user !== "admin")
         throw new Error("Apenas administradores podem acessar essa área!");
 
@@ -40,6 +47,7 @@ export default function Login() {
     } catch (error) {
       console.log({ error });
 
+      // Exibe mensagem de erro caso o login falhe
       return toastFail(
         error?.response?.status === 401
           ? error.response.data.error

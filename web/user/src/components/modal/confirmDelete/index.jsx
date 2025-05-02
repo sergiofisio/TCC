@@ -1,3 +1,4 @@
+//função de criação do componente de confirmação de exclusão do usuario
 export default function ConfirmDelete({ user, onConfirm }) {
   return (
     <div className="confirm-delete">

@@ -60,4 +60,8 @@
     <string name="btn_lost">Recuperar senha</string>
     <string name="lembrou">LEMBROU SUA SENHA? CLIQUE AQUI.</string>
     <string name="forgot">Esqueci minha senha</string>
+    <string name="showPass">Mostrar Senha</string>
+    <string name="next">proximo</string>
+    <string name="meditation_page5">Qual emoção mais descreve aquele momento?</string>
+    <string name="meditation_page4">Você considera esta situação BOA ou RUIM?</string>
 </resources>

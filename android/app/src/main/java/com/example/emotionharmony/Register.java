@@ -3,6 +3,7 @@ package com.example.emotionharmony;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.example.emotionharmony.classes.MaskUtil;
 import com.example.emotionharmony.utils.InputField;
 import com.example.emotionharmony.utils.NavigationHelper;
 import com.example.emotionharmony.utils.ServerConnection;
+import com.example.emotionharmony.utils.ShowPassword;
 import com.example.emotionharmony.utils.Validator;
 
 import org.json.JSONArray;
@@ -59,11 +61,13 @@ public class Register extends AppCompatActivity {
         msgEmergency = findViewById(R.id.txtMsgEmergency);
         Button btnRegister = findViewById(R.id.btnRegister);
         TextView txtLogin = findViewById(R.id.txtLogin);
+        CheckBox cbShowPass = findViewById(R.id.cbShowPass);
 
         applyInputMasks();
 
         btnRegister.setOnClickListener(v -> registerUser());
         txtLogin.setOnClickListener(v -> NavigationHelper.navigateTo(Register.this, Home.class, false));
+        cbShowPass.setOnCheckedChangeListener((buttonView, isChecked) -> ShowPassword.ChangeShowPassword(senha, isChecked));
     }
 
     private void applyInputMasks() {

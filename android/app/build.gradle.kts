@@ -4,12 +4,13 @@ plugins {
 
 android {
     namespace = "com.example.emotionharmony"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.emotionharmony"
         minSdk = 24
-        targetSdk = 34
+        //noinspection OldTargetApi
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -65,10 +66,10 @@ android {
 }
 
 dependencies {
-    implementation("com.google.auth:google-auth-library-oauth2-http:1.18.0")
-    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation(libs.google.auth.library.oauth2.http)
+    implementation(libs.play.services.location)
 
-    implementation("com.google.protobuf:protobuf-java:3.21.7")
+    implementation(libs.protobuf.java)
 
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -79,11 +80,11 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
-    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation(libs.okhttp)
 
-    implementation("org.json:json:20210307")
-    implementation("com.google.code.gson:gson:2.8.9")
+    implementation(libs.json)
+    implementation(libs.gson)
 
-    implementation(platform("com.google.cloud:libraries-bom:26.29.0"))
-    implementation("com.google.cloud:google-cloud-texttospeech:2.33.0")
+    implementation(libs.libraries.bom)
+    implementation(libs.google.cloud.texttospeech)
 }

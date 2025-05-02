@@ -3,6 +3,7 @@ import imgApple from "../../assets/IOS.svg";
 import Os from "./../os";
 import "./appSection.css";
 
+// criação de um array com as informações do aplicativo
 const osInfo = [
   {
     id: 1,
@@ -18,6 +19,7 @@ const osInfo = [
   },
 ];
 
+// Função principal que renderiza a seção do aplicativo
 export default function AppSection() {
   return (
     <section className="app">

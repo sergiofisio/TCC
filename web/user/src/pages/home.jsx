@@ -4,6 +4,7 @@ import imgHistory from "../assets/historia.svg";
 import imgMission from "../assets/mission.svg";
 import AppSection from "../components/app";
 
+//informação de cada seção
 const sections = [
   {
     id: 1,
@@ -21,9 +22,11 @@ const sections = [
   },
 ];
 
+// Função principal que renderiza a página inicial
 export default function Home() {
   return (
     <main className="home">
+      //renderiza cada seção
       {sections.map((section) => (
         <Section key={section.id} {...section} />
       ))}

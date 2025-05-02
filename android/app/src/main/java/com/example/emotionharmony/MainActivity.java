@@ -4,30 +4,39 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.example.emotionharmony.pages.Page_Exercicies;
 import com.example.emotionharmony.utils.EnvConfig;
 import com.example.emotionharmony.utils.NetworkUtils;
 import com.example.emotionharmony.utils.ServerConnection;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
     private int retryCount = 0;
     private static final int MAX_RETRIES = 5;
     private static final int RETRY_INTERVAL = 60000;
+
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -66,31 +75,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void verificarServidor() {
-        ServerConnection.getRequest("/", new ServerConnection.ServerCallback() {
+        executor.execute(() -> ServerConnection.getRequest("/", new ServerConnection.ServerCallback() {
             @Override
             public void onSuccess(String response) {
                 try {
                     JSONObject jsonResponse = new JSONObject(response);
                     boolean init = jsonResponse.getBoolean("init");
 
-                    if (init) {
-                        Log.d("MainActivity", "✅ Servidor está pronto. Continuando...");
-                        verificarToken();
-                    } else {
-                        tentarNovamente();
-                    }
+                    runOnUiThread(() -> {
+                        if (init) {
+                            Log.d("MainActivity", "✅ Servidor está pronto. Continuando...");
+                            verificarToken();
+                        } else {
+                            tentarNovamente();
+                        }
+                    });
                 } catch (JSONException e) {
                     Log.e("MainActivity", "❌ Erro ao processar JSON: " + e.getMessage());
-                    tentarNovamente();
+                    runOnUiThread(MainActivity.this::tentarNovamente);
                 }
             }
 
             @Override
             public void onError(String error) {
                 Log.e("MainActivity", "❌ Erro ao conectar no servidor: " + error);
-                tentarNovamente();
+                runOnUiThread(MainActivity.this::tentarNovamente);
             }
-        });
+        }));
     }
 
     private void tentarNovamente() {
@@ -98,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (retryCount < MAX_RETRIES) {
             Log.w("MainActivity", "⚠️ Tentativa " + retryCount + " falhou. Tentando novamente em 1 minuto...");
-            new Handler(Looper.getMainLooper()).postDelayed(this::verificarServidor, RETRY_INTERVAL);
+            scheduler.schedule(this::verificarServidor, RETRY_INTERVAL, TimeUnit.MILLISECONDS);
         } else {
             Log.e("MainActivity", "❌ Não foi possível conectar ao servidor após " + MAX_RETRIES + " tentativas.");
             mostrarAlertaErroServidor();
@@ -106,73 +117,80 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void verificarToken() {
-        SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
-        String token = preferences.getString("authToken", null);
+        executor.execute(() -> {
+            SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+            String token = preferences.getString("authToken", null);
 
-        if (token == null || token.isEmpty()) {
-            Log.w("VerifyToken", "⚠️ Nenhum token encontrado. Redirecionando para login...");
-            RedirectTo(Home.class);
-            return;
-        }
+            if (token == null || token.isEmpty()) {
+                Log.w("VerifyToken", "⚠️ Nenhum token encontrado. Redirecionando para login...");
+                runOnUiThread(() -> RedirectTo(Home.class));
+                return;
+            }
 
-        ServerConnection.getRequestWithAuth("/auth/verify", token, new ServerConnection.ServerCallback() {
-            @Override
-            public void onSuccess(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    boolean isValid = jsonResponse.getBoolean("verifyToken");
-                    boolean passwordChanged = jsonResponse.getBoolean("passwordChanged");
+            ServerConnection.getRequestWithAuth("/auth/verify", token, new ServerConnection.ServerCallback() {
+                @Override
+                public void onSuccess(String response) {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        boolean isValid = jsonResponse.getBoolean("verifyToken");
+                        boolean passwordChanged = jsonResponse.getBoolean("passwordChanged");
 
-                    if (!isValid || passwordChanged) {
-                        String motivo = !isValid ? "⚠️ Token inválido" : "ℹ️ Senha foi alterada";
-                        Log.w("VerifyToken", motivo + ". Redirecionando para login...");
-                        RedirectTo(Home.class);
-                        return;
+                        runOnUiThread(() -> {
+                            if (!isValid || passwordChanged) {
+                                String motivo = !isValid ? "⚠️ Token inválido" : "ℹ️ Senha foi alterada";
+                                Log.w("VerifyToken", motivo + ". Redirecionando para login...");
+                                RedirectTo(Home.class);
+                            } else {
+                                Log.d("VerifyToken", "✅ Token válido. Redirecionando para exercícios...");
+                                RedirectTo(Page_Exercicies.class);
+                            }
+                        });
+
+                    } catch (JSONException e) {
+                        Log.e("VerifyToken", "❌ Erro ao processar JSON: " + e.getMessage());
+                        runOnUiThread(() -> RedirectTo(Home.class));
                     }
-
-                    Log.d("VerifyToken", "✅ Token válido. Redirecionando para exercícios...");
-                    RedirectTo(Page_Exercicies.class);
-
-                } catch (JSONException e) {
-                    Log.e("VerifyToken", "❌ Erro ao processar JSON: " + e.getMessage());
-                    RedirectTo(Home.class);
                 }
-            }
 
-            @Override
-            public void onError(String error) {
-                Log.e("VerifyToken", "❌ Erro na requisição: " + error);
-                RedirectTo(Home.class);
-            }
+                @Override
+                public void onError(String error) {
+                    Log.e("VerifyToken", "❌ Erro na requisição: " + error);
+                    runOnUiThread(() -> RedirectTo(Home.class));
+                }
+            });
         });
     }
 
     private void RedirectTo(Class<?> activityClass) {
-        runOnUiThread(() ->
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                startActivity(new Intent(MainActivity.this, activityClass));
-                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                finish();
-            }, 2000));
+        startActivity(new Intent(MainActivity.this, activityClass));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
     }
 
     private void mostrarAlertaConexao() {
         runOnUiThread(() ->
-            new AlertDialog.Builder(this)
-                    .setTitle("Sem Conexão com a Internet")
-                    .setMessage("Este aplicativo precisa de conexão com a internet para funcionar. Por favor, conecte-se e tente novamente.")
-                    .setPositiveButton("OK", (dialog, which) -> finishAffinity())
-                    .setCancelable(false)
-                    .show());
+                new AlertDialog.Builder(this)
+                        .setTitle("Sem Conexão com a Internet")
+                        .setMessage("Este aplicativo precisa de conexão com a internet para funcionar. Por favor, conecte-se e tente novamente.")
+                        .setPositiveButton("OK", (dialog, which) -> finishAffinity())
+                        .setCancelable(false)
+                        .show());
     }
 
     private void mostrarAlertaErroServidor() {
         runOnUiThread(() ->
-            new AlertDialog.Builder(this)
-                    .setTitle("Erro de Conexão")
-                    .setMessage("Não foi possível conectar ao servidor após várias tentativas. Tente novamente mais tarde.")
-                    .setPositiveButton("OK", (dialog, which) -> finishAffinity())
-                    .setCancelable(false)
-                    .show());
+                new AlertDialog.Builder(this)
+                        .setTitle("Erro de Conexão")
+                        .setMessage("Não foi possível conectar ao servidor após várias tentativas. Tente novamente mais tarde.")
+                        .setPositiveButton("OK", (dialog, which) -> finishAffinity())
+                        .setCancelable(false)
+                        .show());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        executor.shutdown();
+        scheduler.shutdown();
     }
 }

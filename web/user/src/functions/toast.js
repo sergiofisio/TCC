@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 
+// Função para exibir um toast de sucesso
 export function toastSuccess(msg, time, position) {
   toast.success(`${msg}`, {
     icon: false,
@@ -14,6 +15,7 @@ export function toastSuccess(msg, time, position) {
       "text-[white] font-main text-xl bg-green border-4 border-solid border-green rounded-2xl w-[29rem]",
   });
 }
+// Função para exibir um toast de erro
 export function toastFail(msg, time) {
   toast.error(`${msg}`, {
     closeButton: false,

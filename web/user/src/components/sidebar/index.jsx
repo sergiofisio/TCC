@@ -1,7 +1,12 @@
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+
+// Função para criar o componente de barra lateral
 export default function Sidebar({ setView, setIsAdmin }) {
+  // Hook para navegação
   const navigate = useNavigate();
+
+  // Função para lidar com o logout
   const handleLogout = () => {
     sessionStorage.clear();
     setIsAdmin(false);

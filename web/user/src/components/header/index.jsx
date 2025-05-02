@@ -3,9 +3,12 @@ import logo from "../../assets/iconePrincipal.svg";
 import { useNavigate } from "react-router-dom";
 import Button from "../button";
 
+// Função principal que renderiza o componente Header
 export default function Header({ setModal, isAdmin }) {
+  // Hook do React Router para navegação
   const Navigate = useNavigate();
 
+  // Função que lida com o clique no botão de login
   function handleLogin() {
     if (isAdmin) {
       return Navigate("/admin");

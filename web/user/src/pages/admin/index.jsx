@@ -9,7 +9,9 @@ import "./style.css";
 import ChartsView from "../../components/views/charts";
 import { getItem } from "../../functions/token";
 
+// Função principal que renderiza o componente Dashboard
 export default function Dashboard({ setIsAdmin }) {
+  // Hooks para gerenciar o estado do componente
   const [view, setView] = useState("users");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -17,6 +19,7 @@ export default function Dashboard({ setIsAdmin }) {
   const [modalAction, setModalAction] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
 
+  // Função para buscar todos os usuários
   async function getAllUsers() {
     setLoading(true);
     try {
@@ -34,10 +37,12 @@ export default function Dashboard({ setIsAdmin }) {
     }
   }
 
+  // Efeito colateral para buscar usuários quando o componente é montado
   useEffect(() => {
     getAllUsers();
   }, []);
 
+  // Função para lidar com ações de editar ou excluir usuários
   const handleAction = (type, user) => {
     const userInfo = users.find((u) => u.id_user === user.id_user);
     setSelectedUser(userInfo);
@@ -45,6 +50,7 @@ export default function Dashboard({ setIsAdmin }) {
     setModalOpen(true);
   };
 
+  // Função para lidar com a ação de salvar as alterações no usuário
   const handleSave = async (id, data) => {
     setUsers((prevUsers) =>
       prevUsers.map((user) =>
@@ -64,6 +70,7 @@ export default function Dashboard({ setIsAdmin }) {
     setModalOpen(false);
   };
 
+  // renderiza o componente Dashboard
   return (
     <div className="dashboard">
       <Sidebar setView={setView} setIsAdmin={setIsAdmin} />

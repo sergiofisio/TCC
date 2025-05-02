@@ -1,3 +1,4 @@
+//importação de bibliotecas
 import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
@@ -17,14 +18,17 @@ import axios from "./service/api";
 import Lost from "./pages/lost";
 import { getItem } from "./functions/token";
 
+//incialização do react
 function App() {
   const [modal, setModal] = useState(false);
   const [contato, setContato] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
 
+  //verifica se o token é válido e se o usuário é admin
   useEffect(() => {
     const token = getItem("token");
 
+    //função para verificar o token
     async function verifyToken() {
       try {
         const response = await axios.get("auth/verify", {
@@ -47,6 +51,7 @@ function App() {
   }, []);
 
   return (
+    //criação de rotas
     <Router>
       <Routes>
         <Route

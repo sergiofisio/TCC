@@ -7,11 +7,14 @@ import Input from "../../components/form/input";
 import axios from "./../../service/api";
 import { toastFail, toastSuccess } from "../../functions/toast";
 
+// Função principal que renderiza a página de recuperação de senha
 export default function Lost() {
+  // Hooks para navegação e parâmetros da URL
   const navigate = useNavigate();
   const { id, token } = useParams();
   const [newPass, setNewPass] = useState({ password: "", confirmPassword: "" });
 
+  // Função para lidar com o envio do formulário
   const onSubmit = async (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -40,6 +43,7 @@ export default function Lost() {
     }
   };
 
+  // Renderiza o componente
   return (
     <main className="conteiner-lost">
       <img src={logo} alt="Logo" className="logo" />

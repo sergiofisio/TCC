@@ -1,10 +1,10 @@
 import { toast } from "react-toastify";
 import "./style.css";
 
+// Função para criar o componente de sistema operacional
 export default function Os({ img, title, url }) {
+  // Função para lidar com o clique no sistema operacional
   function handleClick(e, link) {
-    console.log(!link);
-
     e.preventDefault();
     e.stopPropagation();
     try {

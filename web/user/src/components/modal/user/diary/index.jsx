@@ -11,6 +11,7 @@ import {
 import { ptBR } from "date-fns/locale";
 import { useState } from "react";
 
+//renderização do diario de emoções do usuario
 export default function UserEmotionDiary({ user }) {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const getMonthData = () => {

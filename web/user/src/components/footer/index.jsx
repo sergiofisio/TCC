@@ -1,6 +1,7 @@
 import logo from "../../assets/iconePrincipal.svg";
 import "./footer.css";
 
+// Função principal que renderiza o componente Footer
 export default function Footer({ setModal }) {
   return (
     <footer>

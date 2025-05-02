@@ -4,6 +4,7 @@ import eyeClose from "../../../assets/closeEye.svg";
 import { useState } from "react";
 import InputMask from "react-input-mask";
 
+// Função principal que renderiza o componente Input
 export default function Input({
   type,
   label,

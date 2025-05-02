@@ -1,6 +1,7 @@
 import { formatPhone } from "../../functions/format";
 import "./style.css";
 
+//função para criação do componente de tabela
 export default function Table({ description, users, action }) {
   return (
     <div className="table-container">

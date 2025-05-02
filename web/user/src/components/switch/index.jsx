@@ -1,4 +1,6 @@
+//função do componente de criação do switch de status do usuario
 export default function StatusSwitch({ user, formData, setFormData }) {
+  //função para mudança do switch
   const toggleStatus = () => {
     setFormData({ ...formData, active_user: !formData.active_user });
   };

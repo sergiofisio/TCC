@@ -1,8 +1,9 @@
 import Card from "./../../card/index";
 import Table from "./../../table/index";
-export default function UsersView({ users, action }) {
-  console.log({ users, action });
 
+//função para criação do componente de visualização de usuários
+export default function UsersView({ users, action }) {
+  //filtro de usuários ativos e inativos
   const active = users.filter((u) => u.active_user);
   const inactive = users.filter((u) => !u.active_user);
 

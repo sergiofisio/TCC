@@ -1,5 +1,6 @@
 import "./style.css";
 
+//função para criação do componente Section
 export default function Section({ title, className, text, img }) {
   return (
     <section className="section">

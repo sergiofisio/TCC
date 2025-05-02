@@ -1,3 +1,4 @@
+//renderização dos exercicios do usuario
 export default function UserExercises({ user }) {
   return (
     <div className="user-exercises">

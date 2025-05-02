@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="80dp"
-        android:contentDescription="back"
+        android:contentDescription="@string/back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/back" />
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="80dp"
-        android:contentDescription="next"
+        android:contentDescription="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/next" />
@@ -49,7 +49,9 @@
             android:id="@+id/radioAngry"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:checked="false"
+            android:clickable="false" />
 
         <ImageView
             android:id="@+id/imageViewDisc"
@@ -68,7 +70,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="5dp"
-        android:text="Qual emoção mais descreve aquele momento?"
+        android:text="@string/meditation_page5"
         android:textAlignment="center"
         android:textAppearance="@style/CustomInput"
         android:textSize="16sp"
@@ -95,6 +97,7 @@
         android:layout_height="133dp"
         android:layout_margin="8dp"
         android:clickable="true"
+        android:focusable="auto"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2"
@@ -107,7 +110,9 @@
             android:id="@+id/radioDes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:checked="false"
+            android:clickable="false" />
 
         <ImageView
             android:id="@+id/imageView12"
@@ -135,7 +140,9 @@
             android:id="@+id/radioFear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:checked="false"
+            android:clickable="false" />
 
         <ImageView
             android:id="@+id/imageView13"
@@ -163,7 +170,9 @@
             android:id="@+id/radioSad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:checked="false"
+            android:clickable="false" />
 
         <ImageView
             android:id="@+id/imageView14"
@@ -193,6 +202,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:checked="false"
+            android:clickable="false"
             android:minWidth="48dp"
             tools:ignore="TouchTargetSizeCheck" />
 

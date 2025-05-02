@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import com.example.emotionharmony.pages.Page_Exercicies;
 import com.example.emotionharmony.utils.InputField;
 import com.example.emotionharmony.utils.NavigationHelper;
 import com.example.emotionharmony.utils.ServerConnection;
+import com.example.emotionharmony.utils.ShowPassword;
 import com.example.emotionharmony.utils.Validator;
 
 import org.json.JSONException;
@@ -53,9 +55,10 @@ public class Home extends AppCompatActivity {
         customToast = new CustomToast(this);
 
         txtEmail = findViewById(R.id.txtEmail);
-        txtSenha = findViewById(R.id.txtSenha);
+        txtSenha = findViewById(R.id.txtSenha); 
         Button btnLogin = findViewById(R.id.btnLogin);
         TextView lblCadastro = findViewById(R.id.lblCadastro);
+        CheckBox cbShowPass = findViewById(R.id.cbShowPassLogin);
 
         TextView TxtForgot = findViewById(R.id.TxtForgot);
 
@@ -63,7 +66,7 @@ public class Home extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> handleLogin(activity));
         lblCadastro.setOnClickListener(v -> NavigationHelper.navigateTo(activity, Register.class, true));
-
+        cbShowPass.setOnCheckedChangeListener((buttonView, isChecked) -> ShowPassword.ChangeShowPassword(txtSenha, isChecked));
     }
 
     private void handleLogin(Activity activity) {

@@ -3,6 +3,7 @@ import allUsers from "../../assets/allUsers.svg";
 import usersActive from "../../assets/userActive.svg";
 import usersInactive from "../../assets/userInactive.svg";
 
+// Função principal que renderiza o componente Card
 export default function Card({ description, number }) {
   return (
     <div

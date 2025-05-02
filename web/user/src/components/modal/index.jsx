@@ -2,7 +2,8 @@ import "./style.css";
 import Form from "../form/login";
 import Contato from "../form/contato";
 
-export default function Modal({ setModal, contato, children, text }) {
+//renderiza o modal de login ou contato
+export default function Modal({ setModal, contato }) {
   return (
     <div className="modal">
       <div className="modal-content">

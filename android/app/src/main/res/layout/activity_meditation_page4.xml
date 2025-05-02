@@ -71,7 +71,7 @@
         android:layout_width="355dp"
         android:layout_height="56dp"
         android:layout_marginTop="116dp"
-        android:text="Você considera esta situação BOA ou RUIM?"
+        android:text="@string/meditation_page4"
         android:textAlignment="center"
         android:textAppearance="@style/CustomInput"
         android:textSize="16sp"

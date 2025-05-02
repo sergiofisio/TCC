@@ -12,11 +12,14 @@ import UserDetails from "./details";
 import UserExercises from "./exercises";
 import UserEmotionDiary from "./diary";
 
+//renderiza o modal de usuario
 export default function UserModal({ user, isOpen, onClose, onSave, action }) {
+  //verificar tipo de action
   const isEdit = action === "Editar";
   const isDelete = action === "Deletar";
   const isVerificar = action === "Verificar";
 
+  //criar estado para o formData
   const [formData, setFormData] = useState("");
   const [tab, setTab] = useState("usuario");
 
@@ -24,6 +27,7 @@ export default function UserModal({ user, isOpen, onClose, onSave, action }) {
     if (user) setFormData(user);
   }, [user]);
 
+  //função de envio do submit para edição do usuario
   const handleSubmit = async () => {
     try {
       await axios.delete(`/auth/user/${user.id_user}`, {
