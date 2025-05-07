@@ -13,9 +13,6 @@ const app = express();
 // Middlewares globais
 app.use(express.json());
 app.use(cors());
-app.use(helmet());
-app.use(morgan("dev"));
-app.use(compression());
 
 // Rotas
 app.use(routes);
