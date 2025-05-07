@@ -7,11 +7,11 @@ const getAllUsersController = require("../controllers/getAllUsers.controller");
 
 const router = express.Router();
 
-router.patch("/update", verifyToken, updateUserController);
+router.get("/:id?", verifyToken, getUserInfoController);
 router.get("/info", verifyToken, verifyAdmin, (_, res) =>
   res.send("Área Admin")
 );
-router.get("/:id?", verifyToken, getUserInfoController);
 router.get("/admin/all", verifyToken, verifyAdmin, getAllUsersController);
+router.patch("/update", verifyToken, updateUserController);
 
 module.exports = router;

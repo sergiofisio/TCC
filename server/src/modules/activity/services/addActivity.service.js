@@ -1,4 +1,4 @@
-const prisma = require("../../../config/prisma");
+const { prisma } = require("../../../config/prisma");
 const CustomError = require("../../../core/errors/CustomError");
 
 const models = {
@@ -7,6 +7,8 @@ const models = {
 };
 
 module.exports.addActivityService = async (id_user, activity, data) => {
+  console.log({ activity });
+
   const model = models[activity];
   if (!model) throw new CustomError("Atividade inválida", 400);
 

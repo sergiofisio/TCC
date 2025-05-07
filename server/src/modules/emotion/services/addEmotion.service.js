@@ -1,4 +1,4 @@
-const prisma = require("../../../config/prisma");
+const { prisma } = require("../../../config/prisma");
 const CustomError = require("../../../core/errors/CustomError");
 
 module.exports.addEmotionService = async (
