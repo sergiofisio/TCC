@@ -3,11 +3,15 @@ package com.example.emotionharmony.pages;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.CustomToast;
 import com.example.emotionharmony.R;
@@ -21,6 +25,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Tela de Perfil do Usuário onde é possível visualizar e editar informações pessoais como
+ * nome, email, CPF, telefones e senha.
+ */
 public class Page_perfil extends AppCompatActivity {
 
     private CustomToast toast;
@@ -29,11 +37,27 @@ public class Page_perfil extends AppCompatActivity {
     private String originalNome, originalEmail, originalCpf, originalTelefone, originalEmergencia;
     private int idTelefone, idEmergencia;
 
+    /**
+     * Método chamado na criação da atividade. Inicializa UI, aplica efeitos visuais e carrega dados do usuário.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        );
+
         ActivityPagePerfilBinding binding = ActivityPagePerfilBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         BottomMenuView bottomMenu = findViewById(R.id.bottomMenu);
         bottomMenu.setActivityContext(this);
@@ -42,6 +66,9 @@ public class Page_perfil extends AppCompatActivity {
         loadUserData();
     }
 
+    /**
+     * Inicializa os elementos da interface e listeners.
+     */
     private void initUI() {
         toast = new CustomToast(this);
         SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
@@ -59,19 +86,25 @@ public class Page_perfil extends AppCompatActivity {
         btnEdit.setOnClickListener(v -> updateUser());
     }
 
+    /**
+     * Aplica máscaras nos campos de CPF e telefones.
+     */
     private void applyInputMasks() {
         cpf.addTextChangedListener(MaskUtil.applyMask(cpf, "###.###.###-##"));
         telefone.addTextChangedListener(MaskUtil.applyMask(telefone, "(##)#####-####"));
         emergencia.addTextChangedListener(MaskUtil.applyMask(emergencia, "(##)#####-####"));
     }
 
+    /**
+     * Carrega os dados do usuário autenticado e preenche os campos.
+     */
     private void loadUserData() {
         if (token == null) {
             showErrorMessage("Erro: Usuário não autenticado!");
             return;
         }
 
-        ServerConnection.getRequestWithAuth("/auth/user", token, new ServerConnection.ServerCallback() {
+        ServerConnection.getRequestWithAuth("/user", token, new ServerConnection.ServerCallback() {
             @Override
             public void onSuccess(String response) {
                 runOnUiThread(() -> {
@@ -120,6 +153,9 @@ public class Page_perfil extends AppCompatActivity {
         });
     }
 
+    /**
+     * Formata o telefone recebido do servidor.
+     */
     private String formatPhoneNumber(JSONObject phoneObject) {
         int areaCode = phoneObject.optInt("area_code_phone", 0);
         int number = phoneObject.optInt("phone_number", 0);
@@ -128,6 +164,9 @@ public class Page_perfil extends AppCompatActivity {
         return String.format("(%d) %d", areaCode, number);
     }
 
+    /**
+     * Compara os dados preenchidos com os originais e envia atualização se houver mudanças.
+     */
     private void updateUser() {
         try {
             JSONObject userData = new JSONObject();
@@ -185,6 +224,9 @@ public class Page_perfil extends AppCompatActivity {
         }
     }
 
+    /**
+     * Cria um objeto JSON para telefone a ser enviado.
+     */
     private JSONObject createPhoneObject(int id, String type, String phone) throws JSONException {
         JSONObject phoneObj = new JSONObject();
         phoneObj.put("id_phone", id);
@@ -193,11 +235,14 @@ public class Page_perfil extends AppCompatActivity {
         return phoneObj;
     }
 
+    /**
+     * Envia requisição PATCH com os dados atualizados do usuário.
+     */
     private void sendEditRequest(JSONObject userData) {
         try {
             if (token == null) throw new JSONException("Erro: Usuário não autenticado!");
 
-            ServerConnection.patchRequestWithAuth("/auth/update", token, userData, new ServerConnection.ServerCallback() {
+            ServerConnection.patchRequestWithAuth("/user/update", token, userData, new ServerConnection.ServerCallback() {
                 @Override
                 public void onSuccess(String response) {
                     runOnUiThread(() -> {
@@ -217,6 +262,9 @@ public class Page_perfil extends AppCompatActivity {
         }
     }
 
+    /**
+     * Exibe mensagens de erro no Toast personalizado.
+     */
     private void showErrorMessage(String error) {
         toast.show(error, Toast.LENGTH_LONG, "#FF0000", "error");
     }

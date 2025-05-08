@@ -1,12 +1,25 @@
+// Pacote onde a classe está localizada
 package com.example.emotionharmony.classes;
 
+/**
+ * Classe singleton que representa temporariamente os dados de uma emoção escolhida pelo usuário.
+ * Armazena: emoção do dia, descrição e período do dia (manhã, tarde ou noite).
+ */
 public class Choose_Emotion_Db {
 
+    // Instância única da classe (padrão Singleton)
     private static Choose_Emotion_Db instance;
 
-    private String emotion_today, description, morning_afternoon_evening;
+    // Atributos da emoção selecionada
+    private String emotion_today,description, morning_afternoon_evening;
+
+    // Construtor privado para impedir instanciamento direto
     private Choose_Emotion_Db() {}
 
+    /**
+     * Retorna a instância única da classe (Singleton).
+     * Cria uma nova instância se ainda não existir.
+     */
     public static Choose_Emotion_Db getInstance() {
         if (instance == null) {
             instance = new Choose_Emotion_Db();
@@ -14,6 +27,7 @@ public class Choose_Emotion_Db {
         return instance;
     }
 
+    // Getter e Setter para emotion_today
     public String getEmotion_today() {
         return emotion_today;
     }
@@ -22,6 +36,7 @@ public class Choose_Emotion_Db {
         this.emotion_today = emotion_today;
     }
 
+    // Getter e Setter para description
     public String getDescription() {
         return description;
     }
@@ -30,6 +45,7 @@ public class Choose_Emotion_Db {
         this.description = description;
     }
 
+    // Getter e Setter para morning_afternoon_evening
     public String getMorning_afternoon_evening() {
         return morning_afternoon_evening;
     }

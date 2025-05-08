@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -15,7 +16,7 @@
         android:src="@drawable/choose_emotion" />
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -25,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/MANHA"
+            android:textAllCaps="true"
             android:textAppearance="@style/CustomInput"
             android:textColor="@android:color/black"
             android:textSize="24sp"
@@ -37,7 +39,8 @@
             android:text="Felicidade"
             android:textAppearance="@style/CustomInput"
             android:textColor="@android:color/black"
-            android:textSize="24sp" />
+            android:textSize="14dp"
+            tools:ignore="TextSizeCheck" />
     </LinearLayout>
 
     <LinearLayout

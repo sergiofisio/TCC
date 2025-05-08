@@ -1,3 +1,4 @@
+// Pacote da tela de escolha da emoção
 package com.example.emotionharmony.pages.choose;
 
 import android.annotation.SuppressLint;
@@ -26,13 +27,20 @@ import com.example.emotionharmony.utils.TTSHelper;
 
 import org.json.JSONObject;
 
+/**
+ * Tela que permite o usuário escolher uma emoção correspondente ao período do dia.
+ * Usa TTS para leitura, salva localmente e envia a escolha ao servidor.
+ */
 public class Choose_Emotion extends AppCompatActivity {
 
+    // UI
     private TextView txtSpeech;
-    private TTSHelper ttsHelper;
     private RadioButton[] radioButtons;
     private final String[] emotions = {"Raiva", "Desgosto", "Medo", "Tristeza", "Felicidade"};
     private String Emotion;
+
+    // Utilitários
+    private TTSHelper ttsHelper;
     private CustomToast toast;
     private Choose_Emotion_Db chooseEmotionDb;
 
@@ -42,29 +50,35 @@ public class Choose_Emotion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_choose_emotion);
+
+        // Ajusta o layout com padding do sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Recupera o período do dia (manhã, tarde, noite) passado por intent
         String periodo = getIntent().getStringExtra("PERIODO_DIA");
 
+        // Inicialização de views e variáveis
         txtSpeech = findViewById(R.id.txtSpeechChoose);
         ttsHelper = TTSHelper.getInstance(this);
-        chooseEmotionDb=Choose_Emotion_Db.getInstance();
+        chooseEmotionDb = Choose_Emotion_Db.getInstance();
 
         txtSpeech.setText("Qual a sua emoção pela " + periodo);
 
+        // Fala o texto após um pequeno atraso
         new Handler().postDelayed(() -> ttsHelper.speakText(txtSpeech.getText().toString()), 1500);
 
         toast = new CustomToast(this);
-        Choose_Emotion_Db choose_emotion = Choose_Emotion_Db.getInstance();
-        Emotion = choose_emotion.getEmotion_today();
+        Emotion = chooseEmotionDb.getEmotion_today();
 
+        // Botões de ação
         Button btnSairChoose = findViewById(R.id.btnSairChoose);
         TextView BtnFinish = findViewById(R.id.BtnFinishChoose);
 
+        // Layouts clicáveis que envolvem os botões de emoção
         LinearLayout[] linearLayouts = new LinearLayout[]{
                 findViewById(R.id.rdbAng),
                 findViewById(R.id.rdbDesg),
@@ -73,6 +87,7 @@ public class Choose_Emotion extends AppCompatActivity {
                 findViewById(R.id.rdbHappy)
         };
 
+        // RadioButtons das emoções
         radioButtons = new RadioButton[]{
                 findViewById(R.id.radioAngry),
                 findViewById(R.id.radioDes),
@@ -81,11 +96,13 @@ public class Choose_Emotion extends AppCompatActivity {
                 findViewById(R.id.radioHappy)
         };
 
+        // Associa clique nos layouts com a seleção do botão correspondente
         for (int i = 0; i < linearLayouts.length; i++) {
             int index = i;
             linearLayouts[i].setOnClickListener(v -> handleRadioButtonSelection(index));
         }
 
+        // Se já havia uma emoção escolhida, marca a correspondente
         if (Emotion != null) {
             for (int i = 0; i < emotions.length; i++) {
                 if (emotions[i].equals(Emotion)) {
@@ -95,8 +112,12 @@ public class Choose_Emotion extends AppCompatActivity {
             }
         }
 
-        btnSairChoose.setOnClickListener(v-> NavigationHelper.navigateTo(Choose_Emotion.this, Page_Exercicies.class, false));
+        // Botão sair retorna para a tela de exercícios
+        btnSairChoose.setOnClickListener(v ->
+                NavigationHelper.navigateTo(Choose_Emotion.this, Page_Exercicies.class, false)
+        );
 
+        // Botão finalizar valida, salva localmente e envia ao servidor
         BtnFinish.setOnClickListener(v -> {
             try {
                 if (Emotion == null || Emotion.isEmpty()) {
@@ -116,7 +137,7 @@ public class Choose_Emotion extends AppCompatActivity {
                 emotionData.put("description", "");
                 emotionData.put("day_time", getIntent().getStringExtra("PERIODO_DIA"));
 
-                ServerConnection.postRequestWithAuth("/auth/addEmotion", token, emotionData, new ServerConnection.ServerCallback() {
+                ServerConnection.postRequestWithAuth("/emotion/add", token, emotionData, new ServerConnection.ServerCallback() {
                     @Override
                     public void onSuccess(String response) {
                         runOnUiThread(() -> {
@@ -137,10 +158,11 @@ public class Choose_Emotion extends AppCompatActivity {
                 toast.show(e.getMessage(), Toast.LENGTH_LONG, "#FF0000", "error");
             }
         });
-
-
     }
 
+    /**
+     * Trata a seleção de uma emoção. Marca apenas o botão escolhido e fala a emoção.
+     */
     private void handleRadioButtonSelection(int selectedIndex) {
         for (int i = 0; i < radioButtons.length; i++) {
             radioButtons[i].setChecked(i == selectedIndex);
@@ -151,6 +173,9 @@ public class Choose_Emotion extends AppCompatActivity {
         }
     }
 
+    /**
+     * Libera o TTS ao destruir a tela.
+     */
     @Override
     protected void onDestroy() {
         if (ttsHelper != null) {

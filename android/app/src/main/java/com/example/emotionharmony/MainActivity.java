@@ -1,9 +1,20 @@
+/**
+ * Tela inicial da aplicação.
+ * Responsável por:
+ * - Verificar conexão com a internet
+ * - Verificar se a URL do servidor está configurada
+ * - Tentar conexão com o servidor
+ * - Verificar token do usuário
+ * - Redirecionar para tela correta (login ou exercícios)
+ */
 package com.example.emotionharmony;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -33,11 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
     private int retryCount = 0;
     private static final int MAX_RETRIES = 5;
-    private static final int RETRY_INTERVAL = 60000;
+    private static final int RETRY_INTERVAL = 60000; // 1 minuto
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
+    /**
+     * Método principal que inicia a atividade.
+     * Define layout, carrega configs, verifica rede e servidor.
+     */
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +80,25 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        String baseUrl = EnvConfig.get("BASE_URL");
+        executor.execute(() -> {
+            EnvConfig.load(this);
 
-        if (baseUrl.isEmpty()) {
-            Log.e("MainActivity", "❌ Erro: BASE_URL não configurada.");
-        } else {
-            verificarServidor();
-        }
+            new Handler(Looper.getMainLooper()).post(() -> {
+                String baseUrl = EnvConfig.get("BASE_URL");
+
+                if (baseUrl.isEmpty()) {
+                    Log.e("MainActivity", "❌ Erro: BASE_URL não configurada.");
+                    mostrarAlertaErroServidor();
+                } else {
+                    verificarServidor();
+                }
+            });
+        });
     }
 
+    /**
+     * Faz requisição de verificação ao servidor e aguarda resposta.
+     */
     private void verificarServidor() {
         executor.execute(() -> ServerConnection.getRequest("/", new ServerConnection.ServerCallback() {
             @Override
@@ -104,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
         }));
     }
 
+    /**
+     * Tenta novamente a verificação do servidor com limite de tentativas.
+     */
     private void tentarNovamente() {
         retryCount++;
 
@@ -116,6 +144,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Verifica se o token salvo é válido ou expirado.
+     */
     private void verificarToken() {
         executor.execute(() -> {
             SharedPreferences preferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
@@ -161,12 +192,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Redireciona para uma nova tela (Activity).
+     */
     private void RedirectTo(Class<?> activityClass) {
         startActivity(new Intent(MainActivity.this, activityClass));
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
     }
 
+    /**
+     * Mostra alerta para ausência de conexão com a internet.
+     */
     private void mostrarAlertaConexao() {
         runOnUiThread(() ->
                 new AlertDialog.Builder(this)
@@ -177,6 +214,9 @@ public class MainActivity extends AppCompatActivity {
                         .show());
     }
 
+    /**
+     * Mostra alerta de falha ao conectar com servidor após todas as tentativas.
+     */
     private void mostrarAlertaErroServidor() {
         runOnUiThread(() ->
                 new AlertDialog.Builder(this)
@@ -187,6 +227,9 @@ public class MainActivity extends AppCompatActivity {
                         .show());
     }
 
+    /**
+     * Libera recursos de threads ao encerrar a activity.
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();

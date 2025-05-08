@@ -11,6 +11,10 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Classe utilitária para conversão de texto em fala usando Google Cloud TTS.
+ * Gerencia reprodução, fila de falas e controle do MediaPlayer.
+ */
 public class TTSHelper {
     private static TTSHelper instance;
     private MediaPlayer mediaPlayer;
@@ -18,10 +22,16 @@ public class TTSHelper {
     private boolean isSpeaking = false;
     private final Context context;
 
+    /**
+     * Construtor privado para singleton.
+     */
     private TTSHelper(Context context) {
         this.context = context;
     }
 
+    /**
+     * Obtém a instância única de TTSHelper.
+     */
     public static TTSHelper getInstance(Context context) {
         if (instance == null) {
             instance = new TTSHelper(context);
@@ -29,13 +39,16 @@ public class TTSHelper {
         return instance;
     }
 
+    /**
+     * Converte e reproduz um único texto em áudio.
+     */
     public void speakText(String text) {
         if (text == null || text.trim().isEmpty()) {
             Log.e("TTSHelper", "⚠️ Nenhum texto encontrado para leitura.");
             return;
         }
 
-        Log.d("TTSHelper", "🎙️ Enviando texto para conversão: " + text);
+        Log.d("TTSHelper", "\uD83C\uDF99️ Enviando texto para conversão: " + text);
         GoogleCloudTTS.synthesizeSpeech(text).thenAccept(audioBase64 -> {
             if (audioBase64 != null) {
                 playAudio(audioBase64, () -> {});
@@ -48,6 +61,9 @@ public class TTSHelper {
         });
     }
 
+    /**
+     * Reproduz uma fila de textos em sequência.
+     */
     public void speakSequentially(Queue<String> texts, Runnable onComplete) {
         if (texts == null || texts.isEmpty()) {
             if (onComplete != null) onComplete.run();
@@ -61,6 +77,9 @@ public class TTSHelper {
         speakNext(onComplete);
     }
 
+    /**
+     * Reproduz o próximo item da fila.
+     */
     private void speakNext(Runnable onComplete) {
         if (speechQueue.isEmpty()) {
             isSpeaking = false;
@@ -86,6 +105,9 @@ public class TTSHelper {
         }
     }
 
+    /**
+     * Converte base64 em áudio e reproduz com MediaPlayer.
+     */
     private void playAudio(String audioBase64, Runnable onComplete) {
         try {
             byte[] audioData = Base64.decode(audioBase64, Base64.DEFAULT);
@@ -104,7 +126,7 @@ public class TTSHelper {
             mediaPlayer.setDataSource(tempFile.getAbsolutePath());
 
             mediaPlayer.setOnPreparedListener(mp -> {
-                Log.d("TTSHelper", "🔊 Reprodução de áudio iniciada.");
+                Log.d("TTSHelper", "\uD83D\uDD0A Reprodução de áudio iniciada.");
                 mp.start();
             });
 
@@ -122,6 +144,9 @@ public class TTSHelper {
         }
     }
 
+    /**
+     * Interrompe imediatamente a fala atual.
+     */
     public void stopSpeaking() {
         if (mediaPlayer != null) {
             if (mediaPlayer.isPlaying()) {
@@ -129,10 +154,13 @@ public class TTSHelper {
             }
             mediaPlayer.release();
             mediaPlayer = null;
-            Log.d("TTSHelper", "🔇 Reprodução de áudio interrompida.");
+            Log.d("TTSHelper", "\uD83D\uDD07 Reprodução de áudio interrompida.");
         }
     }
 
+    /**
+     * Libera os recursos do MediaPlayer.
+     */
     public void release() {
         if (mediaPlayer != null) {
             mediaPlayer.release();

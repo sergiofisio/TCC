@@ -1,8 +1,10 @@
+// Tela de Diário de Emoções ou Atividades
 package com.example.emotionharmony.pages;
 
+// Importações necessárias
 import android.os.Bundle;
+import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -10,20 +12,34 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.components.BottomMenuView;
+import com.example.emotionharmony.databinding.ActivityPageExerciciesBinding;
 
 public class Page_Diary extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_page_diary);
+
+        // Configura a visualização para ocupar toda a tela, incluindo a área atrás da barra de status e navegação
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        );
+
+        // Usa o binding para inflar o layout da página de exercícios (possivelmente compartilhado)
+        ActivityPageExerciciesBinding binding = ActivityPageExerciciesBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        // Ajusta os paddings com base nas barras do sistema (topo, lateral, inferior)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
+        // Configura o menu inferior para esta tela, ativando a navegação entre seções
         BottomMenuView bottomMenu = findViewById(R.id.bottomMenu);
         bottomMenu.setActivityContext(this);
     }
