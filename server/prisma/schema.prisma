@@ -4,7 +4,6 @@
 // 📦 Geração do client do Prisma (utilizado para acessar o banco via código)
 generator client {
   provider = "prisma-client-js"
-    output   = "./node_modules/@prisma/client"
 }
 
 // 🔗 Configuração da fonte de dados (MySQL neste caso)
