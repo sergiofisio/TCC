@@ -23,12 +23,13 @@ export default function Dashboard({ setIsAdmin }) {
   async function getAllUsers() {
     setLoading(true);
     try {
-      const response = await axios.get("/auth/infoDb", {
+      const response = await axios.get("/user/admin/all", {
         headers: {
           Authorization: `Bearer ${getItem("token")}`,
         },
       });
-      setUsers(response.data.users);
+      console.log({ response: response.data });
+      setUsers(response.data);
     } catch (error) {
       toastFail("Erro ao buscar usuários", 3000, "top-right");
       console.log(error);

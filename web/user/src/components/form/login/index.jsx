@@ -25,14 +25,16 @@ export default function Login() {
 
     // Desestruturação dos dados do formulário
     const { email, password } = data;
+    console.log({ email, password });
+
     try {
       if (!email || !password)
         throw new Error("Todos os campos são obrigatórios!");
 
       // Envio dos dados para o servidor
-      const response = await axios.post("/login", {
+      const response = await axios.post("/auth/login", {
         email,
-        senha,
+        senha: password,
       });
 
       // Verifica se o usuário é um administrador
