@@ -1,4 +1,14 @@
 {
+  "name":"repositorio-emotion-harmony",
+  "description": "Repositorio do projeto de TCC da ETEC Lauro Gomes - Emotion harmony",
+  "version":"1.0.0",
+  "keywords": [
+    "emotion",
+    "harmony",
+    "repositorio"
+  ],
+  "license": "MIT",
+  "author": "Equipe Emotion Harmony <sergiobastosfisio@gmail.com>",
   "scripts":{
     "server":"cd server && npm run dev",
     "web":"cd web/user && npm run dev"

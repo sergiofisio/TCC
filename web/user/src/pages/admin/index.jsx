@@ -28,7 +28,6 @@ export default function Dashboard({ setIsAdmin }) {
           Authorization: `Bearer ${getItem("token")}`,
         },
       });
-      console.log({ response: response.data });
       setUsers(response.data);
     } catch (error) {
       toastFail("Erro ao buscar usuários", 3000, "top-right");

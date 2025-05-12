@@ -114,6 +114,7 @@ public class Breath_Page1 extends AppCompatActivity {
         speechQueue.add(txtSpeechBreath2.getText().toString());
 
         ttsHelper.speakSequentially(speechQueue, this::startCountdown);
+//        startCountdown();
     }
 
     /**
