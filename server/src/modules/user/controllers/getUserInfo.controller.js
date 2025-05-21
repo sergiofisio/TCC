@@ -11,7 +11,9 @@ module.exports = async (req, res, next) => {
       throw new CustomError("Acesso não autorizado", 403);
 
     const idToFetch = requestedId || ownId;
+
     const result = await getUserInfoService(idToFetch);
+
     res.status(200).json(result);
   } catch (err) {
     next(err);

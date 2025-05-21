@@ -12,6 +12,11 @@ CREATE TABLE `tb_users` (
     `last_login_date_user` DATETIME(3) NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
+    `exercise_habit_user` BOOLEAN NOT NULL DEFAULT false,
+    `hydration_habit_user` BOOLEAN NOT NULL DEFAULT false,
+    `sleep_habit_user` BOOLEAN NOT NULL DEFAULT false,
+    `smoke_habit_user` BOOLEAN NOT NULL DEFAULT false,
+    `weight_user` DOUBLE NULL,
 
     UNIQUE INDEX `tb_users_email_user_key`(`email_user`),
     UNIQUE INDEX `tb_users_cpf_user_key`(`cpf_user`),
@@ -29,6 +34,7 @@ CREATE TABLE `tb_phone` (
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
+    INDEX `tb_phone_users_id_fkey`(`users_id`),
     PRIMARY KEY (`id_phone`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -42,6 +48,7 @@ CREATE TABLE `tb_today` (
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
+    INDEX `tb_today_users_id_fkey`(`users_id`),
     PRIMARY KEY (`id_today`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -57,6 +64,7 @@ CREATE TABLE `tb_meditation` (
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
+    INDEX `tb_meditation_users_id_fkey`(`users_id`),
     PRIMARY KEY (`id_meditation`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -70,17 +78,38 @@ CREATE TABLE `tb_breath` (
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
 
+    INDEX `tb_breath_users_id_fkey`(`users_id`),
     PRIMARY KEY (`id_breath`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- AddForeignKey
-ALTER TABLE `tb_phone` ADD CONSTRAINT `tb_phone_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- CreateTable
+CREATE TABLE `tb_habits` (
+    `id_habit` INTEGER NOT NULL AUTO_INCREMENT,
+    `name_habit` ENUM('hidratacao', 'fumo', 'exercicio', 'sono') NOT NULL,
+    `value_habit` INTEGER NULL,
+    `sleep_time_start` DATETIME(3) NULL,
+    `sleep_time_end` DATETIME(3) NULL,
+    `sleep_time_duration` INTEGER NULL,
+    `sleep_feeling` VARCHAR(191) NULL,
+    `users_id` INTEGER NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updated_at` DATETIME(3) NOT NULL,
+
+    INDEX `tb_habits_users_id_fkey`(`users_id`),
+    PRIMARY KEY (`id_habit`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `tb_today` ADD CONSTRAINT `tb_today_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tb_phone` ADD CONSTRAINT `tb_phone_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `tb_meditation` ADD CONSTRAINT `tb_meditation_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tb_today` ADD CONSTRAINT `tb_today_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `tb_breath` ADD CONSTRAINT `tb_breath_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `tb_meditation` ADD CONSTRAINT `tb_meditation_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `tb_breath` ADD CONSTRAINT `tb_breath_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `tb_habits` ADD CONSTRAINT `tb_habits_users_id_fkey` FOREIGN KEY (`users_id`) REFERENCES `tb_users`(`id_user`) ON DELETE RESTRICT ON UPDATE CASCADE;

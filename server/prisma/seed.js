@@ -1,7 +1,7 @@
 // 📦 Importações de módulos do Node.js e do Prisma
 const fs = require("fs");
 const path = require("path");
-const { prisma } = require("../src/prismaFunctions/prisma");
+const { prisma } = require("../src/config/prisma");
 
 // 🌱 Função responsável por executar todos os arquivos de seed da pasta "seeds"
 async function seed() {

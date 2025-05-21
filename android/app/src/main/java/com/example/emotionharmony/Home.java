@@ -107,6 +107,7 @@ public class Home extends AppCompatActivity {
 
             sendLoginRequest(loginData, activity);
         } catch (Exception e) {
+            Log.e("handleLogin", "❌ Erro no login: " + e.getMessage());
             showErrorMessage(e.getMessage());
         }
     }

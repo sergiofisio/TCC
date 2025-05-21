@@ -1,74 +1,37 @@
-// 📘 Arquivo de schema do Prisma
-// Saiba mais em: https://pris.ly/d/prisma-schema
-
-// 📦 Geração do client do Prisma (utilizado para acessar o banco via código)
 generator client {
   provider = "prisma-client-js"
 }
 
-// 🔗 Configuração da fonte de dados (MySQL neste caso)
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL") // URL definida no .env
+  url      = env("DATABASE_URL")
 }
 
-// 🔘 Enumeração para tipos de usuário
-enum Type_user {
-  user // Usuário comum
-  admin // Administrador do sistema
-}
-
-// 🔘 Enumeração para tipos de telefone/contato
-enum Type_contacts {
-  casa
-  trabalho
-  celular
-  emergencia
-}
-
-// 🔘 Enumeração para tipos de emoções registradas
-enum Type_emotion {
-  Felicidade
-  Tristeza
-  Raiva
-  Desgosto
-  Medo
-}
-
-// 🔘 Enumeração para tipos de situação (utilizada em meditações)
-enum type_situation {
-  boa
-  ruim
-}
-
-// 🔘 Enumeração para o período do dia
-enum Type_day {
-  manhã
-  tarde
-  noite
-}
-
-// 🧑‍💻 Modelo de usuário principal do sistema
 model tb_users {
-  id_user                 Int             @id @default(autoincrement())
-  name_user               String          @db.VarChar(100)
-  email_user              String          @unique @db.VarChar(50)
-  cpf_user                String          @unique @db.VarChar(11)
-  password_user           String          @db.VarChar(255)
-  password_changed        Boolean         @default(false) // Indica se a senha foi alterada após login
-  lost_pasword_token_user String?         @db.VarChar(255) // Token de recuperação de senha
-  active_user             Boolean         @default(true)
-  type_user               Type_user       @default(user) // admin ou user
-  phones_user             tb_phone[] // Relação com tabela de telefones
-  meditations_user        tb_meditation[] // Relação com meditações
-  breaths_user            tb_breath[] // Relação com respirações
-  todays_user             tb_today[] // Relação com emoções do dia
+  id_user                 Int       @id @default(autoincrement())
+  name_user               String    @db.VarChar(100)
+  email_user              String    @unique @db.VarChar(50)
+  cpf_user                String    @unique @db.VarChar(11)
+  password_user           String    @db.VarChar(255)
+  password_changed        Boolean   @default(false)
+  lost_pasword_token_user String?   @db.VarChar(255)
+  active_user             Boolean   @default(true)
+  type_user               Type_user @default(user)
   last_login_date_user    DateTime?
-  created_at              DateTime        @default(now())
-  updated_at              DateTime        @updatedAt
+  created_at              DateTime  @default(now())
+  updated_at              DateTime  @updatedAt
+  exercise_habit_user     Boolean   @default(false)
+  hydration_habit_user    Boolean   @default(false)
+  sleep_habit_user        Boolean   @default(false)
+  smoke_habit_user        Boolean   @default(false)
+  phone_user            tb_phone[]
+  today_user            tb_today[]
+  meditation_user       tb_meditation[]
+  breath_user          tb_breath[]
+  habits_user           tb_habits[]
+  weight_user             Float?
 }
 
-// ☎️ Modelo para os telefones dos usuários
 model tb_phone {
   id_phone           Int           @id @default(autoincrement())
   type_phone         Type_contacts @default(celular)
@@ -76,24 +39,26 @@ model tb_phone {
   area_code_phone    Int
   phone_number       Int
   users_id           Int
-  users              tb_users      @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
+  users_phone       tb_users?     @relation(fields: [users_id], references: [id_user])
   created_at         DateTime      @default(now())
   updated_at         DateTime      @updatedAt
+
+  @@index([users_id], map: "tb_phone_users_id_fkey")
 }
 
-// 📅 Modelo para registros de emoções diárias
 model tb_today {
-  id_today                  Int          @id @default(autoincrement())
+  id_today                  Int                                @id @default(autoincrement())
   emotion_today             Type_emotion
-  description_today         String?      @db.Text
-  morning_afternoon_evening Type_day // Manhã, tarde ou noite
+  description_today         String?                            @db.Text
+  morning_afternoon_evening tb_today_morning_afternoon_evening
   users_id                  Int
-  users                     tb_users     @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
-  created_at                DateTime     @default(now())
-  updated_at                DateTime     @updatedAt
+  users_today              tb_users?                          @relation(fields: [users_id], references: [id_user])
+  created_at                DateTime                           @default(now())
+  updated_at                DateTime                           @updatedAt
+
+  @@index([users_id], map: "tb_today_users_id_fkey")
 }
 
-// 🧘 Modelo para registros de meditação
 model tb_meditation {
   id_meditation             Int            @id @default(autoincrement())
   description_meditation    String         @db.Text
@@ -102,19 +67,76 @@ model tb_meditation {
   caracter_meditation       String         @db.Text
   type_situation_meditation type_situation
   users_id                  Int
-  users                     tb_users       @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
+  users_meditation         tb_users?      @relation(fields: [users_id], references: [id_user])
   created_at                DateTime       @default(now())
   updated_at                DateTime       @updatedAt
+
+  @@index([users_id], map: "tb_meditation_users_id_fkey")
 }
 
-// 🌬️ Modelo para registros de respiração
 model tb_breath {
   id_breath           Int      @id @default(autoincrement())
-  finished_breath     Boolean  @default(true) // Se o exercício foi finalizado
-  felt_betther_breath Boolean  @default(true) // Se a pessoa se sentiu melhor
+  finished_breath     Boolean  @default(true)
+  felt_betther_breath Boolean  @default(true)
   description_breath  String   @db.Text
   users_id            Int
-  users               tb_users @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
+  users_breath       tb_users? @relation(fields: [users_id], references: [id_user])
   created_at          DateTime @default(now())
   updated_at          DateTime @updatedAt
+
+  @@index([users_id], map: "tb_breath_users_id_fkey")
+}
+
+model tb_habits {
+  id_habit            Int                  @id @default(autoincrement())
+  name_habit          tb_habits_name_habit
+  value_habit         Int?
+  sleep_time_start    DateTime?
+  sleep_time_end      DateTime?
+  sleep_time_duration Int?
+  sleep_feeling       String?
+  users_id            Int
+  users_habits       tb_users?           @relation(fields: [users_id], references: [id_user])
+  created_at          DateTime             @default(now())
+  updated_at          DateTime
+
+  @@index([users_id], map: "tb_habits_users_id_fkey")
+}
+
+enum Type_user {
+  user
+  admin
+}
+
+enum Type_contacts {
+  casa
+  trabalho
+  celular
+  emergencia
+}
+
+enum Type_emotion {
+  Felicidade
+  Tristeza
+  Raiva
+  Desgosto
+  Medo
+}
+
+enum type_situation {
+  boa
+  ruim
+}
+
+enum tb_habits_name_habit {
+  hidratacao
+  fumo
+  exercicio
+  sono
+}
+
+enum tb_today_morning_afternoon_evening {
+  manhã
+  tarde
+  noite
 }

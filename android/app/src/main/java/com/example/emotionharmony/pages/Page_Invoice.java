@@ -83,9 +83,9 @@ public class Page_Invoice extends AppCompatActivity {
                         preferences.edit().putString("lastUserResponse", response).apply();
 
                         JSONObject jsonResponse = new JSONObject(response);
-                        JSONArray emotionsArray = jsonResponse.optJSONArray("todays_user");
-                        JSONArray breathingExercisesArray = jsonResponse.optJSONArray("breaths_user");
-                        JSONArray meditationsArray = jsonResponse.optJSONArray("meditations_user");
+                        JSONArray emotionsArray = jsonResponse.optJSONArray("today_user");
+                        JSONArray breathingExercisesArray = jsonResponse.optJSONArray("breath_user");
+                        JSONArray meditationsArray = jsonResponse.optJSONArray("meditation_user");
 
                         organizeEmotionsByDate(emotionsArray);
                         organizeExercisesAndMeditations(breathingExercisesArray, meditationsArray);

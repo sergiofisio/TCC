@@ -174,7 +174,7 @@ public class Page_Exercicies extends AppCompatActivity {
                         /*
                          * Busca telefone de emergência e salva em SharedPreferences
                          */
-                        JSONArray phones = jsonResponse.getJSONArray("phones_user");
+                        JSONArray phones = jsonResponse.getJSONArray("phone_user");
                         for (int i = 0; i < phones.length(); i++) {
                             JSONObject phone = phones.getJSONObject(i);
                             String type = phone.getString("type_phone");
@@ -189,7 +189,7 @@ public class Page_Exercicies extends AppCompatActivity {
                         /*
                          * Verifica as emoções registradas no dia atual
                          */
-                        JSONArray emotionsArray = jsonResponse.getJSONArray("todays_user");
+                        JSONArray emotionsArray = jsonResponse.getJSONArray("today_user");
                         JSONArray todayEmotions = new JSONArray();
                         JSONObject emotion;
                         String dataAtual = getDataAtual();

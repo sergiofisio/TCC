@@ -119,7 +119,7 @@ public class Page_perfil extends AppCompatActivity {
                         email.setText(originalEmail);
                         cpf.setText(originalCpf);
 
-                        JSONArray phonesArray = jsonResponse.optJSONArray("phones_user");
+                        JSONArray phonesArray = jsonResponse.optJSONArray("phone_user");
                         if (phonesArray != null) {
                             for (int i = 0; i < phonesArray.length(); i++) {
                                 JSONObject phoneObject = phonesArray.getJSONObject(i);
