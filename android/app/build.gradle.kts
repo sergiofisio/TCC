@@ -63,6 +63,7 @@ android {
         resources.excludes.add("META-INF/notice.txt")
         resources.excludes.add("META-INF/INDEX.LIST")
     }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
