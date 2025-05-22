@@ -21,6 +21,8 @@ export default function Contato() {
   const onSubmit = async (e, data) => {
     e.preventDefault();
     e.stopPropagation();
+    console.log({ data });
+
     // Desestruturação dos dados do formulário
     const { name, email, telefone, mensagem } = data;
     setLoading(true);
@@ -55,8 +57,9 @@ export default function Contato() {
       );
     } finally {
       setForm({
-        nome: "",
+        name: "",
         email: "",
+        telefone: "",
         mensagem: "",
       });
       setLoading(false);

@@ -18,10 +18,10 @@ module.exports.getAllUsersService = async (admin_id) => {
       NOT: { id_user: admin_id },
     },
     include: {
-      phones_user: true,
-      meditations_user: true,
-      breaths_user: true,
-      todays_user: true,
+      phone_user: true,
+      meditation_user: true,
+      breath_user: true,
+      today_user: true,
     },
   });
 
