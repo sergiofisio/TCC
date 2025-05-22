@@ -52,7 +52,7 @@ export default function Login() {
       // Exibe mensagem de erro caso o login falhe
       return toastFail(
         error?.response?.status === 401
-          ? error.response.data.error
+          ? error.response.data.message
           : error.message,
         3000,
         "top-center"

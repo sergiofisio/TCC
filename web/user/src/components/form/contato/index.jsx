@@ -50,7 +50,7 @@ export default function Contato() {
       console.log({ error });
       toastFail(
         error?.response?.status === 401
-          ? error.response.data.error
+          ? error.response.data.message
           : error.message,
         3000,
         "top-center"
