@@ -24,6 +24,9 @@
             android:name=".pages.Page_Diary"
             android:exported="false" />
         <activity
+            android:name=".pages.PageWaterActivity"
+            android:exported="false" />
+        <activity
             android:name=".pages.Page_Invoice"
             android:exported="false" />
         <activity
