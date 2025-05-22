@@ -1,6 +1,5 @@
 // 📦 Importações
-const { colors } = require("../../src/functions/colors"); // Códigos de cores para console
-const { prisma } = require("../../src/prismaFunctions/prisma"); // Prisma Client para acesso ao banco
+const { prisma } = require("../../src/config/prisma"); // Prisma Client para acesso ao banco
 const users = require("../data"); // Lista de usuários a serem inseridos
 
 // 🌱 Função de seed para inserir usuários no banco de dados
@@ -18,9 +17,7 @@ module.exports = async function seedUsers() {
 
       // ⚠ Caso o usuário já exista, apenas loga uma mensagem
       if (userExists) {
-        console.log(
-          `${colors.yellow}⚠ Usuário ${user.name_user} já existe no banco.${colors.reset}`
-        );
+        console.log(`⚠ Usuário ${user.name_user} já existe no banco.`);
       } else {
         // ✅ Se não existir, cria o usuário com todos os dados relacionados
         await prisma.tb_users.create({
@@ -31,9 +28,10 @@ module.exports = async function seedUsers() {
             password_user: user.password_user,
             type_user: user.type_user,
             active_user: user.active_user,
+            weight_user: user.weight_user || null,
 
             // 📞 Telefones vinculados ao usuário
-            phones_user: {
+            phone_user: {
               create:
                 user.phones_user?.map(
                   ({
@@ -51,7 +49,7 @@ module.exports = async function seedUsers() {
             },
 
             // 🧘 Meditações vinculadas ao usuário
-            meditations_user: {
+            meditation_user: {
               create:
                 user.meditations_user?.map(
                   ({
@@ -73,7 +71,7 @@ module.exports = async function seedUsers() {
             },
 
             // 🌬️ Respirações vinculadas ao usuário
-            breaths_user: {
+            breath_user: {
               create:
                 user.breaths_user?.map(
                   ({
@@ -91,7 +89,7 @@ module.exports = async function seedUsers() {
             },
 
             // 😌 Emoções diárias vinculadas ao usuário
-            todays_user: {
+            today_user: {
               create:
                 user.todays_user?.map(
                   ({
@@ -111,9 +109,7 @@ module.exports = async function seedUsers() {
         });
 
         // ✅ Loga sucesso após criar usuário
-        console.log(
-          `${colors.green}✅ Usuário ${user.name_user} criado com sucesso.${colors.reset}`
-        );
+        console.log(`✅ Usuário ${user.name_user} criado com sucesso.`);
       }
     }
   } catch (error) {
@@ -121,9 +117,6 @@ module.exports = async function seedUsers() {
     console.error({ error });
 
     // Alternativa com cores para mensagens de erro:
-    console.error(
-      `${colors.red}❌ Erro ao inserir usuários:${colors.reset}`,
-      error
-    );
+    console.error(`❌ Erro ao inserir usuários:`, error);
   }
 };

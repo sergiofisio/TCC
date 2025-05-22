@@ -21,6 +21,8 @@ export default function Contato() {
   const onSubmit = async (e, data) => {
     e.preventDefault();
     e.stopPropagation();
+    console.log({ data });
+
     // Desestruturação dos dados do formulário
     const { name, email, telefone, mensagem } = data;
     setLoading(true);
@@ -48,15 +50,16 @@ export default function Contato() {
       console.log({ error });
       toastFail(
         error?.response?.status === 401
-          ? error.response.data.error
+          ? error.response.data.message
           : error.message,
         3000,
         "top-center"
       );
     } finally {
       setForm({
-        nome: "",
+        name: "",
         email: "",
+        telefone: "",
         mensagem: "",
       });
       setLoading(false);
