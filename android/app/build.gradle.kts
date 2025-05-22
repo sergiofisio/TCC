@@ -87,4 +87,5 @@ dependencies {
 
     implementation(libs.libraries.bom)
     implementation(libs.google.cloud.texttospeech)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }
