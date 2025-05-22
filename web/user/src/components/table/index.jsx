@@ -3,6 +3,8 @@ import "./style.css";
 
 //função para criação do componente de tabela
 export default function Table({ description, users, action }) {
+  console.log({ users });
+
   return (
     <div className="table-container">
       <h3>{description}</h3>
@@ -19,10 +21,10 @@ export default function Table({ description, users, action }) {
         </thead>
         <tbody>
           {users.map((user, key) => {
-            const personalPhone = user.phones_user.find(
+            const personalPhone = user.phone_user.find(
               (p) => p.type_phone === "celular"
             );
-            const emergencyPhone = user.phones_user.find(
+            const emergencyPhone = user.phone_user.find(
               (p) => p.type_phone === "emergencia"
             );
 
