@@ -88,8 +88,8 @@ public class Meditation_Page4 extends AppCompatActivity {
         txtRuim = findViewById(R.id.txtBad);
         SwSituation = findViewById(R.id.SwSituation);
         btnBack = findViewById(R.id.btnBack4);
-        btnNext = findViewById(R.id.btnNext5);
-        txtSpeech = findViewById(R.id.txtSpeech3);
+        btnNext = findViewById(R.id.btnNext4);
+        txtSpeech = findViewById(R.id.txtSpeech);
 
         // Instância dos dados da meditação
         questionsMeditation = Questions_Meditation.getInstance();
