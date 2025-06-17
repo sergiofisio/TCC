@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -82,13 +83,13 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Card Progresso: Quantidade ingerida (início invisível) -->
+        <!-- Card Progresso: Quantidade ingerida -->
         <androidx.cardview.widget.CardView
             android:id="@+id/waterCard_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="24dp"
             android:visibility="gone"
             app:cardBackgroundColor="#D8E5F8"
@@ -122,8 +123,9 @@
                     android:id="@+id/progressWater"
                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="8dp"
+                    android:layout_height="20dp"
                     android:layout_marginTop="8dp"
+                    android:progressDrawable="@drawable/custom_progress_bar"
                     android:indeterminate="false"
                     android:max="2000"
                     android:progress="0" />
@@ -131,7 +133,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Card de Hábito (inalterado) -->
+        <!-- Card de Hábito -->
         <androidx.cardview.widget.CardView
             android:id="@+id/waterCard_habit"
             android:layout_width="match_parent"
@@ -160,6 +162,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+
                 <Button
                     android:id="@+id/btnStart_Habit"
                     android:layout_width="wrap_content"
@@ -173,6 +176,68 @@
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
+        <!-- Modelo para Cards de Hábito Dinâmicos -->
+        <!-- Este será clonado para cada hábito -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/habitCardTemplate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#D8E5F8"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="24dp"
+                android:paddingBottom="24dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <TextView
+                    android:id="@+id/habitTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fumar"
+                    android:textColor="#000"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/habitTimeInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Última vez que realizou foi há:"
+                    android:textColor="#000"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+
+                <TextView
+                    android:id="@+id/habitTimeValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="23h 42min"
+                    android:textColor="#000"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
 
     </LinearLayout>
 

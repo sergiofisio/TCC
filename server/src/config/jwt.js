@@ -33,6 +33,10 @@ const extractUserToken = async (token) => {
     delete user.lost_pasword_token_user;
 
     // 🔹 Retorna os dados do usuário autenticado
+    await prisma.tb_users.update({
+      where: { id_user: user.id_user },
+      data: { last_login_date_user: new Date() },
+    });
     return user;
   } catch (err) {
     // ❌ Lança erro em caso de token inválido ou falha na extração

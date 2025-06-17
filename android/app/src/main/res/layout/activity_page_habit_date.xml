@@ -1,0 +1,89 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".pages.Page_Diary">
+
+    <com.example.emotionharmony.components.BottomMenuView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/btnBack11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginBottom="109dp"
+            android:contentDescription="@string/back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/back" />
+
+        <EditText
+            android:id="@+id/txtPeso"
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="244dp"
+            android:autofillHints=""
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_semibold"
+            android:hint="@string/Date"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="327dp" />
+
+        <Button
+            android:id="@+id/btnPronto"
+            android:layout_width="222dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="352dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/botao_pronto"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lblTxtPeso"
+            android:layout_width="317dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="160dp"
+            android:gravity="center"
+            android:text="@string/DateHabit"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView29"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icone_principal" />
+
+    </com.example.emotionharmony.components.BottomMenuView>
+</androidx.constraintlayout.widget.ConstraintLayout>

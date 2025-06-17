@@ -25,7 +25,6 @@ export default function Login() {
 
     // Desestruturação dos dados do formulário
     const { email, password } = data;
-    console.log({ email, password });
 
     try {
       if (!email || !password)
