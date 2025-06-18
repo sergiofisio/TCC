@@ -73,7 +73,7 @@
     <string name="avaliacao_agua">Fazer Avaliação de ingestão de água</string>
     <string name="Add_Habit">Adicionar um hábito</string>
     <string name="TxtAdd_Habit">Inserir às informações necessárias para Adicionar um novo hábito</string>
-    <string name="NameHabit">Nome do hábido</string>
+    <string name="NameHabit">Nome do hábito</string>
     <string name="DateHabit">última vez que realizou esse hábito</string>
     <string name="Date">Data</string>
     <string name="HabitBolean">Modo de registro diário</string>

@@ -48,7 +48,7 @@ public class PageWater extends AppCompatActivity {
         );
 
         // 2. Infla o layout da tela APENAS UMA VEZ com View Binding
-        com.example.emotionharmony.databinding.ActivityPageWaterBinding binding = ActivityPageWaterBinding.inflate(getLayoutInflater());
+        ActivityPageWaterBinding binding = ActivityPageWaterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // 3. Inicializa as Views usando o objeto de binding

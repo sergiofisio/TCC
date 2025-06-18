@@ -31,6 +31,7 @@
 
         <EditText
             android:id="@+id/txtPeso"
+            android:inputType="textCapSentences|text"
             android:layout_width="360dp"
             android:layout_height="60dp"
             android:layout_marginStart="32dp"
@@ -56,7 +57,7 @@
             android:layout_width="222dp"
             android:layout_height="63dp"
             android:layout_marginStart="92dp"
-            android:layout_marginTop="352dp"
+            android:layout_marginTop="444dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/botao_pronto"
             android:textAllCaps="true"
@@ -65,7 +66,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/lblTxtPeso"
+            android:id="@+id/txtQntIngerido"
             android:layout_width="317dp"
             android:layout_height="68dp"
             android:layout_marginStart="56dp"
@@ -84,6 +85,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/icone_principal" />
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="96dp"
+            android:layout_marginTop="20dp"
+            android:text="Última vez que realizou este hábito"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPeso" />
+
+        <EditText
+            android:id="@+id/editTextDateTime"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="52dp"
+            android:background="@drawable/rounded_edittext"
+            android:ems="10"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat_semibold"
+            android:hint="data e hora"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtPeso" />
+
 
     </com.example.emotionharmony.components.BottomMenuView>
 </androidx.constraintlayout.widget.ConstraintLayout>

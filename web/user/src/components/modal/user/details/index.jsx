@@ -35,6 +35,14 @@ export default function UserDetails({ user }) {
       <p>
         <strong>Status:</strong> {user.active_user ? "Ativo" : "Inativo"}
       </p>
+      <p>
+        <strong>Ultimo acesso:</strong>{" "}
+        {user.last_login_date_user
+          ? new Date(user.last_login_date_user).toLocaleString("pt-BR", {
+              timeZone: "America/Sao_Paulo",
+            })
+          : "Nunca acessou"}
+      </p>
     </div>
   );
 }

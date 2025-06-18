@@ -39,7 +39,7 @@
             android:background="@drawable/rounded_edittext"
             android:ems="10"
             android:fontFamily="@font/montserrat_semibold"
-            android:hint="@string/NameHabit"
+            android:hint="@string/Date"
             android:textColor="#000000"
             android:textColorHint="#000000"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
             android:layout_marginStart="56dp"
             android:layout_marginTop="160dp"
             android:gravity="center"
-            android:text="@string/TxtAdd_Habit"
+            android:text="@string/DateHabit"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

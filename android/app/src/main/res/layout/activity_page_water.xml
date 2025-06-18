@@ -33,7 +33,7 @@
         android:textColorHint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblTxtPeso" />
+        app:layout_constraintTop_toBottomOf="@+id/txtQntIngerido" />
 
     <EditText
         android:id="@+id/txtHoraInicio"
@@ -49,7 +49,7 @@
         android:textColor="#000000"
         android:textColorHint="#000000"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblHorarioAcorda" />
+        app:layout_constraintTop_toBottomOf="@+id/txtIngerido" />
 
     <EditText
         android:id="@+id/txtHoraFim"
@@ -65,10 +65,10 @@
         android:textColor="#000000"
         android:textColorHint="#000000"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblHorarioAcorda" />
+        app:layout_constraintTop_toBottomOf="@+id/txtIngerido" />
 
     <TextView
-        android:id="@+id/lblHorarioAcorda"
+        android:id="@+id/txtIngerido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="34dp"
@@ -91,7 +91,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtHoraInicio" />
 
     <TextView
-        android:id="@+id/lblTxtPeso"
+        android:id="@+id/txtQntIngerido"
         android:layout_width="317dp"
         android:layout_height="68dp"
         android:layout_marginTop="100dp"
@@ -100,15 +100,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView28"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icone_principal" />
 
     <com.example.emotionharmony.components.BottomMenuView
         android:id="@+id/bottomMenu"
@@ -130,5 +121,14 @@
         <!-- Placeholder CardView -->
 
 
+        <ImageView
+            android:id="@+id/imageView28"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="19dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icone_principal" />
     </com.example.emotionharmony.components.BottomMenuView>
 </androidx.constraintlayout.widget.ConstraintLayout>
