@@ -18,7 +18,7 @@ async function performBackup() {
       include: {
         phone_user: true,
         today_user: true,
-        tb_meditation: true,
+        meditation_user: true,
         breath_user: true,
         habits_user: true,
       },
