@@ -38,7 +38,7 @@ model tb_phone {
   area_code_phone    Int
   phone_number       Int
   users_id           Int
-  users_phone       tb_users?     @relation(fields: [users_id], references: [id_user])
+  users_phone       tb_users?     @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
   created_at         DateTime      @default(now())
   updated_at         DateTime      @updatedAt
 
@@ -51,7 +51,7 @@ model tb_today {
   description_today         String?                            @db.Text
   morning_afternoon_evening tb_today_morning_afternoon_evening
   users_id                  Int
-  users_today              tb_users?                          @relation(fields: [users_id], references: [id_user])
+  users_today              tb_users?                          @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
   created_at                DateTime                           @default(now())
   updated_at                DateTime                           @updatedAt
 
@@ -66,7 +66,7 @@ model tb_meditation {
   caracter_meditation       String         @db.Text
   type_situation_meditation type_situation
   users_id                  Int
-  users_meditation         tb_users?      @relation(fields: [users_id], references: [id_user])
+  users_meditation         tb_users?      @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
   created_at                DateTime       @default(now())
   updated_at                DateTime       @updatedAt
 
@@ -79,7 +79,7 @@ model tb_breath {
   felt_betther_breath Boolean  @default(true)
   description_breath  String   @db.Text
   users_id            Int
-  users_breath       tb_users? @relation(fields: [users_id], references: [id_user])
+  users_breath       tb_users? @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
   created_at          DateTime @default(now())
   updated_at          DateTime @updatedAt
 
@@ -91,7 +91,7 @@ model tb_habits {
   name_habit          String              @db.VarChar(50)
   last_time_habit    DateTime?
   users_id            Int
-  users_habits       tb_users?           @relation(fields: [users_id], references: [id_user])
+  users_habits       tb_users?           @relation(fields: [users_id], references: [id_user], onDelete: Cascade)
   created_at          DateTime             @default(now())
   updated_at          DateTime              @updatedAt
 

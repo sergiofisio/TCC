@@ -14,8 +14,15 @@ const transporter = nodemailer.createTransport({
 
 async function performBackup() {
   try {
-    // Verifica usuário ativos e inativos e faz as mudanças necessárias
-    const users = await prisma.tb_users.findMany();
+    const users = await prisma.tb_users.findMany({
+      include: {
+        phone_user: true,
+        today_user: true,
+        tb_meditation: true,
+        breath_user: true,
+        habits_user: true,
+      },
+    });
     const currentDate = new Date();
     const thirtyDaysAgo = new Date(
       currentDate.setDate(currentDate.getDate() - 30)
@@ -23,7 +30,6 @@ async function performBackup() {
 
     for (const user of users) {
       if (user.last_login_date_user === null) {
-        // Se o usuário nunca acessou, inativa o usuário
         await prisma.tb_users.update({
           where: { id_user: user.id_user },
           data: { active_user: false },
