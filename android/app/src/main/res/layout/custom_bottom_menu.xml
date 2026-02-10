@@ -228,6 +228,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="SIM"
                     android:textAlignment="center"
+                    android:textColor="#FFFFFF"
                     android:textStyle="bold" />
 
                 <Button
@@ -239,6 +240,7 @@
                     android:fontFamily="@font/montserrat"
                     android:text="NÃO"
                     android:textAlignment="center"
+                    android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     tools:ignore="ButtonStyle" />
             </LinearLayout>

@@ -17,6 +17,11 @@ module.exports.loginUserService = async ({ email, senha }) => {
   }
 
   const token = generateToken(user.id_user);
+
+  await prisma.tb_users.update({
+    where: { id_user: user.id_user },
+    data: { last_login_date_user: new Date() },
+  });
   return {
     message: "Login efetuado com sucesso!",
     token,

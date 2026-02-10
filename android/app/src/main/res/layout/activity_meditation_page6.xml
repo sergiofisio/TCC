@@ -22,6 +22,7 @@
         android:inputType="textMultiLine"
         android:paddingTop="20dp"
         android:textAppearance="@style/CustomInput"
+        android:textColor="#000000"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

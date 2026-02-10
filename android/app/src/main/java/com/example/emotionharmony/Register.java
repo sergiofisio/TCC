@@ -40,6 +40,7 @@ public class Register extends AppCompatActivity {
     private CustomToast customToast;
     private EditText nome, email, cpf, telefone, emergencia, senha;
     private TextView msgEmergency;
+    private Button btnRegister;
 
     /**
      * Método principal da tela de registro
@@ -74,7 +75,7 @@ public class Register extends AppCompatActivity {
         emergencia = findViewById(R.id.txtEmergency);
         senha = findViewById(R.id.txttSenhaRegistro);
         msgEmergency = findViewById(R.id.txtMsgEmergency);
-        Button btnRegister = findViewById(R.id.btnRegister);
+        btnRegister = findViewById(R.id.btnRegister);
         TextView txtLogin = findViewById(R.id.txtLogin);
         CheckBox cbShowPass = findViewById(R.id.cbShowPass);
 
@@ -124,6 +125,8 @@ public class Register extends AppCompatActivity {
             }
 
             JSONObject userData = buildUserData(userPhone, emergencyPhone);
+            btnRegister.setActivated(false);
+            btnRegister.setBackgroundColor(R.color.btnInactive);
             sendRegisterRequest(userData);
 
         } catch (Exception e) {
@@ -156,7 +159,7 @@ public class Register extends AppCompatActivity {
      * Envia os dados para o backend e trata a resposta
      */
     private void sendRegisterRequest(JSONObject userData) {
-        ServerConnection.postRequest("/register", userData, new ServerConnection.ServerCallback() {
+        ServerConnection.postRequest("/auth/register", userData, new ServerConnection.ServerCallback() {
             @Override
             public void onSuccess(String response) {
                 runOnUiThread(() -> {

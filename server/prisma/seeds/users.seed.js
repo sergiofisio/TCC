@@ -33,7 +33,7 @@ module.exports = async function seedUsers() {
             // 📞 Telefones vinculados ao usuário
             phone_user: {
               create:
-                user.phones_user?.map(
+                user.phones?.map(
                   ({
                     type_phone,
                     country_code_phone,
@@ -48,10 +48,20 @@ module.exports = async function seedUsers() {
                 ) || [],
             },
 
+            habits_user: {
+              create:
+                user.habits?.map(
+                  ({ name_habit, last_time_habit, created_at }) => ({
+                    name_habit,
+                    last_time_habit,
+                    created_at,
+                  })
+                ) || [],
+            },
             // 🧘 Meditações vinculadas ao usuário
             meditation_user: {
               create:
-                user.meditations_user?.map(
+                user.meditations?.map(
                   ({
                     description_meditation,
                     think_today_meditation,
@@ -73,7 +83,7 @@ module.exports = async function seedUsers() {
             // 🌬️ Respirações vinculadas ao usuário
             breath_user: {
               create:
-                user.breaths_user?.map(
+                user.breaths?.map(
                   ({
                     finished_breath,
                     felt_betther_breath,
@@ -91,7 +101,7 @@ module.exports = async function seedUsers() {
             // 😌 Emoções diárias vinculadas ao usuário
             today_user: {
               create:
-                user.todays_user?.map(
+                user.todays?.map(
                   ({
                     emotion_today,
                     description_today,

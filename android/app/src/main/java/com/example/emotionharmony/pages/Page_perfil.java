@@ -1,5 +1,6 @@
 package com.example.emotionharmony.pages;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -156,6 +157,7 @@ public class Page_perfil extends AppCompatActivity {
     /**
      * Formata o telefone recebido do servidor.
      */
+    @SuppressLint("DefaultLocale")
     private String formatPhoneNumber(JSONObject phoneObject) {
         int areaCode = phoneObject.optInt("area_code_phone", 0);
         int number = phoneObject.optInt("phone_number", 0);
@@ -245,9 +247,7 @@ public class Page_perfil extends AppCompatActivity {
             ServerConnection.patchRequestWithAuth("/user/update", token, userData, new ServerConnection.ServerCallback() {
                 @Override
                 public void onSuccess(String response) {
-                    runOnUiThread(() -> {
-                        toast.show("✅ Informações atualizadas com sucesso!", Toast.LENGTH_LONG, "#11273D", "success");
-                    });
+                    runOnUiThread(() -> toast.show("✅ Informações atualizadas com sucesso!", Toast.LENGTH_LONG, "#11273D", "success"));
                     NavigationHelper.navigateTo(Page_perfil.this, Page_Exercicies.class, true);
                 }
 

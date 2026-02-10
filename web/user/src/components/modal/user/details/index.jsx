@@ -2,10 +2,10 @@ import { formatPhone } from "./../../../../functions/format";
 
 //função para criação do componente de detalhes do usuario
 export default function UserDetails({ user }) {
-  const personalPhone = user?.phones_user?.find(
+  const personalPhone = user?.phone_user?.find(
     (p) => p.type_phone === "celular"
   );
-  const emergencyPhone = user?.phones_user?.find(
+  const emergencyPhone = user?.phone_user?.find(
     (p) => p.type_phone === "emergencia"
   );
   return (
@@ -21,10 +21,8 @@ export default function UserDetails({ user }) {
       </p>
       <p>
         <strong>CPF:</strong>{" "}
-        {user.cpf_user
-          .replace(/(\d{3})(\d)/, "$1.$2")
-          .replace(/(\d{3})(\d)/, "$1.$2")
-          .replace(/(\d{3})(\d{1,2})$/, "$1-$2")}
+        {user.cpf_user &&
+          `***.***.*${user.cpf_user.slice(-4, -2)}-${user.cpf_user.slice(-2)}`}
       </p>
       <p>
         <strong>Telefone Pessoal:</strong> {formatPhone(personalPhone)}
@@ -34,6 +32,14 @@ export default function UserDetails({ user }) {
       </p>
       <p>
         <strong>Status:</strong> {user.active_user ? "Ativo" : "Inativo"}
+      </p>
+      <p>
+        <strong>Ultimo acesso:</strong>{" "}
+        {user.last_login_date_user
+          ? new Date(user.last_login_date_user).toLocaleString("pt-BR", {
+              timeZone: "America/Sao_Paulo",
+            })
+          : "Nunca acessou"}
       </p>
     </div>
   );

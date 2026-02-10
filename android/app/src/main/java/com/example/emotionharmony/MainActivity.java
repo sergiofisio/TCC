@@ -31,7 +31,9 @@ import com.example.emotionharmony.pages.Page_Exercicies;
 import com.example.emotionharmony.utils.EnvConfig;
 import com.example.emotionharmony.utils.NetworkUtils;
 import com.example.emotionharmony.utils.ServerConnection;
+import com.example.emotionharmony.utils.VerifyServer;
 
+import org.apache.commons.logging.LogFactory;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,6 +44,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final org.apache.commons.logging.Log log = LogFactory.getLog(MainActivity.class);
     private int retryCount = 0;
     private static final int MAX_RETRIES = 5;
     private static final int RETRY_INTERVAL = 60000; // 1 minuto
@@ -100,49 +103,7 @@ public class MainActivity extends AppCompatActivity {
      * Faz requisição de verificação ao servidor e aguarda resposta.
      */
     private void verificarServidor() {
-        executor.execute(() -> ServerConnection.getRequest("/", new ServerConnection.ServerCallback() {
-            @Override
-            public void onSuccess(String response) {
-                try {
-                    JSONObject jsonResponse = new JSONObject(response);
-                    boolean init = jsonResponse.getBoolean("init");
-
-                    runOnUiThread(() -> {
-                        if (init) {
-                            Log.d("MainActivity", "✅ Servidor está pronto. Continuando...");
-                            verificarToken();
-                        } else {
-                            tentarNovamente();
-                        }
-                    });
-                } catch (JSONException e) {
-                    Log.e("MainActivity", "❌ Erro ao processar JSON: " + e.getMessage());
-                    runOnUiThread(MainActivity.this::tentarNovamente);
-                }
-            }
-
-            @Override
-            public void onError(String error) {
-                Log.e("MainActivity", "❌ Erro ao conectar no servidor: " + error);
-                runOnUiThread(MainActivity.this::tentarNovamente);
-            }
-        }));
-    }
-
-    /**
-     * Tenta novamente a verificação do servidor com limite de tentativas.
-     */
-    private void tentarNovamente() {
-        retryCount++;
-
-        if (retryCount < MAX_RETRIES) {
-            Log.w("MainActivity", "⚠️ Tentativa " + retryCount + " falhou. Tentando novamente em 1 minuto...");
-            scheduler.schedule(this::verificarServidor, RETRY_INTERVAL, TimeUnit.MILLISECONDS);
-        } else {
-            Log.e("MainActivity", "❌ Não foi possível conectar ao servidor após " + MAX_RETRIES + " tentativas.");
-            mostrarAlertaErroServidor();
-        }
-    }
+        VerifyServer.verificar(this, this::verificarToken);    }
 
     /**
      * Verifica se o token salvo é válido ou expirado.

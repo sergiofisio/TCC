@@ -29,8 +29,10 @@ export default function UserModal({ user, isOpen, onClose, onSave, action }) {
 
   //função de envio do submit para edição do usuario
   const handleSubmit = async () => {
+    console.log(getItem("token"));
+
     try {
-      await axios.delete(`/auth/user/${user.id_user}`, {
+      await axios.delete(`/user/delete/${user.id_user}`, {
         headers: {
           Authorization: `Bearer ${getItem("token")}`,
         },

@@ -121,7 +121,7 @@ public class ServerConnection {
 
                     if (!response.isSuccessful()) {
                         JSONObject jsonError = new JSONObject(responseString);
-                        String errorMessage = jsonError.optString("error", "Erro desconhecido");
+                        String errorMessage = jsonError.optString("message", "Erro desconhecido");
                         callback.onError(errorMessage);
                     } else {
                         callback.onSuccess(responseString);

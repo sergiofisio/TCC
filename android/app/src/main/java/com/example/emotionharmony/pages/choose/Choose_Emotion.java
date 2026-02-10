@@ -36,6 +36,7 @@ public class Choose_Emotion extends AppCompatActivity {
     // UI
     private TextView txtSpeech;
     private RadioButton[] radioButtons;
+    private LinearLayout[] linearLayouts;
     private final String[] emotions = {"Raiva", "Desgosto", "Medo", "Tristeza", "Felicidade"};
     private String Emotion;
 
@@ -79,7 +80,7 @@ public class Choose_Emotion extends AppCompatActivity {
         TextView BtnFinish = findViewById(R.id.BtnFinishChoose);
 
         // Layouts clicáveis que envolvem os botões de emoção
-        LinearLayout[] linearLayouts = new LinearLayout[]{
+        linearLayouts = new LinearLayout[]{
                 findViewById(R.id.rdbAng),
                 findViewById(R.id.rdbDesg),
                 findViewById(R.id.rdbFear),
@@ -132,6 +133,13 @@ public class Choose_Emotion extends AppCompatActivity {
                     throw new Exception("Usuário não autenticado");
                 }
 
+                for(int i = 0; i < radioButtons.length; i++){
+                    linearLayouts[i].setClickable(false);
+                }
+
+                BtnFinish.setEnabled(false);
+                BtnFinish.setText("Salvando...");
+
                 JSONObject emotionData = new JSONObject();
                 emotionData.put("emotion", Emotion);
                 emotionData.put("description", "");
@@ -142,6 +150,7 @@ public class Choose_Emotion extends AppCompatActivity {
                     public void onSuccess(String response) {
                         runOnUiThread(() -> {
                             toast.show("Emoção salva com sucesso!", Toast.LENGTH_LONG, "#11273D", "success");
+                            chooseEmotionDb.setEmotion_today("");
                             NavigationHelper.navigateTo(Choose_Emotion.this, Page_Exercicies.class, true);
                         });
                     }

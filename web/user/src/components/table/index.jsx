@@ -3,8 +3,6 @@ import "./style.css";
 
 //função para criação do componente de tabela
 export default function Table({ description, users, action }) {
-  console.log({ users });
-
   return (
     <div className="table-container">
       <h3>{description}</h3>

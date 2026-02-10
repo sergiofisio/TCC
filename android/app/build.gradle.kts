@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.emotionharmony"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.emotionharmony"
@@ -49,8 +49,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     packaging {
@@ -63,6 +63,7 @@ android {
         resources.excludes.add("META-INF/notice.txt")
         resources.excludes.add("META-INF/INDEX.LIST")
     }
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
@@ -88,5 +89,4 @@ dependencies {
     implementation(libs.libraries.bom)
     implementation(libs.google.cloud.texttospeech)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-
 }

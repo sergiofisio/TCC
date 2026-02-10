@@ -1,4 +1,4 @@
-const prisma = require("../../../config/prisma");
+const { prisma } = require("../../../config/prisma");
 const bcrypt = require("bcrypt");
 const CustomError = require("../../../core/errors/CustomError");
 const {
@@ -8,7 +8,8 @@ const {
 } = require("../../../utils/validation");
 
 module.exports.registerUserService = async (data) => {
-  const { nome, email, cpf, senha, telefones = [] } = data;
+  let { nome, email, cpf, senha, telefones = [] } = data;
+  console.log({ nome, email, cpf, senha, telefones });
 
   const missing = verifyInput({ nome, email, cpf, senha });
   if (missing)
@@ -17,10 +18,19 @@ module.exports.registerUserService = async (data) => {
   if (!verifyEmail(email)) throw new CustomError("Email inválido", 400);
   if (!verifyCPF(cpf)) throw new CustomError("CPF inválido", 400);
 
-  const existing = await prisma.tb_users.findFirst({
-    where: { OR: [{ email_user: email }, { cpf_user: cpf }] },
+  cpf = cpf.replace(/\D/g, "");
+
+  const existisEmail = await prisma.tb_users.findUnique({
+    where: { email_user: email },
   });
-  if (existing) throw new CustomError("Email ou CPF já cadastrado", 409);
+
+  const existingCPF = await prisma.tb_users.findUnique({
+    where: { cpf_user: cpf },
+  });
+
+  if (existisEmail) throw new CustomError("Email já cadastrado", 409);
+
+  if (existingCPF) throw new CustomError("CPF já cadastrado", 409);
 
   const hash = await bcrypt.hash(senha, 10);
 
@@ -28,14 +38,14 @@ module.exports.registerUserService = async (data) => {
     data: {
       name_user: nome,
       email_user: email,
-      cpf_user: cpf.replace(/\D/g, ""),
+      cpf_user: cpf,
       password_user: hash,
-      phones_user: {
+      phone_user: {
         create: telefones.map((tel) => ({
           type_phone: tel.tipo,
           country_code_phone: 55,
-          area_code_phone: Number(tel.telefone.slice(0, 2)),
-          phone_number: Number(tel.telefone.slice(2)),
+          area_code_phone: Number(tel.telefone.replace(/\D/g, "").slice(0, 2)),
+          phone_number: Number(tel.telefone.replace(/\D/g, "").slice(2)),
         })),
       },
     },

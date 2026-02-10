@@ -64,4 +64,17 @@
     <string name="next">proximo</string>
     <string name="meditation_page5">Qual emoção mais descreve aquele momento?</string>
     <string name="meditation_page4">Você considera esta situação BOA ou RUIM?</string>
+    <string name="ingestao_titulo">Inserir informações necessárias para o registrador automático de ingestão de água</string>
+    <string name="hint_peso">Seu Peso</string>
+    <string name="texto_acordado">Quando você está acordado</string>
+    <string name="inicio">Inicio</string>
+    <string name="fim">Fim</string>
+    <string name="botao_pronto">PRONTO</string>
+    <string name="avaliacao_agua">Fazer Avaliação de ingestão de água</string>
+    <string name="Add_Habit">Adicionar um hábito</string>
+    <string name="TxtAdd_Habit">Inserir às informações necessárias para Adicionar um novo hábito</string>
+    <string name="NameHabit">Nome do hábito</string>
+    <string name="DateHabit">última vez que realizou esse hábito</string>
+    <string name="Date">Data</string>
+    <string name="HabitBolean">Modo de registro diário</string>
 </resources>

@@ -27,6 +27,7 @@
     "prisma": "yarn generate",
     "prisma:dev": "prisma migrate dev && npm run generate && npm run push && npm run seed",
     "prisma:format": "prisma format",
+    "prisma:reset":"prisma migrate reset",
     "migrate": "npx prisma migrate dev",
     "generate": "npx prisma generate",
     "pull": "npx prisma db pull",
@@ -46,7 +47,7 @@
     "jsonwebtoken": "^9.0.2",
     "mailersend": "^2.5.0",
     "node-schedule": "^2.1.1",
-    "nodemailer": "^6.10.0",
+    "nodemailer": "^7.0.3",
     "nodemon": "^3.1.9",
     "resend": "^4.2.0",
     "serve-favicon": "^2.5.0",
@@ -59,5 +60,4 @@
   "resolutions": {
     "buffer-equal-constant-time": "^1.0.1"
   }
-
 }

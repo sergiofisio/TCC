@@ -2,7 +2,7 @@ import "./style.css";
 import eye from "../../../assets/openEye.svg";
 import eyeClose from "../../../assets/closeEye.svg";
 import { useState } from "react";
-import InputMask from "react-input-mask";
+import InputMask from 'react-input-mask-next';
 
 // Função principal que renderiza o componente Input
 export default function Input({

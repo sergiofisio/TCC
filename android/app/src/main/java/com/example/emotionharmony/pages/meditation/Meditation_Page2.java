@@ -62,6 +62,7 @@ public class Meditation_Page2 extends AppCompatActivity {
         toast = new CustomToast(this);
         questionsMeditation = Questions_Meditation.getInstance();
 
+
         // Fala o texto da tela após 1,5s
         new Handler().postDelayed(() ->
                 ttsHelper.speakText(txtSpeech.getText().toString()), 1500

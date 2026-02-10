@@ -1,335 +1,306 @@
-// Tela de Diário de Emoções ou Atividades
 package com.example.emotionharmony.pages;
 
-// Importações necessárias
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.util.TypedValue;
+import android.view.ViewGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import androidx.cardview.widget.CardView;
 
 import com.example.emotionharmony.R;
 import com.example.emotionharmony.components.BottomMenuView;
-import com.example.emotionharmony.databinding.ActivityPageExerciciesBinding;
+import com.example.emotionharmony.databinding.ActivityPageDiaryBinding;
+import com.example.emotionharmony.pages.diary.PageHabit;
+import com.example.emotionharmony.pages.diary.PageWater;
+import com.example.emotionharmony.pages.diary.PageWater2;
+import com.example.emotionharmony.utils.NavigationHelper;
+import com.example.emotionharmony.utils.ServerConnection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class Page_Diary extends AppCompatActivity {
+
+    private CardView    cardStartWater, cardProgressWater;
+    private ProgressBar progressWater;
+    private TextView    textWaterAmount;
+    private Button      btnStartWater;
+
+    private CardView    cardAddHabit;
+    private LinearLayout containerLayout;
+    private Button      btnStartHabit;
+
+    private Integer     Weight;
+    private String      token, sleepTimeStart, sleepTimeEnd;
+
+    private ArrayList<Habit> habitList = new ArrayList<>();
+
+    public static class Habit {
+        int    id;
+        String name;
+        Date   lastTime;
+        public Habit(int id, String name, Date lastTime) {
+            this.id = id;
+            this.name = name;
+            this.lastTime = lastTime;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Layout em fullscreen
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
+        // fullscreen
+        View decor = getWindow().getDecorView();
+        decor.setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         );
 
-        // Usa o binding da tela de exercícios
-        ActivityPageExerciciesBinding binding = ActivityPageExerciciesBinding.inflate(getLayoutInflater());
+        ActivityPageDiaryBinding binding = ActivityPageDiaryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Ajuste de padding com base nas barras do sistema
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        // Configura o menu inferior
+        // bottom menu
         BottomMenuView bottomMenu = findViewById(R.id.bottomMenu);
         bottomMenu.setActivityContext(this);
 
-        // Botão para iniciar a tela de água
-        Button btnStart = findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Page_Diary.this, PageWaterActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-}
+        // água
+        cardStartWater    = findViewById(R.id.waterCard_start);
+        cardProgressWater = findViewById(R.id.waterCard_progress);
+        btnStartWater     = findViewById(R.id.btnStart_Water);
+        progressWater     = findViewById(R.id.progressWater);
+        textWaterAmount   = findViewById(R.id.textWaterAmount);
 
- /*
-        * package com.example.tesouro_azul_app;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Toast;
-
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class GraficosActivity extends AppCompatActivity {
-
-    private String typeGraph;
-    //Apenas testando, irei modificar futuramente
-    private List<String> xValues = Arrays.asList("Miguel", "Carlos", "Victor", "Bea");
-
-    CardView PizzaCard, BarraCard, LinhaCard, LucroCard,VendasCard,FaturamentoCard;
-
-    //Maior parte deste conteudo é teste
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_graficos);
-
-        BarChart barChart = findViewById(R.id.barChart);
-        LineChart lineChart = findViewById(R.id.lineChart);
-        PieChart pieChart = findViewById(R.id.pieChart);
-
-        CardView PizzaCard = findViewById(R.id.PizzaCard);
-        CardView BarraCard = findViewById(R.id.BarraCard);
-        CardView LinhaCard = findViewById(R.id.LinhaCard);
-        CardView LucroCard = findViewById(R.id.LucroCard);
-        CardView VendasCard = findViewById(R.id.VendasCard);
-        CardView FaturamentoCard = findViewById(R.id.FaturamentoCard);
-
-        // Oculta todos
-        barChart.setVisibility(View.GONE);
-        lineChart.setVisibility(View.GONE);
-        pieChart.setVisibility(View.GONE);
-
-        PizzaCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Oculta todos
-                barChart.setVisibility(View.GONE);
-                lineChart.setVisibility(View.GONE);
-                pieChart.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), "Gráfico de Pizza selecionado", Toast.LENGTH_SHORT).show();
-                typeGraph = "pizza";
-                exibirGraficoSelecionado(typeGraph,barChart,lineChart,pieChart);
-
-            }
-        });
-
-        BarraCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Oculta todos
-                barChart.setVisibility(View.GONE);
-                lineChart.setVisibility(View.GONE);
-                pieChart.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), "Gráfico de Barras selecionado", Toast.LENGTH_SHORT).show();
-                typeGraph = "barra";
-                exibirGraficoSelecionado(typeGraph,barChart,lineChart,pieChart);
-            }
-        });
-
-        LinhaCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Oculta todos
-                barChart.setVisibility(View.GONE);
-                lineChart.setVisibility(View.GONE);
-                pieChart.setVisibility(View.GONE);
-                Toast.makeText(getApplicationContext(), "Gráfico de Linhas selecionado", Toast.LENGTH_SHORT).show();
-                typeGraph = "linha";
-                exibirGraficoSelecionado(typeGraph,barChart,lineChart,pieChart);
-            }
-        });
-
-        LucroCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Ação ao clicar no card de Lucro
-                Toast.makeText(getApplicationContext(), "Lucro selecionado", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        VendasCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Ação ao clicar no card de Vendas
-                Toast.makeText(getApplicationContext(), "Vendas selecionadas", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        FaturamentoCard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Ação ao clicar no card de Faturamento
-                Toast.makeText(getApplicationContext(), "Faturamento selecionado", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
-    private void exibirBarra(BarChart barChart)
-    {
-        // Oculta os rótulos do eixo da direita (visualmente limpa o gráfico)
-        barChart.getAxisRight().setDrawLabels(false);
-
-        // Cria uma lista de valores de barra (posição X, valor Y)
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0, 45f));  // Primeiro item com valor 45
-        entries.add(new BarEntry(1, 80f));  // Segundo com 80
-        entries.add(new BarEntry(2, 65f));  // ...
-        entries.add(new BarEntry(3, 38f));
-
-        // Configura o eixo Y (esquerdo)
-        YAxis yAxis = barChart.getAxisLeft();
-        yAxis.setAxisMinimum(0f); // Valor mínimo do Y é 0
-        yAxis.setAxisMaximum(100f); // Valor máximo do Y é 100
-        yAxis.setAxisLineWidth(2f);// Espessura da linha do eixo Y
-        yAxis.setAxisLineColor(Color.BLACK);// Cor da linha do eixo Y
-        yAxis.setLabelCount(10);// Quantidade de marcadores no eixo Y
-
-        // Cria um conjunto de dados para o gráfico de barras
-        BarDataSet dataSet = new BarDataSet(entries, "Subjects");// Título da legenda
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);// Define cores variadas
-
-        // Cria os dados finais com o dataset e associa ao gráfico
-        BarData barData = new BarData(dataSet);
-        barChart.setData(barData);
-
-        // Remove a descrição de texto no canto inferior direito
-        barChart.getDescription().setEnabled(false);
-
-        // Configura o eixo X
-        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter());// Formatação personalizada (opcional)
-        barChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM); // Posição na parte de baixo
-        barChart.getXAxis().setGranularity(1f); // Intervalo mínimo entre valores
-        barChart.getXAxis().setGranularityEnabled(true); // Ativa granularidade
-
-        // Redesenha o gráfico
-        barChart.invalidate();
-
-    }
-
-    private void exibirPizza(PieChart pieChart)
-    {
-
-        // Cria uma lista com os dados da pizza (valor, rótulo)
-        ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(45f, "Miguel"));
-        entries.add(new PieEntry(80f, "Carlos"));
-        entries.add(new PieEntry(65f, "Victor"));
-        entries.add(new PieEntry(38f, "Bea"));
-
-        // Cria o conjunto de fatias da pizza
-        PieDataSet dataSet = new PieDataSet(entries, "Subjects");
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);// Aplica cores automáticas
-        dataSet.setSliceSpace(3f);// Espaço entre as fatias
-        dataSet.setValueTextSize(12f);// Tamanho do texto dos valores
-
-        // Cria os dados finais e associa ao gráfico
-        PieData pieData = new PieData(dataSet);
-        pieChart.setData(pieData);
-        pieChart.setUsePercentValues(true);// Converte os valores para porcentagem
-        pieChart.getDescription().setEnabled(false);// Remove a descrição padrão
-        pieChart.setEntryLabelColor(Color.BLACK);// Cor dos rótulos das fatias
-        pieChart.setHoleRadius(30f);// Raio do buraco central
-        pieChart.setTransparentCircleRadius(35f);// Raio da borda transparente
-        pieChart.invalidate(); // Redesenha o gráfico
-
-    }
-
-    private void exibirLinha(LineChart lineChart)
-    {
-        // Cria os pontos (x, y) para o gráfico de linha
-        ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(0, 45f));
-        entries.add(new Entry(1, 80f));
-        entries.add(new Entry(2, 65f));
-        entries.add(new Entry(3, 38f));
-
-        // Cria o dataset para o gráfico de linha
-        LineDataSet dataSet = new LineDataSet(entries, "Subjects");
-        dataSet.setColor(ColorTemplate.getHoloBlue()); // Cor da linha
-        dataSet.setCircleColor(ColorTemplate.MATERIAL_COLORS[0]);// Cor dos círculos nos pontos
-        dataSet.setLineWidth(2f); // Espessura da linha
-        dataSet.setCircleRadius(5f); // Tamanho dos círculos
-        dataSet.setValueTextSize(10f); // Tamanho dos valores nos pontos
-
-        // Cria os dados finais e associa ao gráfico
-        LineData lineData = new LineData(dataSet);
-        lineChart.setData(lineData);
-        lineChart.getDescription().setEnabled(false); // Remove descrição padrão
-
-        // Configura o eixo X com nomes personalizados
-        lineChart.getXAxis().setValueFormatter(
-                new IndexAxisValueFormatter(Arrays.asList("Miguel", "Carlos", "Victor", "Bea"))
+        btnStartWater.setOnClickListener(v ->
+                startActivity(new Intent(Page_Diary.this, PageWater.class))
         );
-        lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);// Posição inferior
-        lineChart.getXAxis().setGranularity(1f);// Intervalo mínimo
-        lineChart.getXAxis().setGranularityEnabled(true); // Ativa granularidade
+        cardProgressWater.setOnClickListener(v ->
+                NavigationHelper.navigateTo(Page_Diary.this, PageWater2.class, true)
+        );
 
-        lineChart.invalidate(); // Redesenha o gráfico
+        // hábitos
+        cardAddHabit    = findViewById(R.id.waterCard_habit);
+        containerLayout = findViewById(R.id.linearlayout);
+        btnStartHabit   = findViewById(R.id.btnStart_Habit);
 
+        btnStartHabit.setOnClickListener(v ->
+                NavigationHelper.navigateTo(Page_Diary.this, PageHabit.class, true)
+        );
+
+        // token
+        SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        token = prefs.getString("authToken", null);
+
+        // carrega dados
+        fetchDataUser();
+        handleIncomingHabit();
+        loadAndDisplayHabitData();
     }
 
-    private void exibirGraficoSelecionado(String typeGraph, BarChart barChart, LineChart lineChart, PieChart pieChart)
-    {
-
-        switch (typeGraph.toLowerCase()) {
-            case "barra":
-                barChart.setVisibility(View.VISIBLE);
-                exibirBarra(barChart);
-                break;
-
-            case "linha":
-                lineChart.setVisibility(View.VISIBLE);
-                exibirLinha(lineChart);
-                break;
-
-            case "pizza":
-                pieChart.setVisibility(View.VISIBLE);
-                exibirPizza(pieChart);
-                break;
-
-            default:
-                Toast.makeText(getApplicationContext(), "Tipo de gráfico inválido", Toast.LENGTH_SHORT).show();
-                break;
+    private void handleIncomingHabit() {
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("habitName") && intent.hasExtra("habitDate")) {
+            String name = intent.getStringExtra("habitName");
+            long millis = intent.getLongExtra("habitDate", 0L);
+            habitList.add(new Habit(0, name, new Date(millis)));
+            cardAddHabit.setVisibility(View.GONE);
         }
     }
+
+    private void loadAndDisplayHabitData() {
+        if (habitList.isEmpty()) {
+            cardAddHabit.setVisibility(View.VISIBLE);
+            return;
+        }
+        cardAddHabit.setVisibility(View.GONE);
+
+        // adiciona cards de hábito
+        for (Habit h : habitList) {
+            addHabitCard(h);
+        }
+    }
+
+    private void addHabitCard(Habit habit) {
+        // cria novo CardView
+        CardView card = new CardView(this);
+
+        // aplica mesmo background, raio e elevação do template de XML
+        CardView template = findViewById(R.id.habitCardTemplate);
+        card.setCardBackgroundColor(template.getCardBackgroundColor().getDefaultColor());
+        card.setRadius(template.getRadius());
+        card.setCardElevation(template.getCardElevation());
+
+        // calcula 24dp em pixels
+        float scale = getResources().getDisplayMetrics().density;
+        int marginSidePx = (int)(24 * scale + 0.5f);
+        int marginTopPx  = (int)(16 * scale + 0.5f);
+        int padPx        = (int)(24 * scale + 0.5f);
+
+        // define LayoutParams com MATCH_PARENT e margens
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        lp.setMargins(marginSidePx, marginTopPx, marginSidePx, 0);
+        card.setLayoutParams(lp);
+
+        // conteúdo interno com padding
+        LinearLayout inner = new LinearLayout(this);
+        inner.setOrientation(LinearLayout.VERTICAL);
+        inner.setPadding(padPx, padPx, padPx, padPx);
+
+        // título
+        TextView tmpT = template.findViewById(R.id.habitTitle);
+        TextView title = new TextView(this);
+        title.setTextSize(TypedValue.COMPLEX_UNIT_PX, tmpT.getTextSize());
+        title.setTextColor(tmpT.getTextColors());
+        title.setTypeface(tmpT.getTypeface());
+        title.setTextAlignment(tmpT.getTextAlignment());
+        title.setText(habit.name);
+
+        // info de tempo
+        TextView tmpI = template.findViewById(R.id.habitTimeInfo);
+        TextView info = new TextView(this);
+        info.setTextSize(TypedValue.COMPLEX_UNIT_PX, tmpI.getTextSize());
+        info.setTextColor(tmpI.getTextColors());
+        info.setTypeface(tmpI.getTypeface());
+        info.setTextAlignment(tmpI.getTextAlignment());
+        info.setText("Última vez que realizou foi há:\n" + getTimeDiffText(habit.lastTime));
+
+        inner.addView(title);
+        inner.addView(info);
+        card.addView(inner);
+
+        // **NOVO**: ao clicar no card, vai para PageHabit
+        card.setClickable(true);
+        card.setOnClickListener(v ->
+                NavigationHelper.navigateTo(Page_Diary.this, PageHabit.class, true)
+        );
+
+        // adiciona ao container
+        containerLayout.addView(card);
+    }
+
+    private String getTimeDiffText(Date lastTime) {
+        long diff = System.currentTimeMillis() - lastTime.getTime();
+        long days = TimeUnit.MILLISECONDS.toDays(diff);
+        long hrs  = TimeUnit.MILLISECONDS.toHours(diff) - days * 24;
+        long min  = TimeUnit.MILLISECONDS.toMinutes(diff)
+                - TimeUnit.MILLISECONDS.toHours(diff) * 60;
+
+        if (days > 0) {
+            return String.format(Locale.getDefault(),
+                    "%dd %02dh %02dmin", days, hrs, min);
+        } else {
+            return String.format(Locale.getDefault(),
+                    "%02dh %02dmin", hrs, min);
+        }
+    }
+
+    private void fetchDataUser() {
+        ServerConnection.getRequestWithAuth("/user", token, new ServerConnection.ServerCallback() {
+            @Override public void onSuccess(String response) {
+                runOnUiThread(() -> {
+                    try {
+                        JSONObject j = new JSONObject(response);
+                        Weight         = j.optInt("weight_user", 0);
+                        sleepTimeStart = j.optString("sleep_time_start");
+                        sleepTimeEnd   = j.optString("sleep_time_end");
+                        if (Weight > 0) loadAndDisplayWaterData();
+                    } catch (JSONException e) {
+                        Log.e("Page_Diary", e.getMessage());
+                    }
+                });
+            }
+            @Override public void onError(String error) {
+                runOnUiThread(() ->
+                        Log.e("Page_Diary", error)
+                );
+            }
+        });
+    }
+
+    private void loadAndDisplayWaterData() {
+        try {
+            int totalDiario        = calculateWaterIntake(Weight);
+            int horasAcordadoTotal = fetchTotalIngeridoFromDb();
+            if (horasAcordadoTotal == 0) return;
+
+            String[] hm = sleepTimeStart.substring(11,16).split(":");
+            int h = Integer.parseInt(hm[0]), m = Integer.parseInt(hm[1]);
+
+            java.util.Calendar agora   = java.util.Calendar.getInstance();
+            java.util.Calendar acordou = java.util.Calendar.getInstance();
+            acordou.set(java.util.Calendar.HOUR_OF_DAY, h);
+            acordou.set(java.util.Calendar.MINUTE, m);
+            acordou.set(java.util.Calendar.SECOND, 0);
+            acordou.set(java.util.Calendar.MILLISECOND, 0);
+            if (acordou.after(agora)) acordou.add(
+                    java.util.Calendar.DAY_OF_YEAR, -1);
+
+            long minutosDesde = TimeUnit.MILLISECONDS.toMinutes(
+                    agora.getTimeInMillis() - acordou.getTimeInMillis()
+            );
+
+            double aguaPorHora      = (double) totalDiario / horasAcordadoTotal;
+            double ingeridoPrevisto = aguaPorHora * (minutosDesde / 60.0);
+            int totalIngerido       = (int) ingeridoPrevisto;
+
+            if (totalIngerido > 0) {
+                showWaterProgress(totalIngerido);
+            } else {
+                cardStartWater.setVisibility(View.VISIBLE);
+                cardProgressWater.setVisibility(View.GONE);
+            }
+        } catch (Exception e) {
+            Log.e("Page_Diary", "Erro em loadAndDisplayWaterData: " + e.getMessage());
+        }
+    }
+
+    private void showWaterProgress(int totalIngerido) {
+        int setMax = calculateWaterIntake(Weight);
+        cardStartWater.setVisibility(View.GONE);
+        cardProgressWater.setVisibility(View.VISIBLE);
+        progressWater.setMax(setMax);
+        progressWater.setProgress(totalIngerido);
+        textWaterAmount.setText(totalIngerido + " ml");
+    }
+
+    private int fetchTotalIngeridoFromDb() {
+        try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
+                    "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
+            sdf.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
+
+            Date acordou = sdf.parse(sleepTimeStart);
+            Date dormiu  = sdf.parse(sleepTimeEnd);
+            long diff = dormiu.after(acordou)
+                    ? dormiu.getTime() - acordou.getTime()
+                    : dormiu.getTime() + TimeUnit.DAYS.toMillis(1) - acordou.getTime();
+
+            long totalMin = TimeUnit.MILLISECONDS.toMinutes(diff);
+            return (int)(totalMin / 60);
+        } catch (Exception e) {
+            Log.e("Page_Diary", "Erro ao calcular tempo acordado: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    private int calculateWaterIntake(int weight) {
+        return weight * 45;
+    }
 }
-        * */

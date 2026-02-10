@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -88,8 +89,8 @@ public class Meditation_Page4 extends AppCompatActivity {
         txtRuim = findViewById(R.id.txtBad);
         SwSituation = findViewById(R.id.SwSituation);
         btnBack = findViewById(R.id.btnBack4);
-        btnNext = findViewById(R.id.btnNext5);
-        txtSpeech = findViewById(R.id.txtSpeech3);
+        btnNext = findViewById(R.id.btnNext4);
+        txtSpeech = findViewById(R.id.txtSpeech);
 
         // Instância dos dados da meditação
         questionsMeditation = Questions_Meditation.getInstance();
@@ -98,10 +99,19 @@ public class Meditation_Page4 extends AppCompatActivity {
         // Marca a opção previamente escolhida (caso exista)
         if (questionsMeditation.getTypeSituation() != null) {
             SwSituation.setChecked(questionsMeditation.getTypeSituation().equals("boa"));
+            boolean isChecked = questionsMeditation.getTypeSituation().equals("boa");
+            if (isChecked) {
+                txtBoa.setTextColor(Color.parseColor("#0026FF"));
+                txtRuim.setTextColor(Color.parseColor("#807F7F"));
+            } else {
+                txtRuim.setTextColor(Color.parseColor("#F44336"));
+                txtBoa.setTextColor(Color.parseColor("#807F7F"));
+            }
         }
 
         // Muda cores conforme seleção do usuário
         SwSituation.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Log.d("Meditation_Page4", "Switch checked: " + isChecked);
             if (isChecked) {
                 txtBoa.setTextColor(Color.parseColor("#0026FF"));
                 txtRuim.setTextColor(Color.parseColor("#807F7F"));

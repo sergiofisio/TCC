@@ -4,6 +4,7 @@ const cors = require("cors");
 const routes = require("./routes");
 const errorHandler = require("./middlewares/errorHandler");
 const notFound = require("./middlewares/notFound");
+const os = require("os");
 
 const app = express();
 
@@ -25,8 +26,23 @@ app.use(routes);
 app.use(notFound);
 app.use(errorHandler);
 
+// Função para obter IP local da máquina
+function getLocalIP() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      if (iface.family === "IPv4" && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+  return "localhost";
+}
+
 // Inicialização do servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
+  const ip = getLocalIP();
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`🌐 IP local: http://${ip}:${PORT}`);
 });

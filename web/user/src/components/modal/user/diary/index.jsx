@@ -33,7 +33,7 @@ export default function UserEmotionDiary({ user }) {
 
   const daysInMonth = getMonthData();
 
-  const emotionsByDate = (user?.todays_user || []).reduce((acc, item) => {
+  const emotionsByDate = (user?.today_user || []).reduce((acc, item) => {
     const dateKey = format(new Date(item.created_at), "yyyy-MM-dd");
     if (!acc[dateKey]) acc[dateKey] = [];
     acc[dateKey].push(item);

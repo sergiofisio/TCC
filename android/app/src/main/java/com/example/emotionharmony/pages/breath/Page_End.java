@@ -140,6 +140,10 @@ public class Page_End extends AppCompatActivity {
                 public void onSuccess(String response) {
                     runOnUiThread(() -> {
                         toast.show("Respiração Finalizada", Toast.LENGTH_LONG, "#11273D", "success");
+                        questionsBreath.setDescription_breath("");
+                        questionsBreath.setFinished_breath(false);
+                        questionsBreath.setFeel_bether_breath(false);
+
                         NavigationHelper.navigateTo(Page_End.this, Page_Exercicies.class, true);
 
                         // Reativa os botões

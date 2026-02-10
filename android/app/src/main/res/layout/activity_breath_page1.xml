@@ -15,6 +15,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:text="@string/finalizar"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,6 +41,7 @@
         android:text="@string/exResp"
         android:textAlignment="center"
         android:textAppearance="@style/CustomInput"
+        android:textColor="#050505"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -166,6 +168,7 @@
             android:text="@string/INICIAR"
             android:textAlignment="center"
             android:textAppearance="@style/CustomInput"
+            android:textColor="#FFFFFF"
             android:textSize="24sp" />
 
     </LinearLayout>

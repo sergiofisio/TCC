@@ -52,12 +52,14 @@ export default function Dashboard({ setIsAdmin }) {
 
   // Função para lidar com a ação de salvar as alterações no usuário
   const handleSave = async (id, data) => {
+    console.log({ id, data });
+
     setUsers((prevUsers) =>
       prevUsers.map((user) =>
         user.id_user === id ? { ...user, ...data } : user
       )
     );
-    const response = await axios.delete(`/auth/user/${id}`, {
+    const response = await axios.patch(`/user/${id}`, {
       headers: {
         Authorization: `Bearer ${getItem("token")}`,
       },

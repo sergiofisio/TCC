@@ -1,17 +1,16 @@
+import { forwardRef } from "react";
 import Button from "../button";
 
-//função para renderizar o formulário
-export default function Form({
-  onSubmit,
-  children,
-  data,
-  loading,
-  buttonText,
-}) {
+const Form = forwardRef(function Form(
+  { onSubmit, children, data, loading, buttonText },
+  ref
+) {
   return (
-    <form className="form" onSubmit={(e) => onSubmit(e, data)}>
+    <form className="form" ref={ref} onSubmit={(e) => onSubmit(e, data)}>
       {children}
       <Button text={buttonText} type="submit" loading={loading} />
     </form>
   );
-}
+});
+
+export default Form;

@@ -5,6 +5,8 @@ module.exports = async (req, res, next) => {
     const result = await registerUserService(req.body);
     res.status(201).json(result);
   } catch (err) {
+    console.log({ err });
+
     next(err);
   }
 };
